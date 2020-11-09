@@ -13,11 +13,12 @@ namespace Puzzle
 {
     public partial class LevelSettings : Form
     {
-        private int level;
+        private int level=0;
         SqlConnection sqlConnection;
         public LevelSettings()
         {
             InitializeComponent();
+           
         }
 
         private void LevelSettings_Load(object sender, EventArgs e)
@@ -51,20 +52,52 @@ namespace Puzzle
             level = 5;
         }
 
-        private async void button6_Click(object sender, EventArgs e)
+        private async void Connection()
         {
-            string connectionString= @"Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+           
+            string connectionString = @"Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
             sqlConnection = new SqlConnection(connectionString);
             await sqlConnection.OpenAsync();
-            SqlCommand command = new SqlCommand("INSERT INTO [Level] (number, count_of_piece_horizontally,count_of_piece_vertically, type_of_piece) VALUES(@number, @count_horizon,@count_vertical, @type)",sqlConnection);
-            command.Parameters.AddWithValue("number", level);
-            command.Parameters.AddWithValue("count_horizon",numericUpDown2.Value);
-            command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-            command.Parameters.AddWithValue("type", comboBox1.SelectedItem.ToString());
-            await command.ExecuteNonQueryAsync();
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            if (level== 0)
+            {
+                MessageBox.Show("Выберите номер уровня");
+               
+            }
+            else if(comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите вид фрагментов");
+            }
+            else
+            {
+                Connection();
+               
+                SqlCommand sqlCommand = new SqlCommand("SELECT number FROM Level WHERE number=@num");
+                sqlCommand.Parameters.AddWithValue("num", level);
+
+                SqlDataReader reader = null;
+                reader = await sqlCommand.ExecuteReaderAsync(); //что возвращает??
+                if (reader != null)
+                {
+                    reader.Close();
+                    MessageBox.Show("Этот уровень существует. Хотите его изменить?");
+                }
+                else {
+                    SqlCommand command = new SqlCommand("INSERT INTO [Level] (number, count_of_piece_horizontally,count_of_piece_vertically, type_of_piece) VALUES(@number, @count_horizon,@count_vertical, @type)", sqlConnection);
+                    command.Parameters.AddWithValue("number", level);
+                    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
+                    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
+                    command.Parameters.AddWithValue("type", comboBox1.SelectedItem.ToString());
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+           
             //проверить и вернуться в меню
             //ошибка?
-            //редактировать?
+          
         }
     }
 }
