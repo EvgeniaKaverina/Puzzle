@@ -37,9 +37,10 @@
             // 
             // buttonNewGame
             // 
-            this.buttonNewGame.Location = new System.Drawing.Point(308, 48);
+            this.buttonNewGame.Location = new System.Drawing.Point(274, 38);
+            this.buttonNewGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewGame.Name = "buttonNewGame";
-            this.buttonNewGame.Size = new System.Drawing.Size(151, 53);
+            this.buttonNewGame.Size = new System.Drawing.Size(134, 42);
             this.buttonNewGame.TabIndex = 0;
             this.buttonNewGame.Text = "Начать новую игру";
             this.buttonNewGame.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // 
             // buttonAboutGame
             // 
-            this.buttonAboutGame.Location = new System.Drawing.Point(308, 418);
+            this.buttonAboutGame.Location = new System.Drawing.Point(274, 334);
+            this.buttonAboutGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAboutGame.Name = "buttonAboutGame";
-            this.buttonAboutGame.Size = new System.Drawing.Size(151, 46);
+            this.buttonAboutGame.Size = new System.Drawing.Size(134, 37);
             this.buttonAboutGame.TabIndex = 1;
             this.buttonAboutGame.Text = "Об игре";
             this.buttonAboutGame.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // buttonAboutCreators
             // 
-            this.buttonAboutCreators.Location = new System.Drawing.Point(308, 316);
+            this.buttonAboutCreators.Location = new System.Drawing.Point(274, 253);
+            this.buttonAboutCreators.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAboutCreators.Name = "buttonAboutCreators";
-            this.buttonAboutCreators.Size = new System.Drawing.Size(151, 46);
+            this.buttonAboutCreators.Size = new System.Drawing.Size(134, 37);
             this.buttonAboutCreators.TabIndex = 2;
             this.buttonAboutCreators.Text = "О разработчиках";
             this.buttonAboutCreators.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // buttonRating
             // 
-            this.buttonRating.Location = new System.Drawing.Point(308, 221);
+            this.buttonRating.Location = new System.Drawing.Point(274, 177);
+            this.buttonRating.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRating.Name = "buttonRating";
-            this.buttonRating.Size = new System.Drawing.Size(151, 46);
+            this.buttonRating.Size = new System.Drawing.Size(134, 37);
             this.buttonRating.TabIndex = 3;
             this.buttonRating.Text = "Рейтинг";
             this.buttonRating.UseVisualStyleBackColor = true;
@@ -77,9 +81,10 @@
             // 
             // buttonContinue
             // 
-            this.buttonContinue.Location = new System.Drawing.Point(308, 136);
+            this.buttonContinue.Location = new System.Drawing.Point(274, 109);
+            this.buttonContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonContinue.Name = "buttonContinue";
-            this.buttonContinue.Size = new System.Drawing.Size(151, 46);
+            this.buttonContinue.Size = new System.Drawing.Size(134, 37);
             this.buttonContinue.TabIndex = 4;
             this.buttonContinue.Text = "Продолжить";
             this.buttonContinue.UseVisualStyleBackColor = true;
@@ -87,15 +92,17 @@
             // 
             // UserMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 532);
+            this.ClientSize = new System.Drawing.Size(769, 426);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.buttonRating);
             this.Controls.Add(this.buttonAboutCreators);
             this.Controls.Add(this.buttonAboutGame);
             this.Controls.Add(this.buttonNewGame);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserMenu";
             this.ResumeLayout(false);
 

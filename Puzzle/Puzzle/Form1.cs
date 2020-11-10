@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,60 +13,126 @@ namespace Puzzle
 {
     public partial class Form1 : Form
     {
+        SqlConnection sqlConnection;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void enter_Click(object sender, EventArgs e)
         {
-            Gallery g = new Gallery();
-            g.Show();
-        }
+            string log = login_enter.Text;
+            string pas = password_enter.Text;
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string log=textBox3.Text;
-            string pas=textBox4.Text;
+            string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
 
-           
-
-            if (log.Length < 4)
+            if (isUserExistsEnter())
             {
-                MessageBox.Show("Введите логин не менее 4 символов.");
+                UserMenu s = new UserMenu();
+                s.Show();
+                this.Hide();
 
             }
             
-            if (log.Length > 12)
+            //Gallery g = new Gallery();
+            //g.Show();
+        }
+
+        public Boolean isUserExistsEnter()
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE login=@login AND password=@password", sqlConnection);
+            command.Parameters.AddWithValue("login", login_enter.Text);
+            command.Parameters.AddWithValue("password", password_enter.Text);
+
+            DataTable table = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
             {
-                MessageBox.Show("Логин содержит слишком много символов.");
+
+                return true;
+            }
+            else 
+            {
+                MessageBox.Show("Пользователь с таким логином и паролем не существует", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+        private async void registration_Click(object sender, EventArgs e)
+        {
+            string log=login_reg.Text;
+            string pas=password_reg.Text;
+     
+
+            if (log.Length < 4 || log.Length > 12)
+            {
+                MessageBox.Show("Логин должен содержать от 4 до 12 символов.","Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
 
-            if (pas.Length < 5)
-            {
-                MessageBox.Show("Придумайте пароль, содержащий не менее 5 символов.");
-            }
-            if (pas.Length > 10)
-            {
-                MessageBox.Show("Длина пароля должна быть менее 10 символов.");
-            }
 
+            if (pas.Length < 5 || pas.Length > 10)
+            {
+                MessageBox.Show("Пароль должен содержать от 5 до 10 символов.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             else
             {
-                AdminMenu s = new AdminMenu();
-                s.Show();
+                string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
 
-                this.Hide();
+
+                SqlCommand sqlCommand = new SqlCommand("INSERT INTO [User] (login, password) VALUES(@login, @password)", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("login", login_reg.Text);
+                sqlCommand.Parameters.AddWithValue("password", password_reg.Text);
+
+                if (isUserExists())
+                {
+                    return;
+                }
+
+               else  if (sqlCommand.ExecuteNonQuery() == 1)
+                {
+                    UserMenu s = new UserMenu();
+                    s.Show();
+                    this.Hide();
+                }
             }
+ 
+        }
+        public Boolean isUserExists()
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE login=@login", sqlConnection);
+            command.Parameters.AddWithValue("login", login_reg.Text);
 
+            DataTable table = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Такой логин уже существует. Придумайте новый.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            else
+                return false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button_admin_Click(object sender, EventArgs e)
         {
             string pas = "admin";
 
-            if (textBox5.Text == pas)
+            if (password_admin.Text == pas)
             {
                 AdminMenu s = new AdminMenu();
                 s.Show();
@@ -74,8 +141,8 @@ namespace Puzzle
             }
             else
             {
-                textBox5.Text = "";
-                MessageBox.Show("Пароль неверный. Попробуйте снова.");
+                password_admin.Text = "";
+                MessageBox.Show("Пароль неверный. Попробуйте снова.", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
