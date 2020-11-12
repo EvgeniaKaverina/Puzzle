@@ -60,7 +60,7 @@ namespace Puzzle
             }
             else 
             {
-                MessageBox.Show("Пользователь с таким логином и паролем не существует", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Введен неверный логин или пароль. Попробуйте ввести данные снова!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
