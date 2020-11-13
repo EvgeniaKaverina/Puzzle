@@ -19,8 +19,9 @@ namespace Puzzle
         public Picture(string filename)
         {
             InitializeComponent();
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image= image.GetThumbnailImage(600, 420,
+            // Image image = Image.FromFile(filename);
+            Bitmap bitmap = new Bitmap(filename);
+            pictureBox1.Image= bitmap.GetThumbnailImage(600, 420,
                                    new Image.GetThumbnailImageAbort(ThumbnailCallback),
                                    IntPtr.Zero);
        //   pictureBox1.Size = new System.Drawing.Size(600, 420);

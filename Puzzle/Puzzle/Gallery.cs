@@ -7,120 +7,126 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+
 
 namespace Puzzle
 {
     public partial class Gallery : Form
     {
         private PictureBox picSelected;
+        string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+        private SqlConnection sqlConnection;
         public Gallery()
         {
             InitializeComponent();
             picSelected = null;
         }
 
-        private void Gallery_Load(object sender, EventArgs e)
+        private async void Gallery_Load(object sender, EventArgs e)
         {
-           
-     
-            //запрос в БД SELECT
-            for(int i = 0; i < 16; i++)
+             //запрос в БД SELECT
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
+            SqlCommand command = new SqlCommand("SELECT name_picture FROM GalleryImage", sqlConnection);
+            SqlDataReader reader = null;
+            reader= await command.ExecuteReaderAsync();
+            while(await reader.ReadAsync())
+            //for(int i = 0; i < 16; i++)
             {
-                Bitmap bmp = new Bitmap(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\gallery1.jpg"));
+                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
+                Bitmap bmp = new Bitmap(filename);
                 PictureBox tempPictureBox = new PictureBox();
 
                 //generates a thumbnail image of specified size
-           tempPictureBox.Image = bmp.GetThumbnailImage(100, 100,  new Image.GetThumbnailImageAbort(ThumbnailCallback),   IntPtr.Zero);
-           //   tempPictureBox.ImageLocation = @"C:\\\Users\\Alsu\\Desktop\\7semester\Puzzle\Puzzle\Puzzle\gallery\gallery1.jpg";
+                tempPictureBox.Image = bmp.GetThumbnailImage(100, 100,  new Image.GetThumbnailImageAbort(ThumbnailCallback),   IntPtr.Zero);
+        
                 tempPictureBox.Size = new System.Drawing.Size(100, 100);
+                string[] p=filename.Split('\\');
+                tempPictureBox.Name = p[p.Length-1];
                 tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
                 tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
                 flowLayoutPanel1.Controls.Add(tempPictureBox);
             }
-            //запрос select из БД
-           /* for (int i = 1; i <= 6; i++)
-            {
-                imageList1.Images.Add(Image.FromFile(@"C:\\\Users\\Alsu\\Desktop\\7semester\Puzzle\Puzzle\Puzzle\gallery\gallery"+i+".jpg"));
-            }
-            listView1.LargeImageList = imageList1;
-      //      imageList1.Images.Add(Image.FromFile(@"C:\\\Users\\Alsu\\Desktop\\7semester\Puzzle\Puzzle\Puzzle\gallery\gallery1.jpg"));
-            for (int j = 0; j < imageList1.Images.Count; j++)
-            {
-                ListViewItem item = new ListViewItem();
-            //    item.Text = name[j];
-                item.ImageIndex = j;
-                listView1.Items.Add(item);
-            }*/
+                    
         }
+
+        //выделение картинки
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
-            // Form form = new Form((Bitmap)((PictureBox)sender).Image);
-            // Form Form2 = new Form((Bitmap)pictureBox1.Image);
-            // Form2.ShowDialog();
-            
-
             picSelected = (PictureBox)sender;
-            //  PreviewPictureBox.Image = ((PictureBox)sender).Image;
+         //   picSelected.Focus();
+        
         }
         public bool ThumbnailCallback()
         {
             return true;
         }
-        private void buttonAdd_Click(object sender, EventArgs e)
+        //сделать приведение к одному размеру
+        //добавление картинки
+        private async void buttonAdd_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Файлы изображений | *.jpg";
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
+            string filename = dialog.FileName;
             Image image = Image.FromFile(dialog.FileName);
+            
             PictureBox tempPictureBox = new PictureBox();
 
             //generates a thumbnail image of specified size
             
-            tempPictureBox.Image = image.GetThumbnailImage(100, 100,
+            tempPictureBox.Image = image.GetThumbnailImage(600, 140,
                                    new Image.GetThumbnailImageAbort(ThumbnailCallback),
                                    IntPtr.Zero);
-            tempPictureBox.Size = new System.Drawing.Size(100, 100);
+            tempPictureBox.Size = new System.Drawing.Size(600, 140);
+            string[] p = filename.Split('\\');
+            tempPictureBox.Name = p[p.Length - 1];
             tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
             tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
             flowLayoutPanel1.Controls.Add(tempPictureBox);
-            /* try
-             {
-                 image = Image.FromFile(dialog.FileName);
-             }
-             catch (OutOfMemoryException ex)
-             {
-                 MessageBox.Show("Ошибка чтения картинки");
-                 return;
-             }
-             //запрос INSERT в бд
-             //перенести в другой метод
-             imageList1.Images.Add(image);
-             ListViewItem item = new ListViewItem();
-             //    item.Text = name[j];
-             item.ImageIndex =imageList1.Images.Count-1;
-             listView1.Items.Add(item);*/
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            //запрос DELETE в бд
+            File.Copy(filename, Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\",new FileInfo(tempPictureBox.Name).Name));
            
-            flowLayoutPanel1.Controls.Remove((Control)picSelected);
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
+            SqlCommand command = new SqlCommand("INSERT INTO [GalleryImage] (name_picture) VALUES(@picture)", sqlConnection);
+            command.Parameters.AddWithValue("picture", tempPictureBox.Name);
+            
+            await command.ExecuteNonQueryAsync();
+
 
         }
-        private void pictureBox_DoubleClick(object sender, EventArgs e){
-            //   picSelected = (PictureBox)sender;
-         //rintDocument1.DocumentName =@"C:\\Users\\Alsu\\Desktop\\7semester\Puzzle\Puzzle\Puzzle\gallery\gallery1.jpg";
-            //((PictureBox)sender).ImageLocation;
-            // printDialog1.Document = printDocument1;
+        //удаление картинки
+        private async void buttonDelete_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Remove((Control)picSelected);
+            picSelected.Image = null;
+            
+            if (File.Exists(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", picSelected.Name)))
+            {
+                File.Delete(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", picSelected.Name));
+            }
 
-         // printPreviewDialog1.Document = printDocument1;
-          //printPreviewDialog1.ShowDialog();
-          string filename= @"C:\\Users\\Alsu\\Desktop\\7semester\Puzzle\Puzzle\Puzzle\gallery\gallery1.jpg";
-            Picture picture = new Picture(filename);
+            //запрос DELETE в бд
+            sqlConnection = new SqlConnection(connectionString);
+              await sqlConnection.OpenAsync();
+              SqlCommand command = new SqlCommand("DELETE FROM [GalleryImage] WHERE name_picture=@picture", sqlConnection);
+              command.Parameters.AddWithValue("picture", picSelected.Name);
+
+              await command.ExecuteNonQueryAsync();
+           
+           
+        }
+
+        //увеличение картинки
+        private void pictureBox_DoubleClick(object sender, EventArgs e) {
+           
+      
+            Picture picture = new Picture(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\", picSelected.Name));
             picture.ShowDialog();
+
         }
       
         
