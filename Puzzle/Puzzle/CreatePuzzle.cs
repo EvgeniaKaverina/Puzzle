@@ -17,6 +17,10 @@ namespace Puzzle
             InitializeComponent();
         }
 
-       
+        private void select_pict_Click(object sender, EventArgs e)
+        {
+           GalleryForCreate gal= new GalleryForCreate();
+            gal.Show();
+        }
     }
 }

@@ -32,6 +32,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.select_pict = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -72,6 +73,7 @@
             this.select_pict.Text = "Выбрать картинку";
             this.select_pict.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.select_pict.UseVisualStyleBackColor = false;
+            this.select_pict.Click += new System.EventHandler(this.select_pict_Click);
             // 
             // comboBox2
             // 
@@ -86,11 +88,22 @@
             this.comboBox2.TabIndex = 3;
             this.comboBox2.Text = "Выбрать расположение фрагментов";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(329, 370);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(166, 39);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Создать";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // CreatePuzzle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 537);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.select_pict);
             this.Controls.Add(this.comboBox1);
@@ -109,5 +122,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button select_pict;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button1;
     }
 }
