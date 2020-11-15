@@ -37,7 +37,8 @@ namespace Puzzle
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            CreatePuzzle p = new CreatePuzzle();
+            p.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
