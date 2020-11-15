@@ -91,6 +91,7 @@
             // 
             this.password_enter.Location = new System.Drawing.Point(192, 197);
             this.password_enter.Name = "password_enter";
+            this.password_enter.PasswordChar = '*';
             this.password_enter.Size = new System.Drawing.Size(264, 22);
             this.password_enter.TabIndex = 3;
             // 
@@ -150,6 +151,7 @@
             // 
             this.password_reg.Location = new System.Drawing.Point(191, 230);
             this.password_reg.Name = "password_reg";
+            this.password_reg.PasswordChar = '*';
             this.password_reg.Size = new System.Drawing.Size(264, 22);
             this.password_reg.TabIndex = 3;
             // 
@@ -206,6 +208,7 @@
             // 
             this.password_admin.Location = new System.Drawing.Point(201, 172);
             this.password_admin.Name = "password_admin";
+            this.password_admin.PasswordChar = '*';
             this.password_admin.Size = new System.Drawing.Size(264, 22);
             this.password_admin.TabIndex = 1;
             // 
