@@ -84,7 +84,7 @@ namespace Puzzle
                 if (n != "")
                 {
                     reader.Close();
-                    DialogResult dialogResult= MessageBox.Show("Этот уровень существует. Хотите его изменить?", "Уровень существует!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);//доделать
+                    DialogResult dialogResult= MessageBox.Show("Этот уровень существует. Хотите его изменить?", "Уровень существует!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                     if (dialogResult== DialogResult.Yes)
                     {
                         SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);

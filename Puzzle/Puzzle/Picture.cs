@@ -24,13 +24,18 @@ namespace Puzzle
             pictureBox1.Image= bitmap.GetThumbnailImage(600, 420,
                                    new Image.GetThumbnailImageAbort(ThumbnailCallback),
                                    IntPtr.Zero);
-       //   pictureBox1.Size = new System.Drawing.Size(600, 420);
+         // pictureBox1.Size = new System.Drawing.Size(800, 560);
         }
         public bool ThumbnailCallback()
         {
             return true;
         }
         private void Picture_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

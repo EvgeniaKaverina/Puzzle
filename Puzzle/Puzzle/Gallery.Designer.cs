@@ -41,7 +41,7 @@
             // 
             this.buttonAdd.Location = new System.Drawing.Point(530, 524);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(93, 41);
+            this.buttonAdd.Size = new System.Drawing.Size(126, 49);
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -51,7 +51,7 @@
             // 
             this.buttonDelete.Location = new System.Drawing.Point(742, 524);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(86, 41);
+            this.buttonDelete.Size = new System.Drawing.Size(117, 49);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -65,6 +65,7 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1020, 518);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.flowLayoutPanel1_Scroll);
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // printPreviewDialog1
             // 
