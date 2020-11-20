@@ -20,7 +20,7 @@ namespace Puzzle
         private void select_pict_Click(object sender, EventArgs e)
         {
            GalleryForCreate gal= new GalleryForCreate();
-            gal.Show();
+           gal.Show();
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -29,5 +29,25 @@ namespace Puzzle
             s.Show();
             this.Hide();
         }
+
+        private void create_puzzle_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите номер уровня");
+            }
+            else if (comboBox2.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите расположение фрагментов");
+            }
+
+            else
+            {
+                AdminMenu a = new AdminMenu();
+                a.Show();
+                this.Hide();
+            }
+        }
+
     }
 }

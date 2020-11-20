@@ -73,7 +73,9 @@ namespace Puzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+            CreatePuzzle c = new CreatePuzzle();
+            c.Show();
+            this.Hide();
         }
     }
 }
