@@ -45,5 +45,12 @@ namespace Puzzle
         {
 
         }
+
+        private void exit_admin_Click(object sender, EventArgs e)
+        {
+            Form1 s = new Form1();
+            s.Show();
+            this.Hide();
+        }
     }
 }

@@ -113,5 +113,12 @@ namespace Puzzle
            
           
         }
+
+        private void back_level_Click(object sender, EventArgs e)
+        {
+            AdminMenu a = new AdminMenu();
+            a.Show();
+            this.Hide();
+        }
     }
 }

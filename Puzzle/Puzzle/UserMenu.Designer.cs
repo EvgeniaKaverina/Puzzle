@@ -33,6 +33,7 @@
             this.buttonAboutCreators = new System.Windows.Forms.Button();
             this.buttonRating = new System.Windows.Forms.Button();
             this.buttonContinue = new System.Windows.Forms.Button();
+            this.back_user = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonNewGame
@@ -90,11 +91,23 @@
             this.buttonContinue.UseVisualStyleBackColor = true;
             this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
             // 
+            // back_user
+            // 
+            this.back_user.Location = new System.Drawing.Point(274, 404);
+            this.back_user.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.back_user.Name = "back_user";
+            this.back_user.Size = new System.Drawing.Size(134, 37);
+            this.back_user.TabIndex = 5;
+            this.back_user.Text = "Выйти";
+            this.back_user.UseVisualStyleBackColor = true;
+            this.back_user.Click += new System.EventHandler(this.back_user_Click);
+            // 
             // UserMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 426);
+            this.ClientSize = new System.Drawing.Size(769, 473);
+            this.Controls.Add(this.back_user);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.buttonRating);
             this.Controls.Add(this.buttonAboutCreators);
@@ -115,5 +128,6 @@
         private System.Windows.Forms.Button buttonAboutCreators;
         private System.Windows.Forms.Button buttonRating;
         private System.Windows.Forms.Button buttonContinue;
+        private System.Windows.Forms.Button back_user;
     }
 }

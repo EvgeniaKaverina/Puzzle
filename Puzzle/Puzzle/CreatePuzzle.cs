@@ -22,5 +22,12 @@ namespace Puzzle
            GalleryForCreate gal= new GalleryForCreate();
             gal.Show();
         }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            AdminMenu s = new AdminMenu();
+            s.Show();
+            this.Hide();
+        }
     }
 }

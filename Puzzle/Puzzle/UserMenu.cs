@@ -43,5 +43,12 @@ namespace Puzzle
         {
 
         }
+
+        private void back_user_Click(object sender, EventArgs e)
+        {
+            Form1 f = new Form1();
+            f.Show();
+            this.Hide();
+        }
     }
 }
