@@ -18,6 +18,8 @@ namespace Puzzle
         string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
         private SqlConnection sqlConnection;
 
+        private string picture_name;
+
         public GalleryForCreate()
         {
             InitializeComponent();
@@ -40,9 +42,9 @@ namespace Puzzle
                 PictureBox tempPictureBox = new PictureBox();
 
                 //generates a thumbnail image of specified size
-                tempPictureBox.Image = bmp.GetThumbnailImage(100, 100, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+                tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
 
-                tempPictureBox.Size = new System.Drawing.Size(100, 100);
+                tempPictureBox.Size = new System.Drawing.Size(200, 140);
                 string[] p = filename.Split('\\');
                 tempPictureBox.Name = p[p.Length - 1];
                 tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
@@ -55,8 +57,13 @@ namespace Puzzle
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
             picSelected = (PictureBox)sender;
+            picture_name = picSelected.Name;
             //   picSelected.Focus();
 
+        }
+        public string getpicture_name()
+        {
+            return picture_name;
         }
         public bool ThumbnailCallback()
         {
@@ -73,9 +80,17 @@ namespace Puzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CreatePuzzle c = new CreatePuzzle();
-            c.Show();
-            this.Hide();
+
+            if (picSelected == null)
+            {
+                MessageBox.Show("Изображение не выбрано");
+            }
+            else
+            {
+                CreatePuzzle c = new CreatePuzzle();
+                c.Show();
+                this.Hide();
+            }
         }
     }
 }

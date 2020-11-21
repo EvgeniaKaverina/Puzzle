@@ -59,6 +59,7 @@ namespace Puzzle
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
             picSelected = (PictureBox)sender;
+
          //   picSelected.Focus();
         
         }
@@ -75,13 +76,13 @@ namespace Puzzle
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             string filename = dialog.FileName;
-            if (File.Exists(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", filename)))
-            {
-                MessageBox.Show("Изображение с таким названием существует");
+            //if (File.Exists(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", filename)))
+            //{
+            //    MessageBox.Show("Изображение с таким названием существует");
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 Image image = Image.FromFile(dialog.FileName);
 
                 PictureBox tempPictureBox = new PictureBox();
@@ -114,7 +115,7 @@ namespace Puzzle
                     g.DrawImage(image, dst, src, GraphicsUnit.Pixel);
                     bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", tempPictureBox.Name), ImageFormat.Jpeg);
 
-                }
+                //}
 
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();

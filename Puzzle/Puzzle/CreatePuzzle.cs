@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Puzzle
 {
     public partial class CreatePuzzle : Form
     {
+        string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+        private SqlConnection sqlConnection;
+
+        private GalleryForCreate gal = new GalleryForCreate();
+
         public CreatePuzzle()
         {
             InitializeComponent();
@@ -30,7 +36,7 @@ namespace Puzzle
             this.Hide();
         }
 
-        private void create_puzzle_Click(object sender, EventArgs e)
+        private async void create_puzzle_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
             {
@@ -43,6 +49,19 @@ namespace Puzzle
 
             else
             {
+                string pict = gal.getpicture_name();
+                //sqlConnection = new SqlConnection(connectionString);
+                //await sqlConnection.OpenAsync();
+
+
+
+                //SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (image, number_level, location) VALUES(@image, @number_level, @location)", sqlConnection);
+                ////command.Parameters.AddWithValue("image", comboBox1.Text);
+                //command.Parameters.AddWithValue("number_level", comboBox1.SelectedItem);
+                //command.Parameters.AddWithValue("location", comboBox2.SelectedText);
+
+                //await command.ExecuteNonQueryAsync();
+
                 AdminMenu a = new AdminMenu();
                 a.Show();
                 this.Hide();
