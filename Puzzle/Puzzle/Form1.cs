@@ -18,6 +18,7 @@ namespace Puzzle
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private async void enter_Click(object sender, EventArgs e)
@@ -149,7 +150,7 @@ namespace Puzzle
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
