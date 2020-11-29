@@ -40,9 +40,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(324, 59);
+            this.label1.Location = new System.Drawing.Point(364, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 27);
+            this.label1.Size = new System.Drawing.Size(197, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "Создание пазла";
             // 
@@ -56,9 +56,10 @@
             "3",
             "4",
             "5"});
-            this.comboBox1.Location = new System.Drawing.Point(195, 129);
+            this.comboBox1.Location = new System.Drawing.Point(219, 161);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(433, 37);
+            this.comboBox1.Size = new System.Drawing.Size(487, 44);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.Text = "Выбрать уровень";
             // 
@@ -66,10 +67,11 @@
             // 
             this.select_pict.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.select_pict.Font = new System.Drawing.Font("Microsoft JhengHei Light", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.select_pict.Location = new System.Drawing.Point(195, 207);
+            this.select_pict.Location = new System.Drawing.Point(219, 259);
+            this.select_pict.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.select_pict.Name = "select_pict";
             this.select_pict.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.select_pict.Size = new System.Drawing.Size(433, 40);
+            this.select_pict.Size = new System.Drawing.Size(487, 50);
             this.select_pict.TabIndex = 2;
             this.select_pict.Text = "Выбрать картинку";
             this.select_pict.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -81,20 +83,22 @@
             this.comboBox2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Расположить фрагменты на ленте",
-            "Расположить фрагменты на поле"});
-            this.comboBox2.Location = new System.Drawing.Point(195, 279);
+            "Лента",
+            "Поле"});
+            this.comboBox2.Location = new System.Drawing.Point(219, 349);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(433, 37);
+            this.comboBox2.Size = new System.Drawing.Size(487, 44);
             this.comboBox2.TabIndex = 3;
             this.comboBox2.Text = "Выбрать расположение фрагментов";
             // 
             // back
             // 
             this.back.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.back.Location = new System.Drawing.Point(195, 361);
+            this.back.Location = new System.Drawing.Point(219, 451);
+            this.back.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.back.Name = "back";
-            this.back.Size = new System.Drawing.Size(166, 39);
+            this.back.Size = new System.Drawing.Size(187, 49);
             this.back.TabIndex = 5;
             this.back.Text = "Назад";
             this.back.UseVisualStyleBackColor = true;
@@ -103,9 +107,10 @@
             // create_puzzle
             // 
             this.create_puzzle.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.create_puzzle.Location = new System.Drawing.Point(462, 361);
+            this.create_puzzle.Location = new System.Drawing.Point(520, 451);
+            this.create_puzzle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.create_puzzle.Name = "create_puzzle";
-            this.create_puzzle.Size = new System.Drawing.Size(166, 39);
+            this.create_puzzle.Size = new System.Drawing.Size(187, 49);
             this.create_puzzle.TabIndex = 6;
             this.create_puzzle.Text = "Создать";
             this.create_puzzle.UseVisualStyleBackColor = true;
@@ -113,15 +118,16 @@
             // 
             // CreatePuzzle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 537);
+            this.ClientSize = new System.Drawing.Size(900, 671);
             this.Controls.Add(this.create_puzzle);
             this.Controls.Add(this.back);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.select_pict);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CreatePuzzle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreatePuzzle";

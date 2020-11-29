@@ -87,10 +87,15 @@ namespace Puzzle
             }
             else
             {
-                CreatePuzzle c = new CreatePuzzle();
-                c.Show();
+          //      CreatePuzzle c = new CreatePuzzle();
+            //    c.Show();
                 this.Hide();
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
