@@ -103,6 +103,9 @@
     <Compile Include="LevelSettings.Designer.cs">
       <DependentUpon>LevelSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Picture.cs">
       <SubType>Form</SubType>
     </Compile>

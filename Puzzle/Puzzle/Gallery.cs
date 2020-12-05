@@ -55,11 +55,15 @@ namespace Puzzle
         }
 
         //выделение картинки
-        //сделать фокус на картинку!!!!!!!!!
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
-            picSelected = (PictureBox)sender;
+            if (picSelected != null)
+            {
+                picSelected.BorderStyle = BorderStyle.None;
 
+            }
+            picSelected = (PictureBox)sender;
+            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
          //   picSelected.Focus();
         
         }

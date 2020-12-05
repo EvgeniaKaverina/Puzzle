@@ -13,7 +13,7 @@ namespace Puzzle
 {
     public partial class Game : Form
     {
-        private GalleryForCreate gal;
+       // private GalleryForCreate gal;
         public Game()
         {
             InitializeComponent();
@@ -21,11 +21,144 @@ namespace Puzzle
 
         Image image;
         PictureBox pic = null;
+        PictureBox[] pictureBoxes = null;
+        Image[] images = null;
+        int level = 8;
+
+        MyPictureBox firstBox = null;
+        MyPictureBox secondBox = null;
+
+        private void createFrag()
+        {
+          //запрос в бд
+          //треугольные фрагменты
+          //сохранение пазла в бд (незаконченного)
+          //лента для пазлов
+            if (pic != null)
+            {
+                groupBox1.Controls.Remove(pic);
+                pic.Dispose();
+                pic = null;
+
+            }
+            if (pictureBoxes == null)
+            {
+                pictureBoxes = new PictureBox[level];
+                images = new Image[level];
+            }
+            int numCol = 2;
+            int numRows = 4;
+            int unitX = groupBox1.Width / numCol;
+            int unitY = groupBox1.Height / numRows;
+            int[] indice = new int[level];
+            for(int i = 0; i < level; i++)
+            {
+                indice[i] = i;
+                if (pictureBoxes[i] == null)
+                {
+                    pictureBoxes[i] = new MyPictureBox();
+                    pictureBoxes[i].Click += new EventHandler(OnPuzzleClick);
+                    pictureBoxes[i].BorderStyle = BorderStyle.Fixed3D;
+                }
+                pictureBoxes[i].Width = unitX;
+                pictureBoxes[i].Height = unitY;
+
+                ((MyPictureBox)pictureBoxes[i]).Index = i;
+
+                CreateBitmapImage(image, images,i, numRows, numCol, unitX, unitY);
+                pictureBoxes[i].Location = new Point(unitX * (i % numCol), unitY * (i / numCol));
+                if (!groupBox1.Controls.Contains(pictureBoxes[i]))
+                    groupBox1.Controls.Add(pictureBoxes[i]);
+            }
+            shuffle(ref indice);
+            for(int i = 0; i < level; i++)
+            {
+                pictureBoxes[i].Image = images[indice[i]];
+                ((MyPictureBox)pictureBoxes[i]).ImageIndex = indice[i];
+            }
+
+           
+        }
+        private void OnPuzzleClick(object sender, EventArgs e)
+        {
+            if (firstBox == null)
+            {
+                firstBox = (MyPictureBox)sender;
+                firstBox.BorderStyle = BorderStyle.FixedSingle;
+            }
+            else if (secondBox == null)
+            {
+                secondBox = (MyPictureBox)sender;
+                firstBox.BorderStyle = BorderStyle.Fixed3D;
+                secondBox.BorderStyle = BorderStyle.FixedSingle;
+                SwitchImage(firstBox, secondBox);
+                firstBox = null;
+                secondBox = null;
+            }
+           
+           // ((MyPictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
+        }
+        private void SwitchImage(MyPictureBox box1,MyPictureBox box2)
+        {
+            int tmp = box2.ImageIndex;
+            box2.Image = images[box1.ImageIndex];
+            box2.ImageIndex = box1.ImageIndex;
+            box1.Image = images[tmp];
+            box1.ImageIndex = tmp;
+            if (isFinished())
+            {
+                 MessageBox.Show("Well done!");
+                //ShowImage();
+            }
+        }
+        private bool isFinished()
+        {
+            for(int i = 0; i < level; i++)
+            {
+                if (((MyPictureBox)pictureBoxes[i]).ImageIndex != ((MyPictureBox)pictureBoxes[i]).Index)
+                    return false;
+            }
+            return true;
+        }
+        private void CreateBitmapImage(Image image,Image[] images, int index, int numRows, int numCols, int unitX,int unitY)
+        {
+            images[index] = new Bitmap(unitX, unitY);
+            Graphics og = Graphics.FromImage(images[index]);
+            og.Clear(Color.White);
+
+            og.DrawImage(image,
+                new Rectangle(0, 0, unitX, unitY),
+                //что-то не так
+                new Rectangle(unitX * (index % numCols), unitY * (index / numCols), unitX, unitY),
+                GraphicsUnit.Pixel);
+            og.Flush();
+        }
+
+        private void shuffle(ref int[] array)
+        {
+            Random rnd = new Random();
+            int n = array.Length;
+            while (n > 1)
+            {
+                int k = rnd.Next(n);
+                n--;
+                int temp = array[n];
+                array[n] = array[k];
+                array[k] = temp;
+
+            }
+        }
 
         private void Game_Load(object sender, EventArgs e)
         {
+            groupBox1.Size = new System.Drawing.Size(600, 420);
             //image = Image.FromFile();
             //CreateBitmapImage();
+            ShowImage();
+            createFrag();
+        }
+        private void ShowImage()
+        {
             image = CreateBitmapImage();
             if (pic == null)
             {
