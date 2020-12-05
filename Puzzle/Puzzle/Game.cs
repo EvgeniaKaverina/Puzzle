@@ -24,29 +24,39 @@ namespace Puzzle
 
         private void Game_Load(object sender, EventArgs e)
         {
-
-        }
-        private Bitmap CreateBitmapImage(string pict, Image image)
-        {
-           // string img = gal.getpicture_name();
-
+            //image = Image.FromFile();
+            //CreateBitmapImage();
+            image = CreateBitmapImage();
             if (pic == null)
             {
-                Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\cat4", pict));
                 pic = new PictureBox();
                 pic.Height = groupBox1.Height;
                 pic.Width = groupBox1.Width;
                 groupBox1.Controls.Add(pic);
             }
             pic.Image = image;
+        }
+        private Bitmap CreateBitmapImage()
+        {
+           // string img = gal.getpicture_name();
 
-            //Image img = Image.FromFile(@"..\..\gallery\about.jpg");
+            //if (pic == null)
+            //{
+            //    Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
+            //    pic = new PictureBox();
+            //    pic.Height = groupBox1.Height;
+            //    pic.Width = groupBox1.Width;
+            //    groupBox1.Controls.Add(pic);
+            //}
+            //pic.Image = image;
+
+            Image img = Image.FromFile(@"..\..\gallery\about.jpg");
 
 
             Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
             Graphics objGraphics = Graphics.FromImage(objBmImage);
             objGraphics.Clear(Color.White);
-            objGraphics.DrawImage(image, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
+            objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
             objGraphics.Flush();
 
             return objBmImage;
