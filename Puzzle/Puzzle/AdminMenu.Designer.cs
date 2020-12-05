@@ -34,7 +34,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.exit_admin = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -44,7 +43,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(184, 128);
+            this.button1.Location = new System.Drawing.Point(184, 65);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(274, 56);
             this.button1.TabIndex = 0;
@@ -58,7 +57,7 @@
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(184, 218);
+            this.button2.Location = new System.Drawing.Point(184, 161);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(274, 50);
             this.button2.TabIndex = 1;
@@ -72,7 +71,7 @@
             this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(184, 300);
+            this.button3.Location = new System.Drawing.Point(184, 249);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(274, 50);
             this.button3.TabIndex = 2;
@@ -86,7 +85,7 @@
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(184, 381);
+            this.button4.Location = new System.Drawing.Point(184, 342);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(274, 50);
             this.button4.TabIndex = 3;
@@ -100,7 +99,7 @@
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(184, 466);
+            this.button5.Location = new System.Drawing.Point(184, 438);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(274, 50);
             this.button5.TabIndex = 4;
@@ -114,7 +113,7 @@
             this.exit_admin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exit_admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exit_admin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exit_admin.Location = new System.Drawing.Point(184, 546);
+            this.exit_admin.Location = new System.Drawing.Point(184, 537);
             this.exit_admin.Name = "exit_admin";
             this.exit_admin.Size = new System.Drawing.Size(274, 50);
             this.exit_admin.TabIndex = 5;
@@ -122,23 +121,12 @@
             this.exit_admin.UseVisualStyleBackColor = false;
             this.exit_admin.Click += new System.EventHandler(this.exit_admin_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(261, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 43);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Меню";
-            // 
             // AdminMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(664, 634);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.exit_admin);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -150,7 +138,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Администратор";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -162,6 +149,5 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button exit_admin;
-        private System.Windows.Forms.Label label1;
     }
 }

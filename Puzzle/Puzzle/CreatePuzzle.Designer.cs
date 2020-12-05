@@ -42,7 +42,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(275, 44);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 39);
+            this.label1.Size = new System.Drawing.Size(234, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "Создание пазла";
             // 
@@ -63,6 +63,7 @@
             this.comboBox1.Size = new System.Drawing.Size(485, 39);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.Text = "Выбрать уровень";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // select_pict
             // 

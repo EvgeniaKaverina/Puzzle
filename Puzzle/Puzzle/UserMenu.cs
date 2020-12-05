@@ -21,7 +21,9 @@ namespace Puzzle
 
         private void buttonNewGame_Click(object sender, EventArgs e)
         {
-
+            UserChoosingPuzzle ch = new UserChoosingPuzzle();
+            ch.Show();
+            this.Close();
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
