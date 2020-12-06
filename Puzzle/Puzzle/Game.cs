@@ -94,10 +94,10 @@ namespace Puzzle
                 pictureBoxes = new PictureBox[level];
                 images = new Image[level];
             }
-            int numCol = 2;
-            int numRows = 4;
-            int unitX = flowLayoutPanel1.Width / numCol;
-            int unitY = flowLayoutPanel1.Height / numRows;
+            int numCol = 4;
+            int numRows = 2;
+            int unitX = groupBox1.Width / numCol;
+            int unitY = groupBox1.Height / numRows;
             int[] indice = new int[level];
             for (int i = 0; i < level; i++)
             {
@@ -107,6 +107,7 @@ namespace Puzzle
                     pictureBoxes[i] = new MyPictureBox();
                     pictureBoxes[i].Click += new EventHandler(OnPuzzleClickTale);
                     pictureBoxes[i].BorderStyle = BorderStyle.Fixed3D;
+                   // pictureBoxes[i].Size = new System.Drawing.Size(unitX, unitY);
                 }
                 pictureBoxes[i].Width = unitX;
                 pictureBoxes[i].Height = unitY;
@@ -218,7 +219,7 @@ namespace Puzzle
         private void Game_Load(object sender, EventArgs e)
         {
             groupBox1.Size = new System.Drawing.Size(600, 420);
-            flowLayoutPanel1.Size = new System.Drawing.Size(600, 420);
+          //  flowLayoutPanel1.Size = new System.Drawing.Size(600, 420);
             //image = Image.FromFile();
             CreateBitmapImage();
             ShowImage();
@@ -231,13 +232,13 @@ namespace Puzzle
             if (pic == null)
             {
                 pic = new PictureBox();
-                //pic.Height = groupBox1.Height;
-                //pic.Width = groupBox1.Width;
-                //groupBox1.Controls.Add(pic);
+                pic.Height = groupBox1.Height;
+                pic.Width = groupBox1.Width;
+              //  groupBox1.Controls.Add(pic);
 
-                pic.Height = flowLayoutPanel1.Height;
-                pic.Width = flowLayoutPanel1.Width;
-                flowLayoutPanel1.Controls.Add(pic);
+                //pic.Height = flowLayoutPanel1.Height;
+                //pic.Width = flowLayoutPanel1.Width;
+                //flowLayoutPanel1.Controls.Add(pic);
 
             }
             pic.Image = image;
@@ -259,12 +260,12 @@ namespace Puzzle
 
             Image img = Image.FromFile(@"..\..\gallery\cat4.jpg");
 
-            //Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
-            Bitmap objBmImage = new Bitmap(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+            Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
+            //Bitmap objBmImage = new Bitmap(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
             Graphics objGraphics = Graphics.FromImage(objBmImage);
             objGraphics.Clear(Color.White);
-            //objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
-            objGraphics.DrawImage(img, new Rectangle(0, 0, flowLayoutPanel1.Width, flowLayoutPanel1.Height));
+            objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
+            //objGraphics.DrawImage(img, new Rectangle(0, 0, flowLayoutPanel1.Width, flowLayoutPanel1.Height));
             objGraphics.Flush();
 
             return objBmImage;           
