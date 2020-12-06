@@ -37,7 +37,6 @@ namespace Puzzle
             if (pic != null)
             {
                 groupBox1.Controls.Remove(pic);
-               // flowLayoutPanel1.Controls.Remove(pic);
                 pic.Dispose();
                 pic = null;
 
@@ -269,6 +268,11 @@ namespace Puzzle
             objGraphics.Flush();
 
             return objBmImage;           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
