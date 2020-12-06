@@ -37,6 +37,7 @@ namespace Puzzle
             if (pic != null)
             {
                 groupBox1.Controls.Remove(pic);
+               // flowLayoutPanel1.Controls.Remove(pic);
                 pic.Dispose();
                 pic = null;
 
@@ -77,9 +78,74 @@ namespace Puzzle
                 ((MyPictureBox)pictureBoxes[i]).ImageIndex = indice[i];
             }
 
-           
         }
-        private void OnPuzzleClick(object sender, EventArgs e)
+
+        private void createFragTale()//лента 
+        {
+            if (pic != null)
+            {
+                flowLayoutPanel1.Controls.Remove(pic);
+                pic.Dispose();
+                pic = null;
+
+            }
+            if (pictureBoxes == null)
+            {
+                pictureBoxes = new PictureBox[level];
+                images = new Image[level];
+            }
+            int numCol = 2;
+            int numRows = 4;
+            int unitX = flowLayoutPanel1.Width / numCol;
+            int unitY = flowLayoutPanel1.Height / numRows;
+            int[] indice = new int[level];
+            for (int i = 0; i < level; i++)
+            {
+                indice[i] = i;
+                if (pictureBoxes[i] == null)
+                {
+                    pictureBoxes[i] = new MyPictureBox();
+                    pictureBoxes[i].Click += new EventHandler(OnPuzzleClickTale);
+                    pictureBoxes[i].BorderStyle = BorderStyle.Fixed3D;
+                }
+                pictureBoxes[i].Width = unitX;
+                pictureBoxes[i].Height = unitY;
+
+                ((MyPictureBox)pictureBoxes[i]).Index = i;
+
+                CreateBitmapImage(image, images, i, numRows, numCol, unitX, unitY);
+                pictureBoxes[i].Location = new Point(unitX * (i % numCol), unitY * (i / numCol));
+                if (!flowLayoutPanel1.Controls.Contains(pictureBoxes[i]))
+                    flowLayoutPanel1.Controls.Add(pictureBoxes[i]);
+            }
+            shuffle(ref indice);
+            for (int i = 0; i < level; i++)
+            {
+                pictureBoxes[i].Image = images[indice[i]];
+                ((MyPictureBox)pictureBoxes[i]).ImageIndex = indice[i];
+            }
+
+        }
+
+        private void OnPuzzleClickTale(object sender, EventArgs e)
+        {
+            if (firstBox == null)
+            {
+                firstBox = (MyPictureBox)sender;
+                firstBox.BorderStyle = BorderStyle.FixedSingle;
+            }
+            else if (secondBox == null)
+            {
+                secondBox = (MyPictureBox)sender;
+                firstBox.BorderStyle = BorderStyle.Fixed3D;
+                secondBox.BorderStyle = BorderStyle.FixedSingle;
+                SwitchImage(firstBox, secondBox);
+                firstBox = null;
+                secondBox = null;
+            }
+        }
+
+        private void OnPuzzleClick(object sender, EventArgs e)//createFrag
         {
             if (firstBox == null)
             {
@@ -98,7 +164,7 @@ namespace Puzzle
            
            // ((MyPictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
         }
-        private void SwitchImage(MyPictureBox box1,MyPictureBox box2)
+        private void SwitchImage(MyPictureBox box1,MyPictureBox box2)//createFrag
         {
             int tmp = box2.ImageIndex;
             box2.Image = images[box1.ImageIndex];
@@ -111,7 +177,7 @@ namespace Puzzle
                 //ShowImage();
             }
         }
-        private bool isFinished()
+        private bool isFinished()//createFrag
         {
             for(int i = 0; i < level; i++)
             {
@@ -152,10 +218,12 @@ namespace Puzzle
         private void Game_Load(object sender, EventArgs e)
         {
             groupBox1.Size = new System.Drawing.Size(600, 420);
+            flowLayoutPanel1.Size = new System.Drawing.Size(600, 420);
             //image = Image.FromFile();
-            //CreateBitmapImage();
+            CreateBitmapImage();
             ShowImage();
-            createFrag();
+            //createFrag();
+            createFragTale();
         }
         private void ShowImage()
         {
@@ -163,12 +231,18 @@ namespace Puzzle
             if (pic == null)
             {
                 pic = new PictureBox();
-                pic.Height = groupBox1.Height;
-                pic.Width = groupBox1.Width;
-                groupBox1.Controls.Add(pic);
+                //pic.Height = groupBox1.Height;
+                //pic.Width = groupBox1.Width;
+                //groupBox1.Controls.Add(pic);
+
+                pic.Height = flowLayoutPanel1.Height;
+                pic.Width = flowLayoutPanel1.Width;
+                flowLayoutPanel1.Controls.Add(pic);
+
             }
             pic.Image = image;
         }
+
         private Bitmap CreateBitmapImage()
         {
            // string img = gal.getpicture_name();
@@ -183,17 +257,17 @@ namespace Puzzle
             //}
             //pic.Image = image;
 
-            Image img = Image.FromFile(@"..\..\gallery\about.jpg");
+            Image img = Image.FromFile(@"..\..\gallery\cat4.jpg");
 
-
-            Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
+            //Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
+            Bitmap objBmImage = new Bitmap(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
             Graphics objGraphics = Graphics.FromImage(objBmImage);
             objGraphics.Clear(Color.White);
-            objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
+            //objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
+            objGraphics.DrawImage(img, new Rectangle(0, 0, flowLayoutPanel1.Width, flowLayoutPanel1.Height));
             objGraphics.Flush();
 
-            return objBmImage;
-            
+            return objBmImage;           
         }
     }
 }
