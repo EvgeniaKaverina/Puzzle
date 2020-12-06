@@ -139,7 +139,7 @@ namespace Puzzle
                 secondBox = (MyPictureBox)sender;
                 firstBox.BorderStyle = BorderStyle.Fixed3D;
                 secondBox.BorderStyle = BorderStyle.FixedSingle;
-                SwitchImage(firstBox, secondBox);
+               // SwitchImage(firstBox, secondBox);
                 firstBox = null;
                 secondBox = null;
             }
@@ -274,5 +274,7 @@ namespace Puzzle
         {
 
         }
+
+        
     }
 }
