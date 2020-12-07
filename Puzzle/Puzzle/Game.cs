@@ -97,6 +97,7 @@ namespace Puzzle
             int numRows = 2;
             int unitX = groupBox1.Width / numCol;
             int unitY = groupBox1.Height / numRows;
+            flowLayoutPanel1.Height = unitY + 50;
             int[] indice = new int[level];
             for (int i = 0; i < level; i++)
             {
