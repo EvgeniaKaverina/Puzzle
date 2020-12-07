@@ -182,6 +182,14 @@ namespace Puzzle
         {
             for(int i = 0; i < level; i++)
             {
+                if(((MyPictureBox)pictureBoxes[i]).ImageIndex== ((MyPictureBox)pictureBoxes[i]).Index)
+                {
+                    pictureBoxes[i].Enabled = false;
+                    pictureBoxes[i].Click -= null;
+                }
+            }
+            for(int i = 0; i < level; i++)
+            {
                 if (((MyPictureBox)pictureBoxes[i]).ImageIndex != ((MyPictureBox)pictureBoxes[i]).Index)
                     return false;
             }
@@ -223,8 +231,8 @@ namespace Puzzle
             //image = Image.FromFile();
             CreateBitmapImage();
             ShowImage();
-            //createFrag();
-            createFragTale();
+            createFrag();
+            //createFragTale();
         }
         private void ShowImage()
         {

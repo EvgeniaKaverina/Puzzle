@@ -23,7 +23,7 @@ namespace Puzzle
 
         private void LevelSettings_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -67,6 +67,15 @@ namespace Puzzle
             }
             else
             {
+                int type=0;
+                if (comboBox1.SelectedItem.ToString() == "Прямоугольные")
+                {
+                    type = 1;
+                }
+                else if (comboBox1.SelectedItem.ToString() == "Треугольные")
+                {
+                    type = 0;
+                }
                 string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
@@ -91,7 +100,7 @@ namespace Puzzle
                         command.Parameters.AddWithValue("number", level);
                         command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
                         command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                        command.Parameters.AddWithValue("type", comboBox1.SelectedItem.ToString());
+                        command.Parameters.AddWithValue("type", type);
                         await command.ExecuteNonQueryAsync();
                     }
                 }
@@ -102,7 +111,7 @@ namespace Puzzle
                     command.Parameters.AddWithValue("number", level);
                     command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
                     command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                    command.Parameters.AddWithValue("type", comboBox1.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("type", type);
                     await command.ExecuteNonQueryAsync();
                 }
                 AdminMenu am = new AdminMenu();
@@ -119,6 +128,24 @@ namespace Puzzle
             AdminMenu a = new AdminMenu();
             a.Show();
             this.Hide();
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem.ToString() == "Треугольные")
+            {
+                numericUpDown2.Increment = 2;
+                if (numericUpDown2.Value % 2 == 1)
+                {
+                    numericUpDown2.Value -= 1;
+                }
+            }
+            else numericUpDown2.Increment = 1;
         }
     }
 }

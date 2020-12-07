@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace Puzzle
 {
-    public partial class UserChoosingPuzzle : Form
+    public partial class UserChoosingPuzzle : CreatePuzzle
     {
         private GalleryForCreate gal;
         //string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
@@ -31,8 +31,15 @@ namespace Puzzle
 
         private void select_img_Click(object sender, EventArgs e)
         {
-            gal = new GalleryForCreate();
-            gal.Show();
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите номер уровня");
+            }
+            else {
+                int number = Int32.Parse(comboBox1.SelectedItem.ToString());
+                gal = new GalleryForCreate(this,number);
+                gal.Show();
+            }
         }
 
         private void play_Click(object sender, EventArgs e)
@@ -43,10 +50,16 @@ namespace Puzzle
             }
             else
             {
+
                 Game g = new Game();
                 g.Show();
                 this.Close();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -19,15 +19,54 @@ namespace Puzzle
         private SqlConnection sqlConnection;
 
         private string picture_name;
+        CreatePuzzle p;
+        UserChoosingPuzzle choosingPuzzle;
 
-        public GalleryForCreate()
+        public  GalleryForCreate(CreatePuzzle puzzle)
         {
             InitializeComponent();
             picSelected = null;
-        }
+            p = puzzle;
+            createPuzzleChoose();
 
-        private async void GalleryForCreate_Load(object sender, EventArgs e)
+        }
+        public GalleryForCreate(UserChoosingPuzzle choosingPuzzle, int number )
         {
+            InitializeComponent();
+            picSelected = null;
+            this.choosingPuzzle=choosingPuzzle;
+            userChoose(number);
+            
+        }
+        //добавить запрос о номеру
+        private async void userChoose(int number)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
+            SqlCommand command = new SqlCommand("", sqlConnection);
+            SqlDataReader reader = null;
+            reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+
+            {
+                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
+                Bitmap bmp = new Bitmap(filename);
+                PictureBox tempPictureBox = new PictureBox();
+
+                //generates a thumbnail image of specified size
+                tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+
+                tempPictureBox.Size = new System.Drawing.Size(200, 140);
+                string[] p = filename.Split('\\');
+                tempPictureBox.Name = p[p.Length - 1];
+                tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
+                tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
+                flowLayoutPanel1.Controls.Add(tempPictureBox);
+            }
+        }
+        private async void createPuzzleChoose()
+        {
+           
             //запрос в БД SELECT
             sqlConnection = new SqlConnection(connectionString);
             await sqlConnection.OpenAsync();
@@ -51,12 +90,16 @@ namespace Puzzle
                 tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
                 flowLayoutPanel1.Controls.Add(tempPictureBox);
             }
-
+        }
+        private  void GalleryForCreate_Load(object sender, EventArgs e)
+        {
+            
         }
         //выделение картинки
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
             picSelected = (PictureBox)sender;
+            picSelected.BorderStyle = BorderStyle.Fixed3D;
             picture_name = picSelected.Name;
             //   picSelected.Focus();
 
@@ -80,13 +123,14 @@ namespace Puzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            p.setTextToButton();
             if (picSelected == null)
             {
                 MessageBox.Show("Изображение не выбрано");
             }
             else
             {
+                
           //      CreatePuzzle c = new CreatePuzzle();
             //    c.Show();
                 this.Hide();

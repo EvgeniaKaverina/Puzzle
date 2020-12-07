@@ -28,10 +28,14 @@ namespace Puzzle
 
         private void select_pict_Click(object sender, EventArgs e)
         {
-            gal= new GalleryForCreate();
+            gal= new GalleryForCreate(this);
            gal.Show();
+            
         }
-
+        public void setTextToButton()
+        {
+            select_pict.Text = gal.getpicture_name();
+        }
         private void back_Click(object sender, EventArgs e)
         {
             AdminMenu s = new AdminMenu();
@@ -39,146 +43,146 @@ namespace Puzzle
             this.Hide();
         }
 
-        private async void create_rect(string pict, int num_rows, int num_cols, int id)
-        {
-            Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
+       // private async void create_rect(string pict, int num_rows, int num_cols, int id)
+       // {
+       //     Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
 
-            int wid = (int)600 / num_cols;
-            int hgt = (int)420 / num_rows;
+       //     int wid = (int)600 / num_cols;
+       //     int hgt = (int)420 / num_rows;
  
 
-            // Начнем расщепление растрового изображения.
+       //     // Начнем расщепление растрового изображения.
 
-            Bitmap piece = new Bitmap(wid, hgt);
-            Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
-            using (Graphics gr = Graphics.FromImage(piece))
-            {
-                sqlConnection = new SqlConnection(connectionString);
-                await sqlConnection.OpenAsync();
-                Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
-                for (int row = 0; row < num_rows; row++)
-                {
-                    source_rect.X = 0;
-                    for (int col = 0; col < num_cols; col++)
-                    {
-                        // Скопируем фрагмент изображения.
-                        gr.DrawImage(bm, dest_rect, source_rect,
-                            GraphicsUnit.Pixel);
+       //     Bitmap piece = new Bitmap(wid, hgt);
+       //     Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
+       //     using (Graphics gr = Graphics.FromImage(piece))
+       //     {
+       //         sqlConnection = new SqlConnection(connectionString);
+       //         await sqlConnection.OpenAsync();
+       //         Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
+       //         for (int row = 0; row < num_rows; row++)
+       //         {
+       //             source_rect.X = 0;
+       //             for (int col = 0; col < num_cols; col++)
+       //             {
+       //                 // Скопируем фрагмент изображения.
+       //                 gr.DrawImage(bm, dest_rect, source_rect,
+       //                     GraphicsUnit.Pixel);
 
-                        // Сохраним кусок.
+       //                 // Сохраним кусок.
                   
-                        string filename = pict +id+
-                            row.ToString("00") +
-                            col.ToString("00") + ".jpg";
-                        //      matrix[row, col] = filename;
+       //                 string filename = pict +id+
+       //                     row.ToString("00") +
+       //                     col.ToString("00") + ".jpg";
+       //                 //      matrix[row, col] = filename;
 
-                        //запись в бд
+       //                 //запись в бд
                        
-                        SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)",sqlConnection);
-                        command.Parameters.AddWithValue("frag", filename);
-                        command.Parameters.AddWithValue("id", id);
+       //                 SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)",sqlConnection);
+       //                 command.Parameters.AddWithValue("frag", filename);
+       //                 command.Parameters.AddWithValue("id", id);
 
-                        await command.ExecuteNonQueryAsync();
+       //                 await command.ExecuteNonQueryAsync();
                        
 
-                        piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
+       //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
                         
 
-                        // Переместимся к следующему столбцу.
-                        source_rect.X += wid;
-                    }
-                    source_rect.Y += hgt;
-                }
+       //                 // Переместимся к следующему столбцу.
+       //                 source_rect.X += wid;
+       //             }
+       //             source_rect.Y += hgt;
+       //         }
 
-                sqlConnection.Close();
-            }
-       //     return matrix; // вернуть матрицу
+       //         sqlConnection.Close();
+       //     }
+       ////     return matrix; // вернуть матрицу
 
-        }
-        private async void create_trian(string pict, int num_rows, int num_cols, int id)
-        {
-            Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
+       // }
+       // private async void create_trian(string pict, int num_rows, int num_cols, int id)
+       // {
+       //     Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
 
-            int wid = (int)600 / num_cols;
-            int hgt = (int)420 / num_rows;
+       //     int wid = (int)600 / num_cols;
+       //     int hgt = (int)420 / num_rows;
 
 
-            // Начнем расщепление растрового изображения.
+       //     // Начнем расщепление растрового изображения.
 
-            Bitmap piece = new Bitmap(wid, hgt);
-            Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
-            using (Graphics gr = Graphics.FromImage(piece))
-            {
-                sqlConnection = new SqlConnection(connectionString);
-                await sqlConnection.OpenAsync();
+       //     Bitmap piece = new Bitmap(wid, hgt);
+       //     Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
+       //     using (Graphics gr = Graphics.FromImage(piece))
+       //     {
+       //         sqlConnection = new SqlConnection(connectionString);
+       //         await sqlConnection.OpenAsync();
                 
-                Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
-                for (int row = 0; row < num_rows; row++)
-                {
-                    source_rect.X = 0;
-                    for (int col = 0; col < num_cols; col++)
-                    {
-                        // Скопируем фрагмент изображения.
-                        gr.DrawImage(bm, dest_rect, source_rect,
-                            GraphicsUnit.Pixel);
+       //         Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
+       //         for (int row = 0; row < num_rows; row++)
+       //         {
+       //             source_rect.X = 0;
+       //             for (int col = 0; col < num_cols; col++)
+       //             {
+       //                 // Скопируем фрагмент изображения.
+       //                 gr.DrawImage(bm, dest_rect, source_rect,
+       //                     GraphicsUnit.Pixel);
 
-                        for(int j = 0; j < hgt; j++)
-                        {
-                            for(int i = 0; i < wid/hgt*j; i++)
-                            {
-                                piece.SetPixel(i, j, Color.Transparent);
-                            }
-                        }
+       //                 for(int j = 0; j < hgt; j++)
+       //                 {
+       //                     for(int i = 0; i < wid/hgt*j; i++)
+       //                     {
+       //                         piece.SetPixel(i, j, Color.Transparent);
+       //                     }
+       //                 }
                        
                        
-                        // Сохраним кусок.
+       //                 // Сохраним кусок.
                         
 
-                        string filename = pict + id +row.ToString("00") + col.ToString("00")+"01" + ".jpg";
+       //                 string filename = pict + id +row.ToString("00") + col.ToString("00")+"01" + ".jpg";
               
-                        SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
-                        command.Parameters.AddWithValue("frag", filename);
-                        command.Parameters.AddWithValue("id", id);
+       //                 SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
+       //                 command.Parameters.AddWithValue("frag", filename);
+       //                 command.Parameters.AddWithValue("id", id);
 
-                        await command.ExecuteNonQueryAsync();
-
-
-                        piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
-
-                        for (int j = 0; j < hgt; j++)
-                        {
-                            for (int i = wid / hgt * j; i < wid ; i++)
-                            {
-                                piece.SetPixel(i, j, Color.Transparent);
-                            }
-                        }
+       //                 await command.ExecuteNonQueryAsync();
 
 
-                        // Сохраним кусок.
+       //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
+
+       //                 for (int j = 0; j < hgt; j++)
+       //                 {
+       //                     for (int i = wid / hgt * j; i < wid ; i++)
+       //                     {
+       //                         piece.SetPixel(i, j, Color.Transparent);
+       //                     }
+       //                 }
 
 
-                        string filename2 = pict + id + row.ToString("00") + col.ToString("00") + "02" + ".jpg";
-
-                       command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
-                        command.Parameters.AddWithValue("frag", filename2);
-                        command.Parameters.AddWithValue("id", id);
-
-                        await command.ExecuteNonQueryAsync();
+       //                 // Сохраним кусок.
 
 
-                        piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename2), ImageFormat.Jpeg);
+       //                 string filename2 = pict + id + row.ToString("00") + col.ToString("00") + "02" + ".jpg";
+
+       //                command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
+       //                 command.Parameters.AddWithValue("frag", filename2);
+       //                 command.Parameters.AddWithValue("id", id);
+
+       //                 await command.ExecuteNonQueryAsync();
 
 
-                        // Переместимся к следующему столбцу.
-                        source_rect.X += wid;
-                    }
-                    source_rect.Y += hgt;
-                }
+       //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename2), ImageFormat.Jpeg);
 
-                sqlConnection.Close();
-            }
 
-        }
+       //                 // Переместимся к следующему столбцу.
+       //                 source_rect.X += wid;
+       //             }
+       //             source_rect.Y += hgt;
+       //         }
+
+       //         sqlConnection.Close();
+       //     }
+
+       // }
         private async void create_puzzle_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
@@ -194,10 +198,20 @@ namespace Puzzle
             {
                 string pict = gal.getpicture_name();
 
+
                 //запрос к бд все сохранить
 
                 int number = Int32.Parse(comboBox1.SelectedItem.ToString());
-                string loc=comboBox2.SelectedItem.ToString();
+                //  string loc=comboBox2.SelectedItem.ToString();
+                int loc=0;
+                if (comboBox2.SelectedItem.ToString() == "Лента")
+                {
+                    loc = 1;
+                }
+                else if (comboBox2.SelectedItem.ToString() == "Поле")
+                {
+                    loc = 0;
+                }
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
 
@@ -207,46 +221,10 @@ namespace Puzzle
                 command.Parameters.AddWithValue("location", loc);
               
                 await command.ExecuteNonQueryAsync();
+                AdminMenu menu = new AdminMenu();
+                menu.Show();
+                this.Close();
 
-                command = new SqlCommand("Select id_puzzle From [Puzzles] where image=@pict and number_level=@number_level and location=@location", sqlConnection);
-                command.Parameters.AddWithValue("pict", pict);
-                command.Parameters.AddWithValue("number_level", number);
-                command.Parameters.AddWithValue("location", loc);
-                SqlDataReader reader = null;
-                reader = await command.ExecuteReaderAsync();
-                int id=0;
-                while (await reader.ReadAsync())
-                {
-     
-                    id =Int32.Parse( Convert.ToString(reader["id_puzzle"]));
-                }
-                reader.Close();
-
-
-                //запрос к уровню
-                command = new SqlCommand("Select * from [Level] where number=@number_level",sqlConnection);
-                command.Parameters.AddWithValue("number_level", number);
-                reader = await command.ExecuteReaderAsync();
-                int num_row=0;
-                string type="";
-                int num_col=0;
-                while (await reader.ReadAsync())
-                {
-                    num_col = Int32.Parse(Convert.ToString(reader["count_of_piece_horizontally"]));
-                    num_row = Int32.Parse(Convert.ToString(reader["count_of_piece_vertically"]));
-                    type = Convert.ToString(reader["type_of_piece"]);
-                }
-                sqlConnection.Close();
-                if (type.Equals("Прямоугольные       "))
-                {
-                    create_rect(pict, num_row, num_col, id);
-                }
-                else create_trian(pict, num_row, num_col, id);
-                //метод create_puzzle
-                //вернуться, не создавать новое
-                // AdminMenu a = new AdminMenu();
-                //a.Show();
-                // this.Hide();
             }
         }
 
