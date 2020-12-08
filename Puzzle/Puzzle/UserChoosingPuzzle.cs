@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace Puzzle
 {
-    public partial class UserChoosingPuzzle : CreatePuzzle
+    public partial class UserChoosingPuzzle : Form
     {
         private GalleryForCreate gal;
         //string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";

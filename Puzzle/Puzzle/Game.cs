@@ -13,7 +13,9 @@ namespace Puzzle
 {
     public partial class Game : Form
     {
-       // private GalleryForCreate gal;
+        // private GalleryForCreate gal;
+        DateTime date; 
+
         public Game()
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace Puzzle
         PictureBox[] pictureBoxes = null;
         Image[] images = null;
         int level = 8;
+        int h, m, s;
 
         MyPictureBox firstBox = null;
         MyPictureBox secondBox = null;
@@ -174,7 +177,9 @@ namespace Puzzle
             box1.ImageIndex = tmp;
             if (isFinished())
             {
-                 MessageBox.Show("Well done!");
+                //Останавливаем таймер
+                timer1.Stop();
+                MessageBox.Show("Well done!");
                 //ShowImage();
             }
         }
@@ -226,6 +231,17 @@ namespace Puzzle
 
         private void Game_Load(object sender, EventArgs e)
         {
+            date = DateTime.Now;
+           Timer timer = new Timer();
+            timer1.Interval = 10;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            
+            ////Делаем таймер доступным
+            //timer1.Enabled = true;
+            //Запускаем таймер
+            timer1.Start();
+           
+
             groupBox1.Size = new System.Drawing.Size(600, 420);
           //  flowLayoutPanel1.Size = new System.Drawing.Size(600, 420);
             //image = Image.FromFile();
@@ -250,6 +266,15 @@ namespace Puzzle
 
             }
             pic.Image = image;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            long tick = DateTime.Now.Ticks - date.Ticks;
+            DateTime stopWatch = new DateTime();
+
+            stopWatch = stopWatch.AddTicks(tick);
+            time.Text = String.Format("{0:mm:ss}", stopWatch);
         }
 
         private Bitmap CreateBitmapImage()
