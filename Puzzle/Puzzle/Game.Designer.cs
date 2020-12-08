@@ -62,59 +62,84 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(984, 82);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 36);
+            this.button1.Size = new System.Drawing.Size(136, 45);
             this.button1.TabIndex = 2;
             this.button1.Text = "Сохранить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(33, 26);
+            this.exit.BackColor = System.Drawing.Color.Gainsboro;
+            this.exit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exit.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exit.Location = new System.Drawing.Point(32, 12);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(136, 36);
+            this.exit.Size = new System.Drawing.Size(136, 45);
             this.exit.TabIndex = 3;
             this.exit.Text = "Выйти";
-            this.exit.UseVisualStyleBackColor = true;
+            this.exit.UseVisualStyleBackColor = false;
             // 
             // rating
             // 
-            this.rating.Location = new System.Drawing.Point(198, 26);
+            this.rating.BackColor = System.Drawing.Color.Gainsboro;
+            this.rating.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rating.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rating.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rating.Location = new System.Drawing.Point(197, 12);
             this.rating.Name = "rating";
-            this.rating.Size = new System.Drawing.Size(136, 36);
+            this.rating.Size = new System.Drawing.Size(136, 45);
             this.rating.TabIndex = 4;
             this.rating.Text = "Рейтинг";
-            this.rating.UseVisualStyleBackColor = true;
+            this.rating.UseVisualStyleBackColor = false;
             // 
             // help
             // 
-            this.help.Location = new System.Drawing.Point(984, 142);
+            this.help.BackColor = System.Drawing.Color.Gainsboro;
+            this.help.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.help.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.help.Location = new System.Drawing.Point(984, 163);
             this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(136, 36);
+            this.help.Size = new System.Drawing.Size(136, 45);
             this.help.TabIndex = 5;
             this.help.Text = "Подсказка";
-            this.help.UseVisualStyleBackColor = true;
+            this.help.UseVisualStyleBackColor = false;
             // 
             // info
             // 
-            this.info.Location = new System.Drawing.Point(949, 202);
+            this.info.BackColor = System.Drawing.Color.Gainsboro;
+            this.info.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.info.Location = new System.Drawing.Point(931, 245);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(192, 36);
+            this.info.Size = new System.Drawing.Size(244, 63);
             this.info.TabIndex = 6;
             this.info.Text = "Справочная информация";
-            this.info.UseVisualStyleBackColor = true;
+            this.info.UseVisualStyleBackColor = false;
             // 
             // view_pic
             // 
-            this.view_pic.Location = new System.Drawing.Point(922, 261);
+            this.view_pic.BackColor = System.Drawing.Color.Gainsboro;
+            this.view_pic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.view_pic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.view_pic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.view_pic.Location = new System.Drawing.Point(931, 342);
             this.view_pic.Name = "view_pic";
-            this.view_pic.Size = new System.Drawing.Size(244, 36);
+            this.view_pic.Size = new System.Drawing.Size(244, 65);
             this.view_pic.TabIndex = 7;
             this.view_pic.Text = "Посмотреть исходную картинку";
-            this.view_pic.UseVisualStyleBackColor = true;
+            this.view_pic.UseVisualStyleBackColor = false;
+            this.view_pic.Click += new System.EventHandler(this.view_pic_Click);
             // 
             // timer1
             // 
@@ -124,10 +149,12 @@
             // time
             // 
             this.time.AutoSize = true;
+            this.time.BackColor = System.Drawing.Color.Transparent;
+            this.time.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.time.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.time.Location = new System.Drawing.Point(1000, 322);
+            this.time.Location = new System.Drawing.Point(1015, 438);
             this.time.Name = "time";
-            this.time.Size = new System.Drawing.Size(96, 38);
+            this.time.Size = new System.Drawing.Size(96, 37);
             this.time.TabIndex = 8;
             this.time.Text = "00:00";
             // 

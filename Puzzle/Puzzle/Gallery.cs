@@ -102,7 +102,7 @@ namespace Puzzle
                 tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
                 tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
                 flowLayoutPanel1.Controls.Add(tempPictureBox);
-                //   File.Copy(filename, Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\",new FileInfo(tempPictureBox.Name).Name));
+               //  File.Copy(filename, Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\",new FileInfo(tempPictureBox.Name).Name));
 
                 //приведение к одному размеру
                 Bitmap bmp = new Bitmap(600, 420);

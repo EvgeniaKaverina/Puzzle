@@ -16,6 +16,7 @@ namespace Puzzle
         {
             InitializeComponent();
         }
+
         public Picture(string filename)
         {
             InitializeComponent();

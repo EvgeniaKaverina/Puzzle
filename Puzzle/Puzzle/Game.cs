@@ -26,7 +26,6 @@ namespace Puzzle
         PictureBox[] pictureBoxes = null;
         Image[] images = null;
         int level = 8;
-        int h, m, s;
 
         MyPictureBox firstBox = null;
         MyPictureBox secondBox = null;
@@ -275,6 +274,15 @@ namespace Puzzle
 
             stopWatch = stopWatch.AddTicks(tick);
             time.Text = String.Format("{0:mm:ss}", stopWatch);
+        }
+
+        private void view_pic_Click(object sender, EventArgs e)
+        {
+            //Picture p = new Picture();
+            //указать путь к выбранной пользователем картинке
+            Picture picture = new Picture(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\cat4.jpg"));
+            picture.ShowDialog();
+            //p.Show();
         }
 
         private Bitmap CreateBitmapImage()
