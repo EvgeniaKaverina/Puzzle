@@ -16,12 +16,18 @@ namespace Puzzle
         {
             InitializeComponent();
         }
-    
+
+        string login;
+        public UserMenu(string login)
+        {
+            InitializeComponent();
+            this.login = login;
+        }
        //Добавить переходы между формами
 
         private void buttonNewGame_Click(object sender, EventArgs e)
         {
-            UserChoosingPuzzle ch = new UserChoosingPuzzle();
+            UserChoosingPuzzle ch = new UserChoosingPuzzle(login);
             ch.Show();
             this.Close();
         }

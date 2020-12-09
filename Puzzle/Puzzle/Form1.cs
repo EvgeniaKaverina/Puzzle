@@ -32,7 +32,7 @@ namespace Puzzle
 
             if (isUserExistsEnter())
             {
-                UserMenu s = new UserMenu();
+                UserMenu s = new UserMenu(log);
                 s.Show();
                 this.Hide();
 
@@ -92,8 +92,8 @@ namespace Puzzle
 
 
                 SqlCommand sqlCommand = new SqlCommand("INSERT INTO [User] (login, password) VALUES(@login, @password)", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("login", login_reg.Text);
-                sqlCommand.Parameters.AddWithValue("password", password_reg.Text);
+                sqlCommand.Parameters.AddWithValue("login", log);
+                sqlCommand.Parameters.AddWithValue("password", pas);
 
                 if (isUserExists())
                 {
@@ -102,7 +102,7 @@ namespace Puzzle
 
                else  if (sqlCommand.ExecuteNonQuery() == 1)
                 {
-                    UserMenu s = new UserMenu();
+                    UserMenu s = new UserMenu(log);
                     s.Show();
                     this.Hide();
                 }
@@ -154,6 +154,11 @@ namespace Puzzle
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void login_enter_TextChanged(object sender, EventArgs e)
         {
 
         }

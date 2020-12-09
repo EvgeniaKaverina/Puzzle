@@ -21,7 +21,14 @@ namespace Puzzle
         {
             InitializeComponent();
         }
-
+        public UserChoosingPuzzle(string login)
+        {
+            InitializeComponent();
+            this.login = login;
+        }
+        string login;
+        int number;
+        string picture;
         private void back_Click(object sender, EventArgs e)
         {
             UserMenu u = new UserMenu();
@@ -36,14 +43,15 @@ namespace Puzzle
                 MessageBox.Show("Выберите номер уровня");
             }
             else {
-                int number = Int32.Parse(comboBox1.SelectedItem.ToString());
+                number = Int32.Parse(comboBox1.SelectedItem.ToString());
                 gal = new GalleryForCreate(this,number);
                 gal.Show();
             }
         }
         public void setTextToButton()
         {
-            select_img.Text = gal.getpicture_name();
+            picture= gal.getpicture_name();
+            select_img.Text = picture;
         }
 
         private void play_Click(object sender, EventArgs e)
@@ -59,7 +67,7 @@ namespace Puzzle
             else
             {
 
-                Game g = new Game();
+                Game g = new Game(picture,number,login);
                 g.Show();
                 this.Close();
             }
