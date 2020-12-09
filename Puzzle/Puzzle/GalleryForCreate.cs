@@ -19,8 +19,9 @@ namespace Puzzle
         private SqlConnection sqlConnection;
 
         private string picture_name;
-        CreatePuzzle p;
-        UserChoosingPuzzle choosingPuzzle;
+        Form p;
+        bool admin;
+     
 
         public  GalleryForCreate(CreatePuzzle puzzle)
         {
@@ -28,28 +29,31 @@ namespace Puzzle
             picSelected = null;
             p = puzzle;
             createPuzzleChoose();
+            admin = true;
 
         }
         public GalleryForCreate(UserChoosingPuzzle choosingPuzzle, int number )
         {
             InitializeComponent();
             picSelected = null;
-            this.choosingPuzzle=choosingPuzzle;
+            p=choosingPuzzle;
             userChoose(number);
+            admin = false;
             
         }
-        //добавить запрос о номеру
+        //Проверить
         private async void userChoose(int number)
         {
             sqlConnection = new SqlConnection(connectionString);
             await sqlConnection.OpenAsync();
-            SqlCommand command = new SqlCommand("", sqlConnection);
+            SqlCommand command = new SqlCommand("SELECT image FROM Puzzles WHERE number_level=@number", sqlConnection);
+            command.Parameters.AddWithValue("number", number);
             SqlDataReader reader = null;
             reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
 
             {
-                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
+                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["image"].ToString());
                 Bitmap bmp = new Bitmap(filename);
                 PictureBox tempPictureBox = new PictureBox();
 
@@ -123,16 +127,21 @@ namespace Puzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
-            p.setTextToButton();
+            
             if (picSelected == null)
             {
                 MessageBox.Show("Изображение не выбрано");
             }
             else
             {
-                
-          //      CreatePuzzle c = new CreatePuzzle();
-            //    c.Show();
+                if (admin)
+                {
+                    ((CreatePuzzle)p).setTextToButton();
+                }
+                else
+                {
+                    ((UserChoosingPuzzle)p).setTextToButton();
+                }
                 this.Hide();
             }
         }

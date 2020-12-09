@@ -52,7 +52,7 @@ namespace Puzzle
         {
             Form1 s = new Form1();
             s.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

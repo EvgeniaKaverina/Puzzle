@@ -44,19 +44,23 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(33, 82);
+            this.groupBox1.Location = new System.Drawing.Point(37, 102);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(729, 444);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(820, 555);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(33, 563);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(37, 704);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(807, 228);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(908, 285);
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -66,10 +70,10 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(984, 82);
+            this.button1.Location = new System.Drawing.Point(1107, 102);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 45);
+            this.button1.Size = new System.Drawing.Size(153, 56);
             this.button1.TabIndex = 2;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = false;
@@ -81,9 +85,10 @@
             this.exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exit.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exit.Location = new System.Drawing.Point(32, 12);
+            this.exit.Location = new System.Drawing.Point(36, 15);
+            this.exit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(136, 45);
+            this.exit.Size = new System.Drawing.Size(153, 56);
             this.exit.TabIndex = 3;
             this.exit.Text = "Выйти";
             this.exit.UseVisualStyleBackColor = false;
@@ -94,9 +99,10 @@
             this.rating.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rating.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rating.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rating.Location = new System.Drawing.Point(197, 12);
+            this.rating.Location = new System.Drawing.Point(222, 15);
+            this.rating.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rating.Name = "rating";
-            this.rating.Size = new System.Drawing.Size(136, 45);
+            this.rating.Size = new System.Drawing.Size(153, 56);
             this.rating.TabIndex = 4;
             this.rating.Text = "Рейтинг";
             this.rating.UseVisualStyleBackColor = false;
@@ -107,9 +113,10 @@
             this.help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.help.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.help.Location = new System.Drawing.Point(984, 163);
+            this.help.Location = new System.Drawing.Point(1107, 204);
+            this.help.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(136, 45);
+            this.help.Size = new System.Drawing.Size(153, 56);
             this.help.TabIndex = 5;
             this.help.Text = "Подсказка";
             this.help.UseVisualStyleBackColor = false;
@@ -120,9 +127,10 @@
             this.info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.info.Location = new System.Drawing.Point(931, 245);
+            this.info.Location = new System.Drawing.Point(1047, 306);
+            this.info.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(244, 63);
+            this.info.Size = new System.Drawing.Size(274, 79);
             this.info.TabIndex = 6;
             this.info.Text = "Справочная информация";
             this.info.UseVisualStyleBackColor = false;
@@ -133,9 +141,10 @@
             this.view_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.view_pic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.view_pic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.view_pic.Location = new System.Drawing.Point(931, 342);
+            this.view_pic.Location = new System.Drawing.Point(1047, 428);
+            this.view_pic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.view_pic.Name = "view_pic";
-            this.view_pic.Size = new System.Drawing.Size(244, 65);
+            this.view_pic.Size = new System.Drawing.Size(274, 81);
             this.view_pic.TabIndex = 7;
             this.view_pic.Text = "Посмотреть исходную картинку";
             this.view_pic.UseVisualStyleBackColor = false;
@@ -152,17 +161,17 @@
             this.time.BackColor = System.Drawing.Color.Transparent;
             this.time.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.time.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.time.Location = new System.Drawing.Point(1015, 438);
+            this.time.Location = new System.Drawing.Point(1142, 548);
             this.time.Name = "time";
-            this.time.Size = new System.Drawing.Size(96, 37);
+            this.time.Size = new System.Drawing.Size(113, 45);
             this.time.TabIndex = 8;
             this.time.Text = "00:00";
             // 
             // Game
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 803);
+            this.ClientSize = new System.Drawing.Size(1353, 1004);
             this.Controls.Add(this.time);
             this.Controls.Add(this.view_pic);
             this.Controls.Add(this.info);
@@ -172,6 +181,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Game";
             this.Text = "Game";
             this.Load += new System.EventHandler(this.Game_Load);

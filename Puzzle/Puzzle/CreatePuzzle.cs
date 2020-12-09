@@ -193,7 +193,10 @@ namespace Puzzle
             {
                 MessageBox.Show("Выберите расположение фрагментов");
             }
-
+            else if (select_pict.Text == "Выбрать картинку")
+            {
+                MessageBox.Show("Выберите картинку");
+            }
             else
             {
                 string pict = gal.getpicture_name();

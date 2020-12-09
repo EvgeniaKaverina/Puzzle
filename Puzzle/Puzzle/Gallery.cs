@@ -57,13 +57,13 @@ namespace Puzzle
         //выделение картинки
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
-            if (picSelected != null)
-            {
-                picSelected.BorderStyle = BorderStyle.None;
+            //if (picSelected != null)
+            //{
+            //    picSelected.BorderStyle = BorderStyle.None;
 
-            }
+            //}
             picSelected = (PictureBox)sender;
-            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
+            //((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
          //   picSelected.Focus();
         
         }
@@ -189,6 +189,13 @@ namespace Puzzle
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AdminMenu menu = new AdminMenu();
+            menu.Show();
+            this.Close();
         }
     }
 }

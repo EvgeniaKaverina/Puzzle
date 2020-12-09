@@ -41,12 +41,20 @@ namespace Puzzle
                 gal.Show();
             }
         }
+        public void setTextToButton()
+        {
+            select_img.Text = gal.getpicture_name();
+        }
 
         private void play_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Выберите номер уровня");
+            }
+            else if(select_img.Text== "Выбрать картинку")
+            {
+                MessageBox.Show("Выберите картинку");
             }
             else
             {

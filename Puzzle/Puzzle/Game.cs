@@ -21,11 +21,18 @@ namespace Puzzle
             InitializeComponent();
         }
 
+        public Game(string picture_name, int number)
+        {
+            this.picture_name = picture_name;
+            this.number_level = number;
+        }
         Image image;
         PictureBox pic = null;
         PictureBox[] pictureBoxes = null;
         Image[] images = null;
         int level = 8;
+        string picture_name;
+        int number_level;
 
         MyPictureBox firstBox = null;
         MyPictureBox secondBox = null;
@@ -317,6 +324,9 @@ namespace Puzzle
 
         }
 
-        
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
