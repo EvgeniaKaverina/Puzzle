@@ -43,9 +43,11 @@ namespace Puzzle
         PictureBox[][] pictureBoxesTriangleOnTale = null;
         Image[][] imagesTriangle = null;
 
+        int id_puzzle;
         int level;
         string picture_name;
         int number_level;
+        bool location;
 
         MyPictureBox firstBox = null;
         MyPictureBox secondBox = null;
@@ -201,11 +203,7 @@ namespace Puzzle
             {
                 
                 taleBox.BorderStyle = BorderStyle.Fixed3D;
-                //firstBox = (MyPictureBox)sender;
-                //firstBox.BorderStyle = BorderStyle.FixedSingle;
-                //SwitchFieldAndTale(taleBox, firstBox);
-                //taleBox = null;
-                //firstBox = null;
+                
                 taleBox = (MyPictureBox)sender;
                 taleBox.BorderStyle = BorderStyle.FixedSingle;
             }
@@ -347,25 +345,37 @@ namespace Puzzle
 
         private void Game_Load(object sender, EventArgs e)
         {
-            getLevelSettings();
             //размер groupBox
             groupBox1.Size = new System.Drawing.Size(600, 420);
-            //  flowLayoutPanel1.Size = new System.Drawing.Size(600, 420);
-            //image = Image.FromFile();
-            
             CreateBitmapImage();
             ShowImage();
-            //  createFrag();
-
-            //createFragTale();
-            //createFragmentsOnField();
-
-            numRows = numRows / 2;
-            level = numRows * numCols;
-            //   createFragTriangle();
-            createTriangleFragmentsOnField();
-            createFragTaleTriangle();
-
+            getLevelSettings();
+            getPuzzle();
+            if (location && type)
+            {
+                createFragmentsOnField();
+                createFragTale();
+            }else if (!location && type)
+            {
+                createFrag();
+                flowLayoutPanel1.Visible = false;
+            }
+            else if (location && !type)
+            {
+                numRows = numRows / 2;
+                level = numRows * numCols;
+                createTriangleFragmentsOnField();
+                createFragTaleTriangle();
+            }
+            else if (!location && !type)
+            {
+                numRows = numRows / 2;
+                level = numRows * numCols;
+                createFragTriangle();
+                flowLayoutPanel1.Visible = false;
+            }
+           
+         
 
 
             date = DateTime.Now;
@@ -450,6 +460,28 @@ namespace Puzzle
             }
             level = numRows * numCols;
 
+        }
+
+        private void getPuzzle()
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM [Puzzles] where number_level=@num and image=@pic_name", sqlConnection);
+            command.Parameters.AddWithValue("num", number_level);
+            command.Parameters.AddWithValue("pic_name", picture_name);
+
+            SqlDataReader reader = null;
+            reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+
+                id_puzzle=Int32.Parse(Convert.ToString(reader["id_puzzle"]));
+                location = Boolean.Parse(Convert.ToString(reader["location"]));
+            }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -859,6 +891,31 @@ namespace Puzzle
                 taleBox = null;
             }
         }
-
+        //подсказка
+        int help_counter = 3;
+        private void help_Click(object sender, EventArgs e)
+        {
+            //лента прямоугольные
+            if (location && type)
+            {
+               
+            }
+            //поле прямоугольные
+            else if (!location && type)
+            {
+               
+            }
+            //лента треугольные
+            else if (location && !type)
+            {
+                
+            }
+            //поле треугольные
+            else if (!location && !type)
+            {
+                
+            }
+            
+        }
     }
 }
