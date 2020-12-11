@@ -15,6 +15,7 @@ namespace Puzzle
         public bool LeftGrag
         {
             set { left = value; }
+            get { return left; }
         }
         protected override void OnPaint(PaintEventArgs pe)
         {

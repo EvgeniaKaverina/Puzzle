@@ -290,7 +290,7 @@ namespace Puzzle
                     if (pictureBoxes[i].Enabled)
                     {
                         Bitmap btm = (Bitmap)pictureBoxes[i].Image;
-                        pictureBoxes[i].Image = ChangeBrightness(btm, 0.7f);
+                   //     pictureBoxes[i].Image = ChangeBrightness(btm, 0.7f);
                     }
                     pictureBoxes[i].Enabled = false;
                   //  pictureBoxes[i].Click -= null;
@@ -479,34 +479,34 @@ namespace Puzzle
         {
 
         }
-        public static Image ChangeBrightness(Bitmap image, float brightness)
-        {
-            ImageAttributes imageAttributes = new ImageAttributes();
-            int width = image.Width;
-            int height = image.Height;
+        //public static Image ChangeBrightness(Bitmap image, float brightness)
+        //{
+        //    ImageAttributes imageAttributes = new ImageAttributes();
+        //    int width = image.Width;
+        //    int height = image.Height;
 
-            float[][] colorMatrixElements = {
-            new float[] { brightness, 0, 0, 0, 0},
-            new float[] {0, brightness, 0, 0, 0},
-            new float[] {0, 0, brightness, 0, 0},
-            new float[] {0, 0, 0, 1, 0},
-            new float[] {0, 0, 0, 0, 1}
-             };
+        //    float[][] colorMatrixElements = {
+        //    new float[] { brightness, 0, 0, 0, 0},
+        //    new float[] {0, brightness, 0, 0, 0},
+        //    new float[] {0, 0, brightness, 0, 0},
+        //    new float[] {0, 0, 0, 1, 0},
+        //    new float[] {0, 0, 0, 0, 1}
+        //     };
 
-            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+        //    ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
 
-            imageAttributes.SetColorMatrix(
-                colorMatrix,
-                ColorMatrixFlag.Default,
-                ColorAdjustType.Bitmap);
-            Graphics graphics = Graphics.FromImage(image);
+        //    imageAttributes.SetColorMatrix(
+        //        colorMatrix,
+        //        ColorMatrixFlag.Default,
+        //        ColorAdjustType.Bitmap);
+        //    Graphics graphics = Graphics.FromImage(image);
 
-            graphics.DrawImage(image, new Rectangle(0, 0, width, height), 0, 0, width,
-                height,
-                GraphicsUnit.Pixel,
-                imageAttributes);
-            return image;
-        }
+        //    graphics.DrawImage(image, new Rectangle(0, 0, width, height), 0, 0, width,
+        //        height,
+        //        GraphicsUnit.Pixel,
+        //        imageAttributes);
+        //    return image;
+        //}
         private void createFragTriangle()
         {
 
@@ -628,7 +628,7 @@ namespace Puzzle
                     if (pictureBoxesTriangle[i][0].Enabled)
                     {
                         Bitmap btm = (Bitmap)pictureBoxesTriangle[i][0].Image;
-                        pictureBoxesTriangle[i][0].Image = ChangeBrightness(btm, 0.7f);
+                    //    pictureBoxesTriangle[i][0].Image = ChangeBrightness(btm, 0.3f);
                     }
                     pictureBoxesTriangle[i][0].Enabled = false;
                   
@@ -638,7 +638,7 @@ namespace Puzzle
                     if (pictureBoxesTriangle[i][1].Enabled)
                     {
                         Bitmap btm = (Bitmap)pictureBoxesTriangle[i][1].Image;
-                        pictureBoxesTriangle[i][1].Image = ChangeBrightness(btm, 0.7f);
+                    //    pictureBoxesTriangle[i][1].Image = ChangeBrightness(btm, 0.3f);
                     }
                     pictureBoxesTriangle[i][1].Enabled = false;
                   
@@ -902,6 +902,7 @@ namespace Puzzle
                                     pictureBoxes[i].Click += new EventHandler(OnPuzzleClick);
                                 }
                                 else SwitchImage(taleBox, pictureBoxes[i]);
+                                taleBox = null;
                                 isFinished();
                                 help_counter--;
                                 return;
@@ -916,6 +917,7 @@ namespace Puzzle
                             {
                                 SwitchImage(firstBox, pictureBoxes[i]);
                                 isFinished();
+                                firstBox = null;
                                 help_counter--;
                                 return;
                             }
@@ -935,6 +937,7 @@ namespace Puzzle
                             if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
                             {
                                 SwitchImage(firstBox, pictureBoxes[i]);
+                                firstBox = null;
                                 isFinished();
                                 help_counter--;
                                 return;
@@ -948,12 +951,113 @@ namespace Puzzle
                 //лента треугольные
                 else if (location && !type)
                 {
+                    if (taleBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
 
+                            if (((TriangularPictureBox)firstBox).LeftGrag)
+                            {
+                                if (taleBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).Index))
+                                {
+                                    if (((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex == -150)
+
+                                    {
+                                        ((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex = taleBox.ImageIndex;
+                                        pictureBoxesTriangle[i][1].Image = images[taleBox.ImageIndex];
+
+                                        flowLayoutPanel1.Controls.Remove(taleBox);
+                                        pictureBoxesTriangle[i][1].Click += new EventHandler(OnPuzzleClick);
+                                    }
+                                    else SwitchImageTriangle(taleBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
+                                    isFinishedTriangle();
+                                    help_counter--;
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                if (taleBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
+                                {
+                                    if (((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex == -150)
+
+                                    {
+                                        ((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex = taleBox.ImageIndex;
+                                        pictureBoxesTriangle[i][0].Image = images[taleBox.ImageIndex];
+
+                                        flowLayoutPanel1.Controls.Remove(taleBox);
+                                        pictureBoxesTriangle[i][0].Click += new EventHandler(OnPuzzleClick);
+                                    }
+                                    else SwitchImageTriangle(taleBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
+                                    isFinishedTriangle();
+                                    help_counter--;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    else if (firstBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
+                            if (((TriangularPictureBox)firstBox).LeftGrag)
+                            {
+                                if (firstBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).Index))
+                                {
+                                    SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
+                                    firstBox = null;
+                                    help_counter--;
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                if (firstBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
+                                {
+                                    SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
+                                    firstBox = null;
+                                    help_counter--;
+                                    return;
+                                }
+                            }
+
+                        }
+
+                    }
+                    else MessageBox.Show("Выберите фрагмент");
                 }
                 //поле треугольные
                 else if (!location && !type)
                 {
+                    if (firstBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
+                            if (((TriangularPictureBox)firstBox).LeftGrag)
+                            {
+                                if (firstBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).Index))
+                                {
+                                    SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
+                                    firstBox = null;
+                                    help_counter--;
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                if (firstBox.ImageIndex == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
+                                {
+                                    SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
+                                    firstBox = null;
+                                    help_counter--;
+                                    return;
+                                }
+                            }
 
+                        }
+
+                    }
+                    else MessageBox.Show("Выберите фрагмент");
                 }
             }
             else MessageBox.Show("У вас закончились подсказки!");
