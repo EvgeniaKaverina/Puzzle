@@ -35,8 +35,8 @@ namespace Puzzle
         string user;
         Image image;
         PictureBox pic = null;
-        PictureBox[] pictureBoxes = null;
-        PictureBox[] pictureBoxOnTale = null;
+        MyPictureBox[] pictureBoxes = null;
+        MyPictureBox[] pictureBoxOnTale = null;
         Image[] images = null;
 
         PictureBox[][] pictureBoxesTriangle = null;
@@ -70,7 +70,7 @@ namespace Puzzle
             }
             if (pictureBoxes == null)
             {
-                pictureBoxes = new PictureBox[level];
+                pictureBoxes = new MyPictureBox[level];
                 images = new Image[level];
             }
             int unitX = groupBox1.Width / numCols;
@@ -115,7 +115,7 @@ namespace Puzzle
             }
             if (pictureBoxes == null)
             {
-                pictureBoxes = new PictureBox[level];
+                pictureBoxes = new MyPictureBox[level];
               //  images = new Image[level];
             }
             int unitX = groupBox1.Width / numCols;
@@ -158,7 +158,7 @@ namespace Puzzle
             }
             if (pictureBoxOnTale == null)
             {
-                pictureBoxOnTale = new PictureBox[level];
+                pictureBoxOnTale = new MyPictureBox[level];
                 images = new Image[level];
             }
 
@@ -196,12 +196,9 @@ namespace Puzzle
         }
 
         private void OnPuzzleClickTale(object sender, EventArgs e)
-        {
-           
-            
+        {     
             if (taleBox != null)
-            {
-                
+            { 
                 taleBox.BorderStyle = BorderStyle.Fixed3D;
                 
                 taleBox = (MyPictureBox)sender;
@@ -211,10 +208,7 @@ namespace Puzzle
             {
                 taleBox = (MyPictureBox)sender;
                 taleBox.BorderStyle = BorderStyle.FixedSingle;
-            }
-
-            
-            
+            }  
         }
 
         private void SwitchFieldAndTale(MyPictureBox tale, MyPictureBox box)
@@ -266,9 +260,7 @@ namespace Puzzle
                 secondBox = null;
                 taleBox = null;
             }
-
-
-           
+ 
            // ((MyPictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
         }
         private void SwitchImage(MyPictureBox box1,MyPictureBox box2)//createFrag
@@ -302,8 +294,6 @@ namespace Puzzle
                     }
                     pictureBoxes[i].Enabled = false;
                   //  pictureBoxes[i].Click -= null;
-
-                   
 
                 }
             }
@@ -374,9 +364,6 @@ namespace Puzzle
                 createFragTriangle();
                 flowLayoutPanel1.Visible = false;
             }
-           
-         
-
 
             date = DateTime.Now;
             Timer timer = new Timer();
@@ -423,7 +410,6 @@ namespace Puzzle
 
         private Bitmap CreateBitmapImage()
         {
-          
 
             Image img = Image.FromFile(@"..\..\gallery\"+picture_name);
 
@@ -895,27 +881,82 @@ namespace Puzzle
         int help_counter = 3;
         private void help_Click(object sender, EventArgs e)
         {
-            //лента прямоугольные
-            if (location && type)
+            if (help_counter > 0)
             {
-               
+                //лента прямоугольные
+                if (location && type)
+                {
+                    if (taleBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
+                            if (taleBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
+                            {
+                                if (((MyPictureBox)pictureBoxes[i]).ImageIndex == -1)
+
+                                {
+                                    ((MyPictureBox)pictureBoxes[i]).ImageIndex = taleBox.ImageIndex;
+                                    pictureBoxes[i].Image = images[taleBox.ImageIndex];
+
+                                    flowLayoutPanel1.Controls.Remove(taleBox);
+                                    pictureBoxes[i].Click += new EventHandler(OnPuzzleClick);
+                                }
+                                else SwitchImage(taleBox, pictureBoxes[i]);
+                                isFinished();
+                                help_counter--;
+                                return;
+                            }
+                        }
+                    }
+                    else if (firstBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
+                            if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
+                            {
+                                SwitchImage(firstBox, pictureBoxes[i]);
+                                isFinished();
+                                help_counter--;
+                                return;
+                            }
+                        }
+
+                    }
+                    else MessageBox.Show("Выберите фрагмент");
+
+                }
+                //поле прямоугольные
+                else if (!location && type)
+                {
+                    if (firstBox != null)
+                    {
+                        for (int i = 0; i < level; i++)
+                        {
+                            if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
+                            {
+                                SwitchImage(firstBox, pictureBoxes[i]);
+                                isFinished();
+                                help_counter--;
+                                return;
+                            }
+                        }
+
+                    }
+                    else MessageBox.Show("Выберите фрагмент");
+
+                }
+                //лента треугольные
+                else if (location && !type)
+                {
+
+                }
+                //поле треугольные
+                else if (!location && !type)
+                {
+
+                }
             }
-            //поле прямоугольные
-            else if (!location && type)
-            {
-               
-            }
-            //лента треугольные
-            else if (location && !type)
-            {
-                
-            }
-            //поле треугольные
-            else if (!location && !type)
-            {
-                
-            }
-            
+            else MessageBox.Show("У вас закончились подсказки!");
         }
     }
 }
