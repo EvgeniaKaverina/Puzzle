@@ -37,9 +37,6 @@ namespace Puzzle
                 this.Hide();
 
             }
-            
-            //Gallery g = new Gallery();
-            //g.Show();
         }
 
         public Boolean isUserExistsEnter()
@@ -78,10 +75,14 @@ namespace Puzzle
 
             }
 
-
             if (pas.Length < 5 || pas.Length > 10)
             {
                 MessageBox.Show("Пароль должен содержать от 5 до 10 символов.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else if (!char.IsLetter(log[0]))
+            {
+                MessageBox.Show("Логин не должен начинаться с цифры", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             else
@@ -107,7 +108,6 @@ namespace Puzzle
                     this.Hide();
                 }
             }
- 
         }
         public Boolean isUserExists()
         {
@@ -145,7 +145,6 @@ namespace Puzzle
                 password_admin.Text = "";
                 MessageBox.Show("Пароль неверный. Попробуйте снова.", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
