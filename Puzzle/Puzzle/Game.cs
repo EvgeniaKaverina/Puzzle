@@ -56,6 +56,8 @@ namespace Puzzle
         int numRows;
         bool type;
 
+        int count_points;
+
         private void createFrag()
         {
           //запрос в бд
@@ -118,6 +120,7 @@ namespace Puzzle
                 pictureBoxes = new MyPictureBox[level];
               //  images = new Image[level];
             }
+           
             int unitX = groupBox1.Width / numCols;
             int unitY = groupBox1.Height / numRows;
             int[] indice = new int[level];
@@ -374,6 +377,10 @@ namespace Puzzle
             //timer1.Enabled = true;
             //Запускаем таймер
             timer1.Start();
+
+            
+            count_points = 30 * number_level;
+            points.Text = "Количество очков: " + count_points.ToString();
 
         }
         private void ShowImage()
