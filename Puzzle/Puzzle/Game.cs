@@ -276,6 +276,27 @@ namespace Puzzle
                 box2.ImageIndex = box1.ImageIndex;
                 box1.Image = images[tmp];
                 box1.ImageIndex = tmp;
+
+                //проверка на правильность и уменьшение очков 
+                //снимает очки, когда пытаешься поменять с фиксированным фрагментом два раза
+                for (int i = 0; i < level; i++)
+                {
+                    if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
+                    {
+                        count_points = count_points - 1;
+                    }
+
+                }
+                //count_points = count_points - 1;
+
+                if (count_points<0)
+                {
+                    count_points = 0;
+                }
+              
+                points.Text = "Количество очков: " + count_points.ToString();
+                
+
                 if (isFinished())
                 {
                     //Останавливаем таймер
@@ -405,6 +426,7 @@ namespace Puzzle
 
             stopWatch = stopWatch.AddTicks(tick);
             time.Text = String.Format("{0:mm:ss}", stopWatch);
+            
         }
 
         private void view_pic_Click(object sender, EventArgs e)
@@ -984,7 +1006,6 @@ namespace Puzzle
                                 return;
                             }
                         }
-
                     }
                     else MessageBox.Show("Выберите фрагмент");
 

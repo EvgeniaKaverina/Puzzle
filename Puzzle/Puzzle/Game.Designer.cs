@@ -68,7 +68,7 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(984, 82);
+            this.button1.Location = new System.Drawing.Point(959, 123);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(136, 45);
@@ -109,7 +109,7 @@
             this.help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.help.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.help.Location = new System.Drawing.Point(984, 163);
+            this.help.Location = new System.Drawing.Point(959, 204);
             this.help.Name = "help";
             this.help.Size = new System.Drawing.Size(136, 45);
             this.help.TabIndex = 5;
@@ -123,7 +123,7 @@
             this.info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.info.Location = new System.Drawing.Point(931, 245);
+            this.info.Location = new System.Drawing.Point(906, 286);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(244, 63);
             this.info.TabIndex = 6;
@@ -136,7 +136,7 @@
             this.view_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.view_pic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.view_pic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.view_pic.Location = new System.Drawing.Point(931, 342);
+            this.view_pic.Location = new System.Drawing.Point(906, 383);
             this.view_pic.Name = "view_pic";
             this.view_pic.Size = new System.Drawing.Size(244, 65);
             this.view_pic.TabIndex = 7;
@@ -155,7 +155,7 @@
             this.time.BackColor = System.Drawing.Color.Transparent;
             this.time.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.time.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.time.Location = new System.Drawing.Point(1015, 438);
+            this.time.Location = new System.Drawing.Point(990, 479);
             this.time.Name = "time";
             this.time.Size = new System.Drawing.Size(96, 37);
             this.time.TabIndex = 8;
@@ -164,9 +164,10 @@
             // points
             // 
             this.points.AutoSize = true;
-            this.points.Location = new System.Drawing.Point(1010, 39);
+            this.points.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.points.Location = new System.Drawing.Point(900, 44);
             this.points.Name = "points";
-            this.points.Size = new System.Drawing.Size(46, 17);
+            this.points.Size = new System.Drawing.Size(83, 33);
             this.points.TabIndex = 9;
             this.points.Text = "label1";
             // 
