@@ -187,7 +187,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Game";
             this.RightToLeftLayout = true;
-            this.Text = "Game";
+            this.Text = "Мир пазлов ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);

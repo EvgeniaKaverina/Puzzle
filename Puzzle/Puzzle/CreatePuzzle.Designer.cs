@@ -140,7 +140,7 @@
             this.MaximizeBox = false;
             this.Name = "CreatePuzzle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Создание пазла";
+            this.Text = "Мир пазлов. Создание пазла";
             this.ResumeLayout(false);
             this.PerformLayout();
 

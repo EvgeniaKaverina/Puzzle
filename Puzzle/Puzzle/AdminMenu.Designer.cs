@@ -136,7 +136,7 @@
             this.MaximizeBox = false;
             this.Name = "AdminMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Администратор";
+            this.Text = "Мир пазлов. Администратор";
             this.ResumeLayout(false);
 
         }

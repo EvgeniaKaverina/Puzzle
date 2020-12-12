@@ -142,7 +142,7 @@
             this.MaximizeBox = false;
             this.Name = "UserMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Игрок";
+            this.Text = "Мир пазлов. Игрок";
             this.ResumeLayout(false);
 
         }

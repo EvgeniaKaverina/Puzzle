@@ -40,9 +40,10 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(530, 524);
+            this.buttonAdd.Location = new System.Drawing.Point(471, 419);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(126, 49);
+            this.buttonAdd.Size = new System.Drawing.Size(112, 39);
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -50,9 +51,10 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(742, 524);
+            this.buttonDelete.Location = new System.Drawing.Point(660, 419);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(117, 49);
+            this.buttonDelete.Size = new System.Drawing.Size(104, 39);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -62,8 +64,9 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1020, 518);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(907, 414);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.flowLayoutPanel1_Scroll);
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
@@ -84,9 +87,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(27, 524);
+            this.button1.Location = new System.Drawing.Point(24, 419);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 49);
+            this.button1.Size = new System.Drawing.Size(112, 39);
             this.button1.TabIndex = 4;
             this.button1.Text = "Назад";
             this.button1.UseVisualStyleBackColor = true;
@@ -94,15 +98,16 @@
             // 
             // Gallery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1021, 577);
+            this.ClientSize = new System.Drawing.Size(908, 462);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Gallery";
-            this.Text = "Gallery";
+            this.Text = "Мир пазлов. Галерея";
             this.Load += new System.EventHandler(this.Gallery_Load);
             this.ResumeLayout(false);
 
