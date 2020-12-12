@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Puzzle
 {
@@ -477,9 +478,63 @@ namespace Puzzle
            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
+            //прямоугольный на поле
+            //прямоугольный на ленте
+            if (type)
+            {
+                int[] matr = new int[level];
+                for (int i = 0; i < level; i++)
+                {
+                    matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
+                }
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, matr);
 
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
+
+                SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (id_puzzle, login,time,points, unfinished) VALUES(@id_puzzle, @login, @time, @points,@matrix) ", sqlConnection);
+                command.Parameters.AddWithValue("@id_puzzle", id_puzzle);
+                command.Parameters.AddWithValue("@login", user);
+                command.Parameters.AddWithValue("@points", id_puzzle);//добавить очки
+                command.Parameters.AddWithValue("@time", timer1);//как брать время?
+
+                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                command.Parameters["@matrix"].Value = stream.ToArray();
+
+                await command.ExecuteNonQueryAsync();
+            }
+            //треугольный на поле
+            //треугольный на ленте
+            else
+            {
+                int[] matr = new int[level * 2];
+                for (int i = 0; i < level * 2; i += 2)
+                {
+                    matr[i] = ((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex;
+                    matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex;
+                }
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, matr);
+
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
+
+                SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (id_puzzle, login,time,points, unfinished) VALUES(@id_puzzle, @login, @time, @points,@matrix) ", sqlConnection);
+                command.Parameters.AddWithValue("@id_puzzle", id_puzzle);
+                command.Parameters.AddWithValue("@login", user);
+                command.Parameters.AddWithValue("@points", id_puzzle);//добавить очки
+                command.Parameters.AddWithValue("@time", timer1);//как брать время?
+
+                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                command.Parameters["@matrix"].Value = stream.ToArray();
+
+                await command.ExecuteNonQueryAsync();
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
