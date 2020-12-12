@@ -45,6 +45,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(33, 82);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(729, 444);
@@ -64,7 +65,7 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -92,7 +93,7 @@
             // 
             // rating
             // 
-            this.rating.BackColor = System.Drawing.Color.Gainsboro;
+            this.rating.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rating.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rating.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rating.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -105,7 +106,7 @@
             // 
             // help
             // 
-            this.help.BackColor = System.Drawing.Color.Gainsboro;
+            this.help.BackColor = System.Drawing.Color.WhiteSmoke;
             this.help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.help.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -119,7 +120,7 @@
             // 
             // info
             // 
-            this.info.BackColor = System.Drawing.Color.Gainsboro;
+            this.info.BackColor = System.Drawing.Color.WhiteSmoke;
             this.info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -132,7 +133,7 @@
             // 
             // view_pic
             // 
-            this.view_pic.BackColor = System.Drawing.Color.Gainsboro;
+            this.view_pic.BackColor = System.Drawing.Color.WhiteSmoke;
             this.view_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.view_pic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.view_pic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -152,7 +153,7 @@
             // time
             // 
             this.time.AutoSize = true;
-            this.time.BackColor = System.Drawing.Color.Transparent;
+            this.time.BackColor = System.Drawing.Color.Ivory;
             this.time.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.time.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.time.Location = new System.Drawing.Point(990, 479);
@@ -175,7 +176,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 803);
+            this.BackColor = System.Drawing.Color.Ivory;
+            this.ClientSize = new System.Drawing.Size(1203, 833);
             this.Controls.Add(this.points);
             this.Controls.Add(this.time);
             this.Controls.Add(this.view_pic);

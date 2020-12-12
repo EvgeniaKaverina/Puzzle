@@ -42,18 +42,23 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(753, 421);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 29);
+            this.button1.Size = new System.Drawing.Size(111, 35);
             this.button1.TabIndex = 1;
             this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // GalleryForCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(909, 462);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
