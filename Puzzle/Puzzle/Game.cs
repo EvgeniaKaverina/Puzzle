@@ -297,8 +297,7 @@ namespace Puzzle
                 {
                     count_points = 0;
                 }
-              //закоментить
-                points.Text = "Количество очков: " + count_points.ToString();
+              //points.Text = "Количество очков: " + count_points.ToString();
                 
 
                 if (isFinished())
@@ -466,8 +465,7 @@ namespace Puzzle
             help_lab.Text = "Количество подсказок: " + help_counter.ToString();
 
             count_points = 30 * number_level;
-            //закомеентить
-            points.Text = "Количество очков: " + count_points.ToString();
+            //points.Text = "Количество очков: " + count_points.ToString();
 
         }
         private void ShowImage()
@@ -773,8 +771,7 @@ namespace Puzzle
                 {
                     count_points = 0;
                 }
-                //закоментить
-                points.Text = "Количество очков: " + count_points.ToString();
+                //points.Text = "Количество очков: " + count_points.ToString();
                 if (isFinishedTriangle())
                 {
                     timer1.Stop();

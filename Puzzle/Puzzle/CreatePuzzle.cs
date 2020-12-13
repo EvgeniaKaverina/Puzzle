@@ -222,13 +222,44 @@ namespace Puzzle
                 command.Parameters.AddWithValue("image", pict);
                 command.Parameters.AddWithValue("number_level", number);
                 command.Parameters.AddWithValue("location", loc);
-              
-                await command.ExecuteNonQueryAsync();
-                AdminMenu menu = new AdminMenu();
-                menu.Show();
-                this.Close();
+                //await command.ExecuteNonQueryAsync();
 
+                if (isPuzzleExists())
+                {
+                    return;
+                }
+                else if (command.ExecuteNonQuery() == 1)
+                {
+                    //await command.ExecuteNonQueryAsync();
+                    AdminMenu menu = new AdminMenu();
+                    menu.Show();
+                    this.Close();
+                }
             }
+        }
+        public Boolean isPuzzleExists()
+        {
+            string pict = gal.getpicture_name();
+            int number = Int32.Parse(comboBox1.SelectedItem.ToString());
+
+            SqlCommand command = new SqlCommand("SELECT * FROM [Puzzles] WHERE image=@image AND number_level=@number_level", sqlConnection);
+            command.Parameters.AddWithValue("image", pict);
+            command.Parameters.AddWithValue("number_level", number );
+
+
+            DataTable table = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Такой пазл уже существует. Выберите другую картинку или уровень.", "Ошибка создания пазла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            else
+                return false;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
