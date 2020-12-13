@@ -63,6 +63,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "GalleryForCreate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Галерея";
             this.Load += new System.EventHandler(this.GalleryForCreate_Load);
             this.ResumeLayout(false);

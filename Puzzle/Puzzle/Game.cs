@@ -226,7 +226,7 @@ namespace Puzzle
                 {
                     //Останавливаем таймер
                     timer1.Stop();
-                    MessageBox.Show("Well done!");
+                    MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString());
 
                 }
             }
@@ -297,7 +297,7 @@ namespace Puzzle
                 {
                     count_points = 0;
                 }
-              
+              //закоментить
                 points.Text = "Количество очков: " + count_points.ToString();
                 
 
@@ -305,7 +305,7 @@ namespace Puzzle
                 {
                     //Останавливаем таймер
                     timer1.Stop();
-                    MessageBox.Show("Well done!");
+                    MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString());
                     setPointsToDB();
                     //ShowImage();
                 }
@@ -462,8 +462,11 @@ namespace Puzzle
             //Запускаем таймер
             timer1.Start();
 
-            
+            help_counter = 3;
+            help_lab.Text = "Количество подсказок: " + help_counter.ToString();
+
             count_points = 30 * number_level;
+            //закомеентить
             points.Text = "Количество очков: " + count_points.ToString();
 
         }
@@ -770,12 +773,12 @@ namespace Puzzle
                 {
                     count_points = 0;
                 }
-
+                //закоментить
                 points.Text = "Количество очков: " + count_points.ToString();
                 if (isFinishedTriangle())
                 {
                     timer1.Stop();
-                    MessageBox.Show("Well done!");
+                    MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString());
                     setPointsToDB();
 
                 }
@@ -1019,7 +1022,7 @@ namespace Puzzle
                 {
                     //Останавливаем таймер
                        timer1.Stop();
-                    MessageBox.Show("Well done!");
+                    MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString());
 
                 }
             }
@@ -1067,6 +1070,7 @@ namespace Puzzle
                                 taleBox = null;
                                 isFinished();
                                 help_counter--;
+                                help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                 return;
                             }
                         }
@@ -1081,6 +1085,7 @@ namespace Puzzle
                                 isFinished();
                                 firstBox = null;
                                 help_counter--;
+                                help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                 return;
                             }
                         }
@@ -1101,6 +1106,7 @@ namespace Puzzle
                                 firstBox = null;
                                 isFinished();
                                 help_counter--;
+                                help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                 return;
                             }
                         }
@@ -1132,6 +1138,7 @@ namespace Puzzle
                                     }
                                     else SwitchImageTriangle(taleBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
                                     isFinishedTriangle();
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     help_counter--;
                                     return;
                                 }
@@ -1152,6 +1159,7 @@ namespace Puzzle
                                     else SwitchImageTriangle(taleBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
                                     isFinishedTriangle();
                                     help_counter--;
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     return;
                                 }
                             }
@@ -1168,6 +1176,7 @@ namespace Puzzle
                                     SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
                                     firstBox = null;
                                     help_counter--;
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     return;
                                 }
                             }
@@ -1178,6 +1187,7 @@ namespace Puzzle
                                     SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
                                     firstBox = null;
                                     help_counter--;
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     return;
                                 }
                             }
@@ -1201,6 +1211,7 @@ namespace Puzzle
                                     SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][1], 1);
                                     firstBox = null;
                                     help_counter--;
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     return;
                                 }
                             }
@@ -1211,6 +1222,7 @@ namespace Puzzle
                                     SwitchImageTriangle(firstBox, (MyPictureBox)pictureBoxesTriangle[i][0], 0);
                                     firstBox = null;
                                     help_counter--;
+                                    help_lab.Text = "Количество подсказок: " + help_counter.ToString();
                                     return;
                                 }
                             }

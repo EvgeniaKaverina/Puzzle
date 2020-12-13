@@ -120,6 +120,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Gallery";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Галерея";
             this.Load += new System.EventHandler(this.Gallery_Load);
             this.ResumeLayout(false);
