@@ -34,7 +34,9 @@ namespace Puzzle
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-
+            ContinueGame continueGame = new ContinueGame(login);
+            continueGame.Show();
+            this.Close();
         }
 
         private void buttonRating_Click(object sender, EventArgs e)

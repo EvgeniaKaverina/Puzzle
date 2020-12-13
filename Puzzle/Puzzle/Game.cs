@@ -44,6 +44,7 @@ namespace Puzzle
         PictureBox[][] pictureBoxesTriangleOnTale = null;
         Image[][] imagesTriangle = null;
 
+        int id_game;
         int id_puzzle;
         int level;
         string picture_name;
@@ -61,9 +62,8 @@ namespace Puzzle
 
         private void createFrag()
         {
-          //запрос в бд
-          //треугольные фрагменты
-          //сохранение пазла в бд (незаконченного)
+        
+        
             if (pic != null)
             {
                 groupBox1.Controls.Remove(pic);
@@ -279,13 +279,17 @@ namespace Puzzle
 
                 //проверка на правильность и уменьшение очков 
                 //снимает очки, когда пытаешься поменять с фиксированным фрагментом два раза
-                for (int i = 0; i < level; i++)
-                {
-                    if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
-                    {
-                        count_points = count_points - 1;
-                    }
+                //for (int i = 0; i < level; i++)
+                //{
+                //    if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
+                //    {
+                //        count_points = count_points - 1;
+                //    }
 
+                //}
+                if (box1.ImageIndex != box1.Index && box2.ImageIndex != box2.Index)
+                {
+                    count_points -= 1;
                 }
                 //count_points = count_points - 1;
 
@@ -302,6 +306,7 @@ namespace Puzzle
                     //Останавливаем таймер
                     timer1.Stop();
                     MessageBox.Show("Well done!");
+                    setPointsToDB();
                     //ShowImage();
                 }
             }
@@ -357,7 +362,60 @@ namespace Puzzle
 
             }
         }
+        //добавление игры
+        private  void addPuzzleToDB()
+        {
 
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            SqlCommand command = new SqlCommand("INSERT INTO [Game] (id_puzzle,login,time,points) VALUES(@id_puzzle,@user,@time, @points)", sqlConnection);
+            command.Parameters.AddWithValue("@id_puzzle", id_puzzle);
+            command.Parameters.AddWithValue("@user", user);
+            command.Parameters.AddWithValue("@points", 0);
+            command.Parameters.AddWithValue("@time", DateTime.Now - DateTime.Now);
+            command.ExecuteNonQuery();
+
+            command = new SqlCommand("SELECT TOP 1* FROM [Game] ORDER BY id_game DESC ", sqlConnection);
+
+            SqlDataReader reader = null;
+            reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+
+                id_game = Int32.Parse(Convert.ToString(reader["id_game"]));
+               
+            }
+          
+        }
+        //удаление игры
+        private async void deleteGame()
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
+
+            SqlCommand command = new SqlCommand("DELETE FROM  [Game]  where id_game=@id_game", sqlConnection);
+            command.Parameters.AddWithValue("@id_game", id_game);
+           
+            await command.ExecuteNonQueryAsync();
+        }
+        //сохранение очков при завершении
+        private async void setPointsToDB()
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            await sqlConnection.OpenAsync();
+
+            SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix where id_game=@id_game", sqlConnection);
+            command.Parameters.AddWithValue("@id_game", id_game);
+            command.Parameters.AddWithValue("@points", count_points);
+            command.Parameters.AddWithValue("@time", DateTime.Now - date);
+          //  command.Parameters.AddWithValue("@matrix", DBNull.Value);
+          //  command.Parameters["@matrix"].Value = System.Data.SqlTypes.SqlBinary.Null;
+            command.Parameters.Add("@matrix",System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
+            await command.ExecuteNonQueryAsync();
+        }
         private void Game_Load(object sender, EventArgs e)
         {
             //размер groupBox
@@ -365,7 +423,11 @@ namespace Puzzle
             CreateBitmapImage();
             ShowImage();
             getLevelSettings();
+
             getPuzzle();
+            addPuzzleToDB();
+
+            //сохранение данных
             if (location && type)
             {
                 createFragmentsOnField();
@@ -427,15 +489,16 @@ namespace Puzzle
             stopWatch = stopWatch.AddTicks(tick);
             time.Text = String.Format("{0:mm:ss}", stopWatch);
             
+            
         }
 
         private void view_pic_Click(object sender, EventArgs e)
         {
-            //Picture p = new Picture();
+           
             //указать путь к выбранной пользователем картинке
             Picture picture = new Picture(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\"+picture_name));
             picture.ShowDialog();
-            //p.Show();
+          
         }
 
         private Bitmap CreateBitmapImage()
@@ -499,8 +562,7 @@ namespace Puzzle
             }
            
         }
-
-        private async void button1_Click(object sender, EventArgs e)
+        private async void SavePuzzzle()
         {
             //прямоугольный на поле
             //прямоугольный на ленте
@@ -518,11 +580,10 @@ namespace Puzzle
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
 
-                SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (id_puzzle, login,time,points, unfinished) VALUES(@id_puzzle, @login, @time, @points,@matrix) ", sqlConnection);
-                command.Parameters.AddWithValue("@id_puzzle", id_puzzle);
-                command.Parameters.AddWithValue("@login", user);
-                command.Parameters.AddWithValue("@points", id_puzzle);//добавить очки
-                command.Parameters.AddWithValue("@time", timer1);//как брать время?
+                SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix where id_game=@id_game", sqlConnection);
+                command.Parameters.AddWithValue("@id_game", id_game);
+                command.Parameters.AddWithValue("@points", count_points);
+                command.Parameters.AddWithValue("@time", DateTime.Now - date);
 
                 command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
                 command.Parameters["@matrix"].Value = stream.ToArray();
@@ -536,8 +597,8 @@ namespace Puzzle
                 int[] matr = new int[level * 2];
                 for (int i = 0; i < level * 2; i += 2)
                 {
-                    matr[i] = ((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex;
-                    matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex;
+                    matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
+                    matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
                 }
                 MemoryStream stream = new MemoryStream();
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -546,17 +607,20 @@ namespace Puzzle
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
 
-                SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (id_puzzle, login,time,points, unfinished) VALUES(@id_puzzle, @login, @time, @points,@matrix) ", sqlConnection);
-                command.Parameters.AddWithValue("@id_puzzle", id_puzzle);
-                command.Parameters.AddWithValue("@login", user);
-                command.Parameters.AddWithValue("@points", id_puzzle);//добавить очки
-                command.Parameters.AddWithValue("@time", timer1);//как брать время?
+                SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix where id_game=@id_game", sqlConnection);
+                command.Parameters.AddWithValue("@id_game", id_game);
+                command.Parameters.AddWithValue("@points", count_points);
+                command.Parameters.AddWithValue("@time", DateTime.Now - date);
 
                 command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
                 command.Parameters["@matrix"].Value = stream.ToArray();
 
                 await command.ExecuteNonQueryAsync();
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SavePuzzzle();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -695,11 +759,25 @@ namespace Puzzle
                 box2.ImageIndex = box1.ImageIndex;
                 box1.Image = imagesTriangle[tmp][i];
                 box1.ImageIndex = tmp;
+
+                if (Math.Abs(box1.ImageIndex) != Math.Abs(box1.Index) && Math.Abs(box2.ImageIndex) != Math.Abs(box2.Index))
+                {
+                    count_points -= 1;
+                }
+                //count_points = count_points - 1;
+
+                if (count_points < 0)
+                {
+                    count_points = 0;
+                }
+
+                points.Text = "Количество очков: " + count_points.ToString();
                 if (isFinishedTriangle())
                 {
                     timer1.Stop();
                     MessageBox.Show("Well done!");
-                    //ShowImage();
+                    setPointsToDB();
+
                 }
             }
         }
@@ -709,21 +787,21 @@ namespace Puzzle
             {
                 if (Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex) == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
                 {
-                    if (pictureBoxesTriangle[i][0].Enabled)
-                    {
-                        Bitmap btm = (Bitmap)pictureBoxesTriangle[i][0].Image;
-                    //    pictureBoxesTriangle[i][0].Image = ChangeBrightness(btm, 0.3f);
-                    }
+                    //if (pictureBoxesTriangle[i][0].Enabled)
+                    //{
+                    //    Bitmap btm = (Bitmap)pictureBoxesTriangle[i][0].Image;
+                  
+                    //}
                     pictureBoxesTriangle[i][0].Enabled = false;
                   
                 }
                 if (Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex) == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).Index))
                 {
-                    if (pictureBoxesTriangle[i][1].Enabled)
-                    {
-                        Bitmap btm = (Bitmap)pictureBoxesTriangle[i][1].Image;
-                    //    pictureBoxesTriangle[i][1].Image = ChangeBrightness(btm, 0.3f);
-                    }
+                    //if (pictureBoxesTriangle[i][1].Enabled)
+                    //{
+                    //    Bitmap btm = (Bitmap)pictureBoxesTriangle[i][1].Image;
+               
+                    //}
                     pictureBoxesTriangle[i][1].Enabled = false;
                   
                 }
@@ -1144,6 +1222,113 @@ namespace Puzzle
                 }
             }
             else MessageBox.Show("У вас закончились подсказки!");
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(" Хотите сохранить текущий результат?", "Пазл не сохранен!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SavePuzzzle();
+               
+            }
+            else
+            {
+                deleteGame();
+            }
+            UserMenu userMenu = new UserMenu(user);
+            userMenu.Show();
+            this.Close();
+        }
+        private void Continue()
+        {
+            MemoryStream stream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            sqlConnection = new SqlConnection(connectionString);
+            //   await sqlConnection.OpenAsync();
+
+            SqlCommand command = new SqlCommand("SELECT TOP 1 unfinished FROM [Game] where login=@login", sqlConnection);
+            command.Parameters.AddWithValue("login", user);
+            sqlConnection.Open();
+            //  await command.ExecuteNonQueryAsync();
+
+            byte[] array = (byte[])command.ExecuteScalar();
+            stream = new MemoryStream(array, 0, array.Length);
+            int[] newMatrix = (int[])formatter.Deserialize(stream);
+
+            command = new SqlCommand("SELECT TOP 1 * FROM [Game] where login=@login", sqlConnection);
+            command.Parameters.AddWithValue("login", user);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+                id_puzzle = Int32.Parse(Convert.ToString(reader["id_puzzle"]));
+                count_points= Int32.Parse(Convert.ToString(reader["points"]));
+                date = DateTime.Parse(Convert.ToString(reader["time"]));
+                // location = Boolean.Parse(Convert.ToString(reader["location"]));
+            }
+
+            command = new SqlCommand("SELECT * FROM [Puzzles] where id_puzzle=@id_puzzle", sqlConnection);
+            command.Parameters.AddWithValue("id_puzzle", id_puzzle);
+           
+
+            reader = null;
+            reader = command.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                number_level = Int32.Parse(Convert.ToString(reader["number_level"]));
+                location = Boolean.Parse(Convert.ToString(reader["location"]));
+            }
+
+
+            createFragContinue(newMatrix);
+        }
+        private void createFragContinue(int[] matrix)
+        {
+
+            if (pic != null)
+            {
+                groupBox1.Controls.Remove(pic);
+                pic.Dispose();
+                pic = null;
+
+            }
+            if (pictureBoxes == null)
+            {
+                pictureBoxes = new MyPictureBox[level];
+                images = new Image[level];
+            }
+         
+            int unitX = groupBox1.Width / numCols;
+            int unitY = groupBox1.Height / numRows;
+            int[] indice = new int[level];
+            for (int i = 0; i < level; i++)
+            {
+                indice[i] = i;
+                if (pictureBoxes[i] == null)
+                {
+                    pictureBoxes[i] = new MyPictureBox();
+                    pictureBoxes[i].Click += new EventHandler(OnPuzzleClick);
+                    pictureBoxes[i].BorderStyle = BorderStyle.Fixed3D;
+                }
+                pictureBoxes[i].Width = unitX;
+                pictureBoxes[i].Height = unitY;
+
+                ((MyPictureBox)pictureBoxes[i]).Index = i;
+
+                CreateBitmapImage(image, images, i, numRows, numCols, unitX, unitY);
+                pictureBoxes[i].Location = new Point(unitX * (i % numCols), unitY * (i / numCols));
+                if (!groupBox1.Controls.Contains(pictureBoxes[i]))
+                    groupBox1.Controls.Add(pictureBoxes[i]);
+            }
+            //  shuffle(ref indice);
+            for (int i = 0; i < level; i++)
+            {
+                pictureBoxes[i].Image = images[matrix[i]];
+                ((MyPictureBox)pictureBoxes[i]).ImageIndex = matrix[i];
+            }
         }
     }
 }

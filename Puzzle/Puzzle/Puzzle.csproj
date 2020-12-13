@@ -67,6 +67,12 @@
     <Compile Include="AdminMenu.Designer.cs">
       <DependentUpon>AdminMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContinueGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContinueGame.Designer.cs">
+      <DependentUpon>ContinueGame.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreatePuzzle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="AdminMenu.resx">
       <DependentUpon>AdminMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContinueGame.resx">
+      <DependentUpon>ContinueGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreatePuzzle.resx">
       <DependentUpon>CreatePuzzle.cs</DependentUpon>
