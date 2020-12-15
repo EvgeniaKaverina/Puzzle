@@ -102,6 +102,11 @@ namespace Puzzle
         //выделение картинки
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
+            if (picSelected != null && picSelected != ((PictureBox)sender))
+            {
+                picSelected.BorderStyle = BorderStyle.None;
+
+            }
             picSelected = (PictureBox)sender;
             picSelected.BorderStyle = BorderStyle.Fixed3D;
             picture_name = picSelected.Name;

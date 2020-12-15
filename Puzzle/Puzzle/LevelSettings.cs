@@ -93,16 +93,22 @@ namespace Puzzle
                 if (n != "")
                 {
                     reader.Close();
-                    DialogResult dialogResult= MessageBox.Show("Этот уровень существует. Хотите его изменить?", "Уровень существует!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-                    if (dialogResult== DialogResult.Yes)
+                    DialogResult dialogResult= MessageBox.Show("Этот уровень существует", "Уровень существует!", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                    if (dialogResult == DialogResult.OK)
                     {
-                        SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);
-                        command.Parameters.AddWithValue("number", level);
-                        command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
-                        command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                        command.Parameters.AddWithValue("type", type);
-                        await command.ExecuteNonQueryAsync();
+                        AdminMenu adminMenu = new AdminMenu();
+                        adminMenu.Show();
+                        this.Close();
                     }
+                    //if (dialogResult== DialogResult.Yes)
+                    //{
+                    //    SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);
+                    //    command.Parameters.AddWithValue("number", level);
+                    //    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
+                    //    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
+                    //    command.Parameters.AddWithValue("type", type);
+                    //    await command.ExecuteNonQueryAsync();
+                    //}
                 }
                 else
                 {
@@ -116,7 +122,7 @@ namespace Puzzle
                 }
                 AdminMenu am = new AdminMenu();
                 am.Show();
-                Hide();
+                Close();
             }
            
            

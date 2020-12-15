@@ -39,6 +39,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.help_lab = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // time
@@ -95,6 +96,7 @@
             this.help.TabIndex = 14;
             this.help.Text = "Подсказка";
             this.help.UseVisualStyleBackColor = false;
+            this.help.Click += new System.EventHandler(this.help_Click);
             // 
             // rating
             // 
@@ -123,6 +125,7 @@
             this.exit.TabIndex = 12;
             this.exit.Text = "Выйти";
             this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.exit_Click_1);
             // 
             // button1
             // 
@@ -160,16 +163,28 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
+            // 
+            // help_lab
+            // 
+            this.help_lab.AutoSize = true;
+            this.help_lab.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.help_lab.Location = new System.Drawing.Point(1057, 134);
+            this.help_lab.Name = "help_lab";
+            this.help_lab.Size = new System.Drawing.Size(247, 27);
+            this.help_lab.TabIndex = 18;
+            this.help_lab.Text = "Количество подсказок:";
             // 
             // ContinueGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1439, 1022);
+            this.Controls.Add(this.help_lab);
             this.Controls.Add(this.time);
             this.Controls.Add(this.view_pic);
             this.Controls.Add(this.info);
@@ -200,5 +215,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label help_lab;
     }
 }

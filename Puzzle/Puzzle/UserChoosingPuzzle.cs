@@ -67,7 +67,7 @@ namespace Puzzle
             else
             {
 
-                Game g = new Game(picture,number,login);
+                PlayGame g = new PlayGame(picture,number,login);
                 g.Show();
                 this.Close();
             }

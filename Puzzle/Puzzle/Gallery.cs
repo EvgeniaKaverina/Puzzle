@@ -57,15 +57,16 @@ namespace Puzzle
         //выделение картинки
         private void tempPictureBox_Click(object sender, EventArgs e)
         {
-            //if (picSelected != null)
-            //{
-            //    picSelected.BorderStyle = BorderStyle.None;
+            if (picSelected != null&&picSelected!= ((PictureBox)sender))
+            {
+                picSelected.BorderStyle = BorderStyle.None;
 
-            //}
+            }
+           //   picSelected = (PictureBox)sender;
+           ((PictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
             picSelected = (PictureBox)sender;
-            //((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
-         //   picSelected.Focus();
-        
+            //   picSelected.Focus();
+
         }
         public bool ThumbnailCallback()
         {
@@ -101,6 +102,7 @@ namespace Puzzle
                 tempPictureBox.Name = p[p.Length - 1];
                 tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
                 tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
+                //tempPictureBox.MouseClick += new MouseEventHandler(this.pictureBox_DoubleClick);
                 flowLayoutPanel1.Controls.Add(tempPictureBox);
                //  File.Copy(filename, Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\",new FileInfo(tempPictureBox.Name).Name));
 
@@ -172,8 +174,8 @@ namespace Puzzle
 
         //увеличение картинки
         private void pictureBox_DoubleClick(object sender, EventArgs e) {
-           
-      
+
+            picSelected = (PictureBox)sender;
             Picture picture = new Picture(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\", picSelected.Name));
             picture.ShowDialog();
 
