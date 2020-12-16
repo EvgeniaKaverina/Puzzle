@@ -12,6 +12,7 @@ using System.Collections;
 using System.Data.SqlClient;
 using System.Drawing.Drawing2D;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Puzzle
 {
@@ -1301,6 +1302,11 @@ namespace Puzzle
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void info_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
     }
 }

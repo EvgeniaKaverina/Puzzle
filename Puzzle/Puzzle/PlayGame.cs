@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Puzzle
 {
@@ -1289,6 +1290,10 @@ namespace Puzzle
         {
 
         }
-       
+
+        private void info_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
+        }
     }
 }

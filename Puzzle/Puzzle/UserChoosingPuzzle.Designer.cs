@@ -126,6 +126,7 @@
             this.info.TabIndex = 5;
             this.info.Text = "Справочная информация";
             this.info.UseVisualStyleBackColor = false;
+            this.info.Click += new System.EventHandler(this.info_Click);
             // 
             // UserChoosingPuzzle
             // 
