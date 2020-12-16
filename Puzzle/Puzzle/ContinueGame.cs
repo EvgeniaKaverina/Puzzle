@@ -82,42 +82,46 @@ namespace Puzzle
             //  await command.ExecuteNonQueryAsync();
 
             byte[] array = (byte[])command.ExecuteScalar();
-            stream = new MemoryStream(array, 0, array.Length);
-            int[] newMatrix = (int[])formatter.Deserialize(stream);
+           
+                stream = new MemoryStream(array, 0, array.Length);
+                int[] newMatrix = (int[])formatter.Deserialize(stream);
 
-            command = new SqlCommand("SELECT TOP 1 * FROM [Game] where login=@login and unfinished is not null Order by id_game DESC", sqlConnection);
-            command.Parameters.AddWithValue("login", user.Login);
-            SqlDataReader reader = command.ExecuteReader();
-            
-            while (reader.Read())
-            {
-                id_game= Int32.Parse(Convert.ToString(reader["id_game"]));
-                id_puzzle = Int32.Parse(Convert.ToString(reader["id_puzzle"]));
-                count_points = Int32.Parse(Convert.ToString(reader["points"]));
-                date = DateTime.Parse(Convert.ToString(reader["time"]));
-                help_counter = Int32.Parse(Convert.ToString(reader["prompting"]));
-                // location = Boolean.Parse(Convert.ToString(reader["location"]));
-            }
-            reader.Close();
+                command = new SqlCommand("SELECT TOP 1 * FROM [Game] where login=@login and unfinished is not null Order by id_game DESC", sqlConnection);
+                command.Parameters.AddWithValue("login", user.Login);
+                SqlDataReader reader = command.ExecuteReader();
 
-            command = new SqlCommand("SELECT * FROM [Puzzles] where id_puzzle=@id_puzzle", sqlConnection);
-            command.Parameters.AddWithValue("id_puzzle", id_puzzle);
+                while (reader.Read())
+                {
+                    id_game = Int32.Parse(Convert.ToString(reader["id_game"]));
+                    id_puzzle = Int32.Parse(Convert.ToString(reader["id_puzzle"]));
+                    count_points = Int32.Parse(Convert.ToString(reader["points"]));
+                    date = DateTime.Parse(Convert.ToString(reader["time"]));
+                    help_counter = Int32.Parse(Convert.ToString(reader["prompting"]));
+                    // location = Boolean.Parse(Convert.ToString(reader["location"]));
+                }
+                reader.Close();
 
-
-            SqlDataReader datareader = null;
-            datareader = command.ExecuteReader();
+                command = new SqlCommand("SELECT * FROM [Puzzles] where id_puzzle=@id_puzzle", sqlConnection);
+                command.Parameters.AddWithValue("id_puzzle", id_puzzle);
 
 
-            while (datareader.Read())
-            {
-                numberLevel.Number = Int32.Parse(Convert.ToString(datareader["number_level"]));
-                location = Boolean.Parse(Convert.ToString(datareader["location"]));
-                picture_name = Convert.ToString(datareader["image"]);
-            }
-            
-            getLevelSettings();
+                SqlDataReader datareader = null;
+                datareader = command.ExecuteReader();
 
-            return newMatrix;
+
+                while (datareader.Read())
+                {
+                    numberLevel.Number = Int32.Parse(Convert.ToString(datareader["number_level"]));
+                    location = Boolean.Parse(Convert.ToString(datareader["location"]));
+                    picture_name = Convert.ToString(datareader["image"]);
+                }
+
+                getLevelSettings();
+                return newMatrix;
+           
+                      
+
+           
 
         }
         private void createFragContinue(int[] matrix)
@@ -648,10 +652,10 @@ namespace Puzzle
                 SavePuzzzle();
 
             }
-            else
-            {
-                deleteGame();
-            }
+            //else
+            //{
+            //    deleteGame();
+            //}
             UserMenu userMenu = new UserMenu(user.Login);
             userMenu.Show();
             this.Close();
