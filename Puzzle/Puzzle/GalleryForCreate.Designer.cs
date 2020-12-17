@@ -62,6 +62,7 @@
             this.ClientSize = new System.Drawing.Size(909, 462);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.MaximizeBox = false;
             this.Name = "GalleryForCreate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Галерея";

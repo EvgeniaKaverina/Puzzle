@@ -1295,5 +1295,11 @@ namespace Puzzle
         {
             Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
+
+        private void rating_Click(object sender, EventArgs e)
+        {
+            Rating rating = new Rating();
+            rating.Show();
+        }
     }
 }

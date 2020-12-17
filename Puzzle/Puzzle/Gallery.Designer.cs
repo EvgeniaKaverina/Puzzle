@@ -119,6 +119,7 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "Gallery";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Галерея";

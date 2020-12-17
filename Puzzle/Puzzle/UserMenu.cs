@@ -73,7 +73,9 @@ namespace Puzzle
 
         private void buttonRating_Click(object sender, EventArgs e)
         {
-
+            Rating rating = new Rating();
+            rating.Show();
+            //this.Close();
         }
 
         private void buttonAboutCreators_Click(object sender, EventArgs e)

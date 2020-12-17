@@ -50,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(723, 456);
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "Picture";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов";

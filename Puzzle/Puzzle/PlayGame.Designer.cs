@@ -105,6 +105,7 @@
             this.rating.TabIndex = 4;
             this.rating.Text = "Рейтинг";
             this.rating.UseVisualStyleBackColor = false;
+            this.rating.Click += new System.EventHandler(this.rating_Click);
             // 
             // help
             // 
@@ -204,10 +205,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.Name = "PlayGame";
             this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов ";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

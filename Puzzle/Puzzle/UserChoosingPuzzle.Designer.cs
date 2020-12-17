@@ -140,6 +140,7 @@
             this.Controls.Add(this.select_img);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
+            this.MaximizeBox = false;
             this.Name = "UserChoosingPuzzle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Выбор пазла";
