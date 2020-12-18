@@ -266,5 +266,10 @@ namespace Puzzle
         {
 
         }
+
+        private void CreatePuzzle_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

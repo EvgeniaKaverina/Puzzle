@@ -38,10 +38,10 @@
             // 
             // buttonNewGame
             // 
-            this.buttonNewGame.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonNewGame.BackColor = System.Drawing.Color.White;
             this.buttonNewGame.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNewGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewGame.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonNewGame.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonNewGame.Location = new System.Drawing.Point(191, 58);
             this.buttonNewGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewGame.Name = "buttonNewGame";
@@ -53,10 +53,10 @@
             // 
             // buttonAboutGame
             // 
-            this.buttonAboutGame.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonAboutGame.BackColor = System.Drawing.Color.White;
             this.buttonAboutGame.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAboutGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAboutGame.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAboutGame.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAboutGame.Location = new System.Drawing.Point(191, 458);
             this.buttonAboutGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAboutGame.Name = "buttonAboutGame";
@@ -68,10 +68,10 @@
             // 
             // buttonAboutCreators
             // 
-            this.buttonAboutCreators.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonAboutCreators.BackColor = System.Drawing.Color.White;
             this.buttonAboutCreators.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAboutCreators.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAboutCreators.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAboutCreators.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAboutCreators.Location = new System.Drawing.Point(191, 358);
             this.buttonAboutCreators.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAboutCreators.Name = "buttonAboutCreators";
@@ -83,10 +83,10 @@
             // 
             // buttonRating
             // 
-            this.buttonRating.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonRating.BackColor = System.Drawing.Color.White;
             this.buttonRating.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRating.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRating.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonRating.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonRating.Location = new System.Drawing.Point(191, 258);
             this.buttonRating.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRating.Name = "buttonRating";
@@ -98,10 +98,10 @@
             // 
             // buttonContinue
             // 
-            this.buttonContinue.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonContinue.BackColor = System.Drawing.Color.White;
             this.buttonContinue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonContinue.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonContinue.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonContinue.Location = new System.Drawing.Point(191, 157);
             this.buttonContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonContinue.Name = "buttonContinue";
@@ -116,7 +116,7 @@
             this.back_user.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.back_user.Cursor = System.Windows.Forms.Cursors.Hand;
             this.back_user.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back_user.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.back_user.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.back_user.Location = new System.Drawing.Point(191, 552);
             this.back_user.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.back_user.Name = "back_user";
@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Ivory;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(664, 634);
             this.Controls.Add(this.back_user);
             this.Controls.Add(this.buttonContinue);

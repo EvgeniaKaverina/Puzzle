@@ -58,8 +58,8 @@ namespace Puzzle
             SqlCommand command = new SqlCommand(" SELECT TOP 10 [Game].login, [Game].time, [Puzzles].number_level  FROM [Game] " +
                 " INNER JOIN [Puzzles] ON [Game].id_puzzle = [Puzzles].id_puzzle WHERE unfinished IS NULL ORDER BY time", sqlConnection);
 
-
-             SqlDataReader reader = command.ExecuteReader();
+           // time.Text = String.Format("{0:mm:ss}", stopWatch);
+            SqlDataReader reader = command.ExecuteReader();
 
             List<string[]> data = new List<string[]>();
 
@@ -67,9 +67,11 @@ namespace Puzzle
             {
                 data.Add(new string[3]);
 
-                data[data.Count - 1][0] = reader[0].ToString();
-                data[data.Count - 1][1] = reader[1].ToString();
-                data[data.Count - 1][2] = reader[2].ToString();
+                //data[data.Count - 1][0] = reader[0].ToString();
+                //data[data.Count - 1][1] = reader[1].ToString();
+                ////time.Text = String.Format("{0:mm:ss}", DateTime.Parse(reader[2].ToString()));
+                //DateTime time = DateTime.Parse(Convert.ToString(reader[2]));
+                //data[data.Count - 1][2] = String.Format("{0:mm:ss}", time);
             }
             reader.Close();
             sqlConnection.Close();

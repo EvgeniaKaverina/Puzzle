@@ -84,5 +84,10 @@ namespace Puzzle
         {
             Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
+
+        private void UserChoosingPuzzle_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

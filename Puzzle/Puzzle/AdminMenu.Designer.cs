@@ -38,14 +38,14 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(184, 65);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(274, 56);
+            this.button1.Size = new System.Drawing.Size(274, 67);
             this.button1.TabIndex = 0;
             this.button1.Text = "Настроить уровень сложности";
             this.button1.UseVisualStyleBackColor = false;
@@ -53,13 +53,13 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(184, 161);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(274, 50);
+            this.button2.Size = new System.Drawing.Size(274, 61);
             this.button2.TabIndex = 1;
             this.button2.Text = "Создать пазл";
             this.button2.UseVisualStyleBackColor = false;
@@ -67,13 +67,13 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button3.BackColor = System.Drawing.Color.White;
             this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(184, 249);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(274, 50);
+            this.button3.Size = new System.Drawing.Size(274, 61);
             this.button3.TabIndex = 2;
             this.button3.Text = "Работа с галереей";
             this.button3.UseVisualStyleBackColor = false;
@@ -81,13 +81,13 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button4.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button4.Location = new System.Drawing.Point(184, 342);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(274, 50);
+            this.button4.Size = new System.Drawing.Size(274, 61);
             this.button4.TabIndex = 3;
             this.button4.Text = "О разработчиках";
             this.button4.UseVisualStyleBackColor = false;
@@ -95,13 +95,13 @@
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button5.BackColor = System.Drawing.Color.White;
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button5.Location = new System.Drawing.Point(184, 438);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(274, 50);
+            this.button5.Size = new System.Drawing.Size(274, 61);
             this.button5.TabIndex = 4;
             this.button5.Text = "О системе";
             this.button5.UseVisualStyleBackColor = false;
@@ -112,10 +112,10 @@
             this.exit_admin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.exit_admin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exit_admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exit_admin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exit_admin.Font = new System.Drawing.Font("Palatino Linotype", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exit_admin.Location = new System.Drawing.Point(184, 537);
             this.exit_admin.Name = "exit_admin";
-            this.exit_admin.Size = new System.Drawing.Size(274, 50);
+            this.exit_admin.Size = new System.Drawing.Size(274, 61);
             this.exit_admin.TabIndex = 5;
             this.exit_admin.Text = "Выйти";
             this.exit_admin.UseVisualStyleBackColor = false;
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Ivory;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(664, 634);
             this.Controls.Add(this.exit_admin);
             this.Controls.Add(this.button5);

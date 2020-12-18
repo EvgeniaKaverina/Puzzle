@@ -44,7 +44,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox1.Font = new System.Drawing.Font("Palatino Linotype", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -53,7 +53,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox1.Location = new System.Drawing.Point(149, 152);
+            this.comboBox1.Location = new System.Drawing.Point(149, 131);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(461, 39);
             this.comboBox1.TabIndex = 0;
@@ -63,10 +63,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(286, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 37);
+            this.label1.Size = new System.Drawing.Size(197, 41);
             this.label1.TabIndex = 1;
             this.label1.Text = "Выбор пазла";
             // 
@@ -75,11 +75,11 @@
             this.select_img.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.select_img.Cursor = System.Windows.Forms.Cursors.Hand;
             this.select_img.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.select_img.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.select_img.Font = new System.Drawing.Font("Palatino Linotype", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.select_img.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.select_img.Location = new System.Drawing.Point(149, 256);
+            this.select_img.Location = new System.Drawing.Point(149, 230);
             this.select_img.Name = "select_img";
-            this.select_img.Size = new System.Drawing.Size(461, 44);
+            this.select_img.Size = new System.Drawing.Size(461, 43);
             this.select_img.TabIndex = 2;
             this.select_img.Text = "Выбрать картинку";
             this.select_img.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -88,11 +88,11 @@
             // 
             // back
             // 
-            this.back.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.back.Cursor = System.Windows.Forms.Cursors.Hand;
             this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.back.Location = new System.Drawing.Point(149, 432);
+            this.back.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.back.Location = new System.Drawing.Point(149, 423);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(128, 41);
             this.back.TabIndex = 3;
@@ -105,10 +105,10 @@
             this.play.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.play.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.play.Location = new System.Drawing.Point(482, 363);
+            this.play.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.play.Location = new System.Drawing.Point(482, 346);
             this.play.Name = "play";
-            this.play.Size = new System.Drawing.Size(128, 41);
+            this.play.Size = new System.Drawing.Size(128, 47);
             this.play.TabIndex = 4;
             this.play.Text = "Играть";
             this.play.UseVisualStyleBackColor = false;
@@ -119,10 +119,10 @@
             this.info.BackColor = System.Drawing.Color.White;
             this.info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.info.Location = new System.Drawing.Point(149, 363);
+            this.info.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.info.Location = new System.Drawing.Point(149, 346);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(266, 41);
+            this.info.Size = new System.Drawing.Size(293, 47);
             this.info.TabIndex = 5;
             this.info.Text = "Справочная информация";
             this.info.UseVisualStyleBackColor = false;
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Ivory;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(820, 485);
             this.Controls.Add(this.info);
             this.Controls.Add(this.play);
@@ -144,6 +144,7 @@
             this.Name = "UserChoosingPuzzle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мир пазлов. Выбор пазла";
+            this.Load += new System.EventHandler(this.UserChoosingPuzzle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -66,10 +66,11 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.BackColor = System.Drawing.Color.Snow;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(906, 82);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
@@ -81,10 +82,10 @@
             // 
             // exit
             // 
-            this.exit.BackColor = System.Drawing.Color.Gainsboro;
+            this.exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exit.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exit.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exit.Location = new System.Drawing.Point(32, 12);
             this.exit.Name = "exit";
             this.exit.Size = new System.Drawing.Size(136, 45);
@@ -95,10 +96,10 @@
             // 
             // rating
             // 
-            this.rating.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rating.BackColor = System.Drawing.Color.Snow;
             this.rating.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rating.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rating.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rating.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rating.Location = new System.Drawing.Point(197, 12);
             this.rating.Name = "rating";
             this.rating.Size = new System.Drawing.Size(136, 45);
@@ -109,10 +110,10 @@
             // 
             // help
             // 
-            this.help.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.help.BackColor = System.Drawing.Color.Snow;
             this.help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.help.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.help.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.help.Location = new System.Drawing.Point(906, 164);
             this.help.Name = "help";
             this.help.Size = new System.Drawing.Size(244, 45);
@@ -123,13 +124,13 @@
             // 
             // info
             // 
-            this.info.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.info.BackColor = System.Drawing.Color.Snow;
             this.info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.info.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.info.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.info.Location = new System.Drawing.Point(906, 286);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(244, 63);
+            this.info.Size = new System.Drawing.Size(244, 74);
             this.info.TabIndex = 6;
             this.info.Text = "Справочная информация";
             this.info.UseVisualStyleBackColor = false;
@@ -137,13 +138,13 @@
             // 
             // view_pic
             // 
-            this.view_pic.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.view_pic.BackColor = System.Drawing.Color.Snow;
             this.view_pic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.view_pic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.view_pic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.view_pic.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.view_pic.Location = new System.Drawing.Point(906, 383);
             this.view_pic.Name = "view_pic";
-            this.view_pic.Size = new System.Drawing.Size(244, 65);
+            this.view_pic.Size = new System.Drawing.Size(244, 76);
             this.view_pic.TabIndex = 7;
             this.view_pic.Text = "Посмотреть исходную картинку";
             this.view_pic.UseVisualStyleBackColor = false;
@@ -157,7 +158,7 @@
             // time
             // 
             this.time.AutoSize = true;
-            this.time.BackColor = System.Drawing.Color.Ivory;
+            this.time.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.time.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.time.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.time.Location = new System.Drawing.Point(990, 479);
@@ -181,10 +182,10 @@
             // help_lab
             // 
             this.help_lab.AutoSize = true;
-            this.help_lab.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.help_lab.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.help_lab.Location = new System.Drawing.Point(916, 239);
             this.help_lab.Name = "help_lab";
-            this.help_lab.Size = new System.Drawing.Size(206, 22);
+            this.help_lab.Size = new System.Drawing.Size(225, 27);
             this.help_lab.TabIndex = 10;
             this.help_lab.Text = "Количество подсказок:";
             // 
@@ -192,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Ivory;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1203, 833);
             this.Controls.Add(this.help_lab);
             this.Controls.Add(this.points);
