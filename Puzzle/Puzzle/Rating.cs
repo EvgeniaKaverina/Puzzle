@@ -18,6 +18,7 @@ namespace Puzzle
             InitializeComponent();
             LoadData();
             LoadDataTime();
+        
         }
 
         private void LoadData()
@@ -53,31 +54,39 @@ namespace Puzzle
             string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-            sqlConnection.Open();
+            
 
-            SqlCommand command = new SqlCommand(" SELECT TOP 10 [Game].login, [Game].time, [Puzzles].number_level  FROM [Game] " +
-                " INNER JOIN [Puzzles] ON [Game].id_puzzle = [Puzzles].id_puzzle WHERE unfinished IS NULL ORDER BY time", sqlConnection);
-
-           // time.Text = String.Format("{0:mm:ss}", stopWatch);
-            SqlDataReader reader = command.ExecuteReader();
-
-            List<string[]> data = new List<string[]>();
-
-            while (reader.Read())
+            for (int i = 1; i <= 5; i++)
             {
-                data.Add(new string[3]);
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(" SELECT TOP 3 [Game].login, [Game].time, [Puzzles].number_level  FROM [Game] " +
+                    " INNER JOIN [Puzzles] ON [Game].id_puzzle = [Puzzles].id_puzzle WHERE unfinished IS NULL and number_level=@i ORDER BY time", sqlConnection);
+                command.Parameters.AddWithValue("i", i);
 
-                //data[data.Count - 1][0] = reader[0].ToString();
-                //data[data.Count - 1][1] = reader[1].ToString();
-                ////time.Text = String.Format("{0:mm:ss}", DateTime.Parse(reader[2].ToString()));
-                //DateTime time = DateTime.Parse(Convert.ToString(reader[2]));
-                //data[data.Count - 1][2] = String.Format("{0:mm:ss}", time);
+                // time.Text = String.Format("{0:mm:ss}", stopWatch);
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<string[]> data = new List<string[]>();
+
+                while (reader.Read())
+                {
+                    data.Add(new string[3]);
+
+                    data[data.Count - 1][0] = reader[0].ToString();
+                    DateTime time = DateTime.Parse(Convert.ToString(reader[1]));
+                    data[data.Count - 1][1] = String.Format("{0:mm:ss}", time);
+                    data[data.Count - 1][2] = reader[2].ToString();
+                }
+                reader.Close();
+                sqlConnection.Close();
+
+                foreach (string[] s in data)
+                    dataGridView2.Rows.Add(s);
             }
-            reader.Close();
-            sqlConnection.Close();
+        }
 
-            foreach (string[] s in data)
-                dataGridView2.Rows.Add(s);
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

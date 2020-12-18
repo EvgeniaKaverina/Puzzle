@@ -46,6 +46,7 @@ namespace Puzzle
         //int numRows;
         //bool type;
         DateTime date;
+        DateTime dateNow;
         Level numberLevel;
         Puzzle puzzle;
         User user;
@@ -62,6 +63,7 @@ namespace Puzzle
             puzzle = new Puzzle();
             numberLevel = new Level();
             user.Login = login;
+            dateNow = DateTime.Now;
 
         }
 
@@ -105,6 +107,7 @@ namespace Puzzle
                 command.Parameters.AddWithValue("id_puzzle", id_puzzle);
 
 
+            
                 SqlDataReader datareader = null;
                 datareader = command.ExecuteReader();
 
@@ -230,57 +233,122 @@ namespace Puzzle
         {
             //прямоугольный на поле
             //прямоугольный на ленте
-            if (numberLevel.Type)
+            if (IsGameExists())
             {
-                int[] matr = new int[level];
-                for (int i = 0; i < level; i++)
+                if (numberLevel.Type)
                 {
-                    matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
+                    int[] matr = new int[level];
+                    for (int i = 0; i < level; i++)
+                    {
+                        matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
+                    }
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, matr);
+
+                    sqlConnection = new SqlConnection(connectionString);
+                    await sqlConnection.OpenAsync();
+
+                    SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix, prompting=@help where id_game=@id_game", sqlConnection);
+                    command.Parameters.AddWithValue("@id_game", id_game);
+                    command.Parameters.AddWithValue("@points", count_points);
+                    command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                    command.Parameters.AddWithValue("@help", help_counter);
+
+                    command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                    command.Parameters["@matrix"].Value = stream.ToArray();
+
+                    await command.ExecuteNonQueryAsync();
                 }
-                MemoryStream stream = new MemoryStream();
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, matr);
+                //треугольный на поле
+                //треугольный на ленте
+                else
+                {
+                    int[] matr = new int[level * 2];
+                    for (int i = 0; i < level * 2; i += 2)
+                    {
+                        matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
+                        matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
+                    }
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, matr);
 
-                sqlConnection = new SqlConnection(connectionString);
-                await sqlConnection.OpenAsync();
+                    sqlConnection = new SqlConnection(connectionString);
+                    await sqlConnection.OpenAsync();
 
-                SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix,prompting=@help where id_game=@id_game", sqlConnection);
-                command.Parameters.AddWithValue("@id_game", id_game);
-                command.Parameters.AddWithValue("@points", count_points);
-                command.Parameters.AddWithValue("@time", DateTime.Now - date);
-                command.Parameters.AddWithValue("@help", help_counter);
+                    SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix, prompting=@help where id_game=@id_game", sqlConnection);
+                    command.Parameters.AddWithValue("@id_game", id_game);
+                    command.Parameters.AddWithValue("@points", count_points);
+                    command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                    command.Parameters.AddWithValue("@help", help_counter);
+                    command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                    command.Parameters["@matrix"].Value = stream.ToArray();
 
-                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
-                command.Parameters["@matrix"].Value = stream.ToArray();
 
-                await command.ExecuteNonQueryAsync();
+                    await command.ExecuteNonQueryAsync();
+                }
             }
-            //треугольный на поле
-            //треугольный на ленте
             else
             {
-                int[] matr = new int[level * 2];
-                for (int i = 0; i < level * 2; i += 2)
+                if (numberLevel.Type)
                 {
-                    matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
-                    matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
+                    int[] matr = new int[level];
+                    for (int i = 0; i < level; i++)
+                    {
+                        matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
+                    }
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, matr);
+
+                    sqlConnection = new SqlConnection(connectionString);
+                    await sqlConnection.OpenAsync();
+                    SqlCommand command = new SqlCommand("INSERT INTO  [Game]  (id_puzzle,login,time,points, unfinished,prompting)  VALUES(@id_puzzle,@user,@time, @points,@matrix,@help) ", sqlConnection);
+                    command.Parameters.AddWithValue("@id_puzzle", puzzle.ID);
+                    command.Parameters.AddWithValue("@user", user.Login);
+                    command.Parameters.AddWithValue("@id_game", id_game);
+                    command.Parameters.AddWithValue("@points", count_points);
+
+                    command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                    command.Parameters.AddWithValue("@help", help_counter);
+
+                    command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                    command.Parameters["@matrix"].Value = stream.ToArray();
+
+                    await command.ExecuteNonQueryAsync();
                 }
-                MemoryStream stream = new MemoryStream();
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, matr);
+                //треугольный на поле
+                //треугольный на ленте
+                else
+                {
+                    int[] matr = new int[level * 2];
+                    for (int i = 0; i < level * 2; i += 2)
+                    {
+                        matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
+                        matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
+                    }
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, matr);
 
-                sqlConnection = new SqlConnection(connectionString);
-                sqlConnection.Open();
+                    sqlConnection = new SqlConnection(connectionString);
+                    await sqlConnection.OpenAsync();
 
-                SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix where id_game=@id_game", sqlConnection);
-                command.Parameters.AddWithValue("@id_game", id_game);
-                command.Parameters.AddWithValue("@points", count_points);
-                command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                    SqlCommand command = new SqlCommand("INSERT INTO  [Game]  (id_puzzle,login,time,points, unfinished,prompting)  VALUES(@id_puzzle,@user,@time, @points,@matrix,@help) ", sqlConnection);
+                    command.Parameters.AddWithValue("@id_puzzle", puzzle.ID);
+                    command.Parameters.AddWithValue("@user", user.Login);
+                    command.Parameters.AddWithValue("@id_game", id_game);
+                    command.Parameters.AddWithValue("@points", count_points);
 
-                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
-                command.Parameters["@matrix"].Value = stream.ToArray();
+                    command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                    command.Parameters.AddWithValue("@help", help_counter);
+                    command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
+                    command.Parameters["@matrix"].Value = stream.ToArray();
 
-                command.ExecuteNonQuery();
+
+                    await command.ExecuteNonQueryAsync();
+                }
             }
         }
         private void createFragContinueOnTale(int[] matrix)
@@ -510,8 +578,9 @@ namespace Puzzle
         private void timer1_Tick(object sender, EventArgs e)
         {
             //не работает
-            long tick = date.Ticks;
-            for (int delay = 0; delay < 1000; delay++) { tick++; }
+            long tick = DateTime.Now.Ticks - dateNow.Ticks ;
+
+            //for (int delay = 0; delay < 1000; delay++) { tick++; }
             
             DateTime stopWatch = new DateTime();
             
@@ -618,18 +687,56 @@ namespace Puzzle
         //сохранение очков при завершении
         private async void setPointsToDB()
         {
-            sqlConnection = new SqlConnection(connectionString);
-            await sqlConnection.OpenAsync();
+            if (!IsGameExists())
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
 
-            SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix,prompting=@help where id_game=@id_game", sqlConnection);
-            command.Parameters.AddWithValue("@id_game", id_game);
-            command.Parameters.AddWithValue("@points", count_points);
-            command.Parameters.AddWithValue("@time", DateTime.Now - date);
-            command.Parameters.AddWithValue("@help",DBNull.Value);
-            //  command.Parameters.AddWithValue("@matrix", DBNull.Value);
-            //  command.Parameters["@matrix"].Value = System.Data.SqlTypes.SqlBinary.Null;
-            command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
-            await command.ExecuteNonQueryAsync();
+                SqlCommand command = new SqlCommand("INSERT INTO  [Game]  (id_puzzle,login,time,points, unfinished,prompting)  VALUES(@id_puzzle,@user,@time, @points,@matrix,@help)", sqlConnection);
+                command.Parameters.AddWithValue("@id_puzzle", puzzle.ID);
+                command.Parameters.AddWithValue("@user", user.Login);
+                command.Parameters.AddWithValue("@id_game", id_game);
+                command.Parameters.AddWithValue("@points", count_points);
+                command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                command.Parameters.AddWithValue("@help", DBNull.Value);
+                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
+                await command.ExecuteNonQueryAsync();
+
+                command = new SqlCommand("SELECT TOP 1* FROM [Game] ORDER BY id_game DESC ", sqlConnection);
+
+                SqlDataReader reader = null;
+                reader = command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+
+                    id_game = Int32.Parse(Convert.ToString(reader["id_game"]));
+
+                }
+            }
+            else
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
+
+                SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix,prompting=@help where id_game=@id_game", sqlConnection);
+                command.Parameters.AddWithValue("@id_game", id_game);
+                command.Parameters.AddWithValue("@points", count_points);
+                command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                command.Parameters.AddWithValue("@help", DBNull.Value);
+
+                command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+        private bool IsGameExists()
+        {
+            if (id_game == -1)
+            {
+                return false;
+            }
+            else return true;
         }
         private void CreateBitmapImage(Image image, Image[] images, int index, int numRows, int numCols, int unitX, int unitY)
         {
@@ -658,7 +765,7 @@ namespace Puzzle
             //}
             UserMenu userMenu = new UserMenu(user.Login);
             userMenu.Show();
-            this.Close();
+            this.Hide();
         }
         //удаление игры
         private async void deleteGame()
