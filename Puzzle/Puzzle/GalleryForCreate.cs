@@ -30,6 +30,7 @@ namespace Puzzle
             p = puzzle;
             createPuzzleChoose();
             admin = true;
+          
 
         }
         public GalleryForCreate(UserChoosingPuzzle choosingPuzzle, int number )
@@ -41,58 +42,72 @@ namespace Puzzle
             admin = false;
             
         }
-        //Проверить
+        
         private async void userChoose(int number)
         {
-            sqlConnection = new SqlConnection(connectionString);
-            await sqlConnection.OpenAsync();
-            SqlCommand command = new SqlCommand("SELECT image FROM Puzzles WHERE number_level=@number", sqlConnection);
-            command.Parameters.AddWithValue("number", number);
-            SqlDataReader reader = null;
-            reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-
+            try
             {
-                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["image"].ToString());
-                Bitmap bmp = new Bitmap(filename);
-                PictureBox tempPictureBox = new PictureBox();
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
+                SqlCommand command = new SqlCommand("SELECT image FROM Puzzles WHERE number_level=@number", sqlConnection);
+                command.Parameters.AddWithValue("number", number);
+                SqlDataReader reader = null;
+                reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
 
-                //generates a thumbnail image of specified size
-                tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+                {
+                    string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["image"].ToString());
+                    Bitmap bmp = new Bitmap(filename);
+                    PictureBox tempPictureBox = new PictureBox();
 
-                tempPictureBox.Size = new System.Drawing.Size(200, 140);
-                string[] p = filename.Split('\\');
-                tempPictureBox.Name = p[p.Length - 1];
-                tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
-                tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
-                flowLayoutPanel1.Controls.Add(tempPictureBox);
+                    //generates a thumbnail image of specified size
+                    tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+
+                    tempPictureBox.Size = new System.Drawing.Size(200, 140);
+                    string[] p = filename.Split('\\');
+                    tempPictureBox.Name = p[p.Length - 1];
+                    tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
+                    tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
+                    flowLayoutPanel1.Controls.Add(tempPictureBox);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка подключения к базе данных.");
             }
         }
         private async void createPuzzleChoose()
         {
-           
-            //запрос в БД SELECT
-            sqlConnection = new SqlConnection(connectionString);
-            await sqlConnection.OpenAsync();
-            SqlCommand command = new SqlCommand("SELECT name_picture FROM GalleryImage", sqlConnection);
-            SqlDataReader reader = null;
-            reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            //for(int i = 0; i < 16; i++)
+            try
             {
-                string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
-                Bitmap bmp = new Bitmap(filename);
-                PictureBox tempPictureBox = new PictureBox();
 
-                //generates a thumbnail image of specified size
-                tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+                //запрос в БД SELECT
+                sqlConnection = new SqlConnection(connectionString);
+                await sqlConnection.OpenAsync();
+                SqlCommand command = new SqlCommand("SELECT name_picture FROM GalleryImage", sqlConnection);
+                SqlDataReader reader = null;
+                reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                //for(int i = 0; i < 16; i++)
+                {
+                    string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
+                    Bitmap bmp = new Bitmap(filename);
+                    PictureBox tempPictureBox = new PictureBox();
 
-                tempPictureBox.Size = new System.Drawing.Size(200, 140);
-                string[] p = filename.Split('\\');
-                tempPictureBox.Name = p[p.Length - 1];
-                tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
-                tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
-                flowLayoutPanel1.Controls.Add(tempPictureBox);
+                    //generates a thumbnail image of specified size
+                    tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+
+                    tempPictureBox.Size = new System.Drawing.Size(200, 140);
+                    string[] p = filename.Split('\\');
+                    tempPictureBox.Name = p[p.Length - 1];
+                    tempPictureBox.Click += new EventHandler(this.tempPictureBox_Click);
+                    tempPictureBox.DoubleClick += new EventHandler(this.pictureBox_DoubleClick);
+                    flowLayoutPanel1.Controls.Add(tempPictureBox);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка подключения к базе данных.");
             }
         }
         private  void GalleryForCreate_Load(object sender, EventArgs e)

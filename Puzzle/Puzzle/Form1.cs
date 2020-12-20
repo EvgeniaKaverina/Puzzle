@@ -18,49 +18,65 @@ namespace Puzzle
         public Form1()
         {
             InitializeComponent();
-
+            this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
-
-        private async void enter_Click(object sender, EventArgs e)
+        protected void Form_Closed(object sender, EventArgs e)
+        { Application.Exit(); }
+        private  void enter_Click(object sender, EventArgs e)
         {
             string log = login_enter.Text;
             string pas = password_enter.Text;
 
             string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
-            sqlConnection = new SqlConnection(connectionString);
-            await sqlConnection.OpenAsync();
-
-            if (isUserExistsEnter())
+              sqlConnection = new SqlConnection(connectionString);
+            //sqlConnection = null;
+            try
             {
-                UserMenu s = new UserMenu(log);
-                s.Show();
-                this.Hide();
+                sqlConnection.Open();
+                if (isUserExistsEnter())
+                {
+                    UserMenu s = new UserMenu(log);
+                    s.Show();
+                    this.Hide();
 
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ошибка подключения к базе данных.");
+            }
+           
         }
 
         public Boolean isUserExistsEnter()
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE login=@login AND password=@password", sqlConnection);
-            command.Parameters.AddWithValue("login", login_enter.Text);
-            command.Parameters.AddWithValue("password", password_enter.Text);
-
-            DataTable table = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-
-            if (table.Rows.Count > 0)
+            SqlCommand command = null;
+            try
             {
-
-                return true;
-            }
-            else 
+                command = new SqlCommand("SELECT * FROM [User] WHERE login=@login AND password=@password", sqlConnection);
+                command.Parameters.AddWithValue("login", login_enter.Text);
+                command.Parameters.AddWithValue("password", password_enter.Text);
+            }catch(Exception ex)
             {
-                MessageBox.Show("Введен неверный логин или пароль. Попробуйте ввести данные снова!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
+                MessageBox.Show(ex.Message);
             }
+                DataTable table = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+
+                if (table.Rows.Count > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Введен неверный логин или пароль. Попробуйте ввести данные снова!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+           
         }
 
         private async void registration_Click(object sender, EventArgs e)
@@ -87,15 +103,22 @@ namespace Puzzle
 
             else
             {
-                string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
-                sqlConnection = new SqlConnection(connectionString);
-                await sqlConnection.OpenAsync();
+                SqlCommand sqlCommand=null;
+                try
+                {
+                    string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
+                    sqlConnection = new SqlConnection(connectionString);
+                    await sqlConnection.OpenAsync();
 
 
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO [User] (login, password) VALUES(@login, @password)", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("login", log);
-                sqlCommand.Parameters.AddWithValue("password", pas);
-
+                    sqlCommand = new SqlCommand("INSERT INTO [User] (login, password) VALUES(@login, @password)", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("login", log);
+                    sqlCommand.Parameters.AddWithValue("password", pas);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Ошибка подключения к базе данных.");
+                }
                 if (isUserExists())
                 {
                     return;
@@ -111,12 +134,19 @@ namespace Puzzle
         }
         public Boolean isUserExists()
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE login=@login", sqlConnection);
-            command.Parameters.AddWithValue("login", login_reg.Text);
+            SqlCommand command = null;
+            try
+            {
+                command = new SqlCommand("SELECT * FROM [User] WHERE login=@login", sqlConnection);
+                command.Parameters.AddWithValue("login", login_reg.Text);
 
+               
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             DataTable table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
-
             adapter.SelectCommand = command;
             adapter.Fill(table);
 

@@ -27,6 +27,7 @@ namespace Puzzle
         {
             InitializeComponent();
             this.login = login;
+            this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
         string login;
         int number;
@@ -37,7 +38,8 @@ namespace Puzzle
             u.Show();
             this.Hide();
         }
-
+        protected void Form_Closed(object sender, EventArgs e)
+        { Application.Exit(); }
         private void select_img_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)

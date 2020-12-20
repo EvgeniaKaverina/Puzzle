@@ -18,9 +18,10 @@ namespace Puzzle
         public LevelSettings()
         {
             InitializeComponent();
-           
+            this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
-
+        protected void Form_Closed(object sender, EventArgs e)
+        { Application.Exit(); }
         private void LevelSettings_Load(object sender, EventArgs e)
         {
             
@@ -78,51 +79,59 @@ namespace Puzzle
                 }
                 string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
                 sqlConnection = new SqlConnection(connectionString);
-                await sqlConnection.OpenAsync();
-               
-                SqlCommand sqlCommand = new SqlCommand("SELECT number FROM Level WHERE number=@num",sqlConnection);
-                sqlCommand.Parameters.AddWithValue("num", level);
 
-                SqlDataReader reader = null;
-                reader = await sqlCommand.ExecuteReaderAsync();
-                string n="";
-                while(await reader.ReadAsync())
+                try
                 {
-                    n = reader["number"].ToString();
-                }
-                if (n != "")
-                {
-                    reader.Close();
-                    DialogResult dialogResult= MessageBox.Show("Этот уровень существует", "Уровень существует!", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-                    if (dialogResult == DialogResult.OK)
+                    await sqlConnection.OpenAsync();
+
+                    SqlCommand sqlCommand = new SqlCommand("SELECT number FROM Level WHERE number=@num", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("num", level);
+
+                    SqlDataReader reader = null;
+                    reader = await sqlCommand.ExecuteReaderAsync();
+                    string n = "";
+                    while (await reader.ReadAsync())
                     {
-                        AdminMenu adminMenu = new AdminMenu();
-                        adminMenu.Show();
-                        this.Close();
+                        n = reader["number"].ToString();
                     }
-                    //if (dialogResult== DialogResult.Yes)
-                    //{
-                    //    SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);
-                    //    command.Parameters.AddWithValue("number", level);
-                    //    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
-                    //    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                    //    command.Parameters.AddWithValue("type", type);
-                    //    await command.ExecuteNonQueryAsync();
-                    //}
+                    if (n != "")
+                    {
+                        reader.Close();
+                        DialogResult dialogResult = MessageBox.Show("Этот уровень существует", "Уровень существует!", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                        if (dialogResult == DialogResult.OK)
+                        {
+                            AdminMenu adminMenu = new AdminMenu();
+                            adminMenu.Show();
+                            this.Close();
+                        }
+                        //if (dialogResult== DialogResult.Yes)
+                        //{
+                        //    SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);
+                        //    command.Parameters.AddWithValue("number", level);
+                        //    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
+                        //    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
+                        //    command.Parameters.AddWithValue("type", type);
+                        //    await command.ExecuteNonQueryAsync();
+                        //}
+                    }
+                    else
+                    {
+                        reader.Close();
+                        SqlCommand command = new SqlCommand("INSERT INTO [Level] (number, count_of_piece_horizontally,count_of_piece_vertically, type_of_piece) VALUES(@number, @count_horizon,@count_vertical, @type)", sqlConnection);
+                        command.Parameters.AddWithValue("number", level);
+                        command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
+                        command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
+                        command.Parameters.AddWithValue("type", type);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                    AdminMenu am = new AdminMenu();
+                    am.Show();
+                    Close();
                 }
-                else
+                catch (Exception ex)
                 {
-                    reader.Close();
-                    SqlCommand command = new SqlCommand("INSERT INTO [Level] (number, count_of_piece_horizontally,count_of_piece_vertically, type_of_piece) VALUES(@number, @count_horizon,@count_vertical, @type)", sqlConnection);
-                    command.Parameters.AddWithValue("number", level);
-                    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
-                    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                    command.Parameters.AddWithValue("type", type);
-                    await command.ExecuteNonQueryAsync();
+                    MessageBox.Show("Ошибка подключения к базе данных.");
                 }
-                AdminMenu am = new AdminMenu();
-                am.Show();
-                Close();
             }
            
            

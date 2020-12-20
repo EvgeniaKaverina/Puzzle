@@ -17,13 +17,15 @@ namespace Puzzle
         public AdminMenu()
         {
             InitializeComponent();
+            this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
-
+        protected void Form_Closed(object sender, EventArgs e)
+        { Application.Exit(); }
         private void button1_Click(object sender, EventArgs e)
         {
             LevelSettings ls=new LevelSettings();
             ls.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -35,14 +37,14 @@ namespace Puzzle
         {
             Gallery g = new Gallery();
             g.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             CreatePuzzle p = new CreatePuzzle();
             p.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -54,7 +56,7 @@ namespace Puzzle
         {
             Form1 s = new Form1();
             s.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }

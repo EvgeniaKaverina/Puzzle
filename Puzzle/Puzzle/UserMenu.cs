@@ -28,14 +28,16 @@ namespace Puzzle
         {
             InitializeComponent();
             this.login = login;
+            this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
-       //Добавить переходы между формами
+        protected void Form_Closed(object sender, EventArgs e)
+        { Application.Exit(); }
 
         private void buttonNewGame_Click(object sender, EventArgs e)
         {
             UserChoosingPuzzle ch = new UserChoosingPuzzle(login);
             ch.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace Puzzle
             {
                 ContinueGame continueGame = new ContinueGame(login);
                 continueGame.Show();
-                this.Close();
+                this.Hide();
             }
             else
             {
@@ -64,7 +66,7 @@ namespace Puzzle
                 {
                     UserChoosingPuzzle userChoosingPuzzle = new UserChoosingPuzzle(login);
                     userChoosingPuzzle.Show();
-                    this.Close();
+                    this.Hide();
 
                 }
                
