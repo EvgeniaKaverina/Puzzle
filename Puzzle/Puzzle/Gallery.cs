@@ -255,7 +255,7 @@ namespace Puzzle
         {
             AdminMenu menu = new AdminMenu();
             menu.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }

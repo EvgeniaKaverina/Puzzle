@@ -30,7 +30,8 @@ namespace Puzzle
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            Info info= new Info();
+            info.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

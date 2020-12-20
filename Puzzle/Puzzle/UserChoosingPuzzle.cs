@@ -73,7 +73,7 @@ namespace Puzzle
 
                 PlayGame g = new PlayGame(picture,number,login);
                 g.Show();
-                this.Close();
+                this.Hide();
             }
         }
 

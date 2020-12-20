@@ -82,7 +82,8 @@ namespace Puzzle
 
         private void buttonAboutCreators_Click(object sender, EventArgs e)
         {
-
+            Info info = new Info();
+            info.Show();
         }
 
         private void buttonAboutGame_Click(object sender, EventArgs e)
