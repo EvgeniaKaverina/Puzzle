@@ -723,11 +723,11 @@ namespace Puzzle
             {
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
-
+                date += DateTime.Now - dateNow;
                 SqlCommand command = new SqlCommand("UPDATE  [Game] SET time=@time, points=@points, unfinished=@matrix,prompting=@help where id_game=@id_game", sqlConnection);
                 command.Parameters.AddWithValue("@id_game", id_game);
                 command.Parameters.AddWithValue("@points", count_points);
-                command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                command.Parameters.AddWithValue("@time", date);
                 command.Parameters.AddWithValue("@help", DBNull.Value);
 
                 command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
