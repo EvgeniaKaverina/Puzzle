@@ -695,13 +695,13 @@ namespace Puzzle
             {
                 sqlConnection = new SqlConnection(connectionString);
                 await sqlConnection.OpenAsync();
-
+                date += DateTime.Now - dateNow;
                 SqlCommand command = new SqlCommand("INSERT INTO  [Game]  (id_puzzle,login,time,points, unfinished,prompting)  VALUES(@id_puzzle,@user,@time, @points,@matrix,@help)", sqlConnection);
                 command.Parameters.AddWithValue("@id_puzzle", puzzle.ID);
                 command.Parameters.AddWithValue("@user", user.Login);
                 command.Parameters.AddWithValue("@id_game", id_game);
                 command.Parameters.AddWithValue("@points", count_points);
-                command.Parameters.AddWithValue("@time", DateTime.Now - date);
+                command.Parameters.AddWithValue("@time",  date);
                 command.Parameters.AddWithValue("@help", DBNull.Value);
                 command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
                 await command.ExecuteNonQueryAsync();
