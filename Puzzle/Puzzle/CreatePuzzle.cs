@@ -236,7 +236,7 @@ namespace Puzzle
                         //await command.ExecuteNonQueryAsync();
                         AdminMenu menu = new AdminMenu();
                         menu.Show();
-                        this.Close();
+                        this.Hide();
                     }
                 }
                 catch (Exception ex)
