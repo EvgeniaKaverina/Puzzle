@@ -91,7 +91,7 @@ namespace Puzzle
 
             }
 
-            if (pas.Length < 5 || pas.Length > 10)
+            else if (pas.Length < 5 || pas.Length > 10)
             {
                 MessageBox.Show("Пароль должен содержать от 5 до 10 символов.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
