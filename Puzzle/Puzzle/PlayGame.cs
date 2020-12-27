@@ -33,7 +33,7 @@ namespace Puzzle
             numberLevel = new Level();
             this.user = new User();
             puzzle = new Puzzle();
-          //  game = new Game();
+     
             puzzle.Image = picture_name;
             puzzle.Level = number;
             numberLevel.Number = number;
@@ -41,40 +41,47 @@ namespace Puzzle
             id_game = -1;
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
+        /* Событие для закрытия приложения
+        */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
-        //     string user;
+
         Image image;
         PictureBox pic = null;
+        //PictureBox для прямоугольных фрагментов на поле
         MyPictureBox[] pictureBoxes = null;
+        //PictureBox для прямоугольных фрагментов на ленте
         MyPictureBox[] pictureBoxOnTale = null;
+        //массив прямоугольных фрагментов
         Image[] images = null;
 
+
+        //PictureBox для треугольных фрагментов на поле
         PictureBox[][] pictureBoxesTriangle = null;
+        //PictureBox для треугольных фрагментов на ленте
         PictureBox[][] pictureBoxesTriangleOnTale = null;
+        //массив треугольных фрагментов
         Image[][] imagesTriangle = null;
 
         int id_game;
-   //     int id_puzzle;
-        int level;
-     //   string picture_name;
-     
-     //   bool location;
-
+        int countofFragments;
+  
+        //Вспомогательные pictureBox для выделения картинок
         MyPictureBox firstBox = null;
         MyPictureBox secondBox = null;
         MyPictureBox taleBox = null;
+
+
          Level numberLevel;
         Puzzle puzzle;
         User user;
-   //     Game game;
 
-        int count_points;
+        int count_points;//количество очков
 
+        /*создание прямоугольных фрагментов на поле*/
         private void createFrag()
         {
-        
-        
+     
             if (pic != null)
             {
                 groupBox1.Controls.Remove(pic);
@@ -84,13 +91,13 @@ namespace Puzzle
             }
             if (pictureBoxes == null)
             {
-                pictureBoxes = new MyPictureBox[level];
-                images = new Image[level];
+                pictureBoxes = new MyPictureBox[countofFragments];
+                images = new Image[countofFragments];
             }
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
-            int[] indice = new int[level];
-            for(int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for(int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxes[i] == null)
@@ -101,7 +108,7 @@ namespace Puzzle
                 }
                 pictureBoxes[i].Width = unitX;
                 pictureBoxes[i].Height = unitY;
-
+                //присваивание индекса pictureBox
                 ((MyPictureBox)pictureBoxes[i]).Index = i;
 
                 CreateBitmapImage(image, images,i, numberLevel.NumRows, numberLevel.NumCols, unitX, unitY);
@@ -109,14 +116,17 @@ namespace Puzzle
                 if (!groupBox1.Controls.Contains(pictureBoxes[i]))
                     groupBox1.Controls.Add(pictureBoxes[i]);
             }
+            //перемешивание фрагментов
             shuffle(ref indice);
-            for(int i = 0; i < level; i++)
+            for(int i = 0; i < countofFragments; i++)
             {
+                //присваивание картинок и индексов картинок фрагментам
                 pictureBoxes[i].Image = images[indice[i]];
                 ((MyPictureBox)pictureBoxes[i]).ImageIndex = indice[i];
             }
 
         }
+        /*создание прямоугольных фрагментов на поле при игре на ленте*/
         private void createFragmentsOnField()
         {
       
@@ -129,14 +139,14 @@ namespace Puzzle
             }
             if (pictureBoxes == null)
             {
-                pictureBoxes = new MyPictureBox[level];
-              //  images = new Image[level];
+                pictureBoxes = new MyPictureBox[countofFragments];
+             
             }
            
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
-            int[] indice = new int[level];
-            for (int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for (int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxes[i] == null)
@@ -150,18 +160,19 @@ namespace Puzzle
 
                 ((MyPictureBox)pictureBoxes[i]).Index = i;
 
-                //    CreateBitmapImage(image, images, i, numRows, numCols, unitX, unitY);
+              
                 pictureBoxes[i].Location = new Point(unitX * (i % numberLevel.NumCols), unitY * (i / numberLevel.NumCols));
                 if (!groupBox1.Controls.Contains(pictureBoxes[i]))
                     groupBox1.Controls.Add(pictureBoxes[i]);
             }
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
               
                 ((MyPictureBox)pictureBoxes[i]).ImageIndex = -1;
             }
 
         }
+        /*создание прямоугольных фрагментов на ленте*/
         private void createFragTale()//лента 
         {
             if (pic != null)
@@ -173,15 +184,15 @@ namespace Puzzle
             }
             if (pictureBoxOnTale == null)
             {
-                pictureBoxOnTale = new MyPictureBox[level];
-                images = new Image[level];
+                pictureBoxOnTale = new MyPictureBox[countofFragments];
+                images = new Image[countofFragments];
             }
 
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
             flowLayoutPanel1.Height = unitY + 50;
-            int[] indice = new int[level];
-            for (int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for (int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxOnTale[i] == null)
@@ -189,7 +200,7 @@ namespace Puzzle
                     pictureBoxOnTale[i] = new MyPictureBox();
                     pictureBoxOnTale[i].Click += new EventHandler(OnPuzzleClickTale);
                     pictureBoxOnTale[i].BorderStyle = BorderStyle.Fixed3D;
-                   // pictureBoxes[i].Size = new System.Drawing.Size(unitX, unitY);
+                   
                 }
                 pictureBoxOnTale[i].Width = unitX;
                 pictureBoxOnTale[i].Height = unitY;
@@ -202,14 +213,14 @@ namespace Puzzle
                     flowLayoutPanel1.Controls.Add(pictureBoxOnTale[i]);
             }
             shuffle(ref indice);
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
                 pictureBoxOnTale[i].Image = images[indice[i]];
                 ((MyPictureBox)pictureBoxOnTale[i]).ImageIndex = indice[i];
             }
 
         }
-
+        /*Событие при выборе фрагмента на ленте*/
         private void OnPuzzleClickTale(object sender, EventArgs e)
         {     
             if (taleBox != null)
@@ -225,7 +236,7 @@ namespace Puzzle
                 taleBox.BorderStyle = BorderStyle.FixedSingle;
             }  
         }
-
+        //Перетаскивание фрагмента с ленты на поле
         private void SwitchFieldAndTale(MyPictureBox tale, MyPictureBox box)
         {
             if (box.ImageIndex == -1)
@@ -233,12 +244,13 @@ namespace Puzzle
                 box.Image = images[tale.ImageIndex];
                 box.ImageIndex = tale.ImageIndex;
                 flowLayoutPanel1.Controls.Remove(tale);
+                //Проверка на окончание игры
                 if (isFinished())
                 {
                     //Останавливаем таймер
                     timer1.Stop();
                     setPointsToDB();
-                 //   MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString(),"Игра окончена",);
+                
                     DialogResult dialogResult = MessageBox.Show("Поздравляем, вы выиграли!\n" +"Количество набранных очков: " + count_points.ToString(), "Игра окончена", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                     if (dialogResult == DialogResult.OK)
                     {
@@ -253,6 +265,7 @@ namespace Puzzle
                 }
             }
         }
+        //Событие при выборе фрагмента на поле
         private void OnClick(object sender, EventArgs e)
         {
             
@@ -261,13 +274,14 @@ namespace Puzzle
             if (taleBox != null)
             {
                 SwitchFieldAndTale(taleBox, firstBox);
-                //  firstBox.Click -= null;
+         
                 firstBox.Click -= new EventHandler(OnClick);
                 ((MyPictureBox)sender).Click +=new  EventHandler(OnPuzzleClick);
                 firstBox = null;
                 taleBox = null;
             }
         }
+        //Событие при выборе фрагмента на поле
         private void OnPuzzleClick(object sender, EventArgs e)//createFrag
         {
             if (firstBox == null)
@@ -286,9 +300,9 @@ namespace Puzzle
                 secondBox = null;
                 taleBox = null;
             }
- 
-           // ((MyPictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
         }
+
+        /*Обмен картинок на поле*/
         private void SwitchImage(MyPictureBox box1,MyPictureBox box2)//createFrag
         {
             if (box1.ImageIndex != -1 && box2.ImageIndex != -1)
@@ -300,26 +314,23 @@ namespace Puzzle
                 box1.ImageIndex = tmp;
 
                 //проверка на правильность и уменьшение очков 
-                //снимает очки, когда пытаешься поменять с фиксированным фрагментом два раза
-               
+                               
                 if (box1.ImageIndex != box1.Index && box2.ImageIndex != box2.Index)
                 {
                     count_points -= 1;
                 }
-                //count_points = count_points - 1;
+               
 
                 if (count_points<0)
                 {
                     count_points = 0;
                 }
-              //points.Text = "Количество очков: " + count_points.ToString();
-                
-
+          //Проверка на завершение игры
                 if (isFinished())
                 {
                     //Останавливаем таймер
                     timer1.Stop();
-                //    MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString());
+           
                     setPointsToDB();
                     DialogResult dialogResult = MessageBox.Show("Поздравляем, вы выиграли!\n" + "Количество набранных очков: " + count_points.ToString(), "Игра окончена", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                     if (dialogResult == DialogResult.OK)
@@ -332,29 +343,32 @@ namespace Puzzle
                 }
             }
         }
-        private bool isFinished()//createFrag
+        //Метод проверки завершения игры
+        private bool isFinished()
         {
-            for(int i = 0; i < level; i++)
+            for(int i = 0; i < countofFragments; i++)
             {
                 if(((MyPictureBox)pictureBoxes[i]).ImageIndex== ((MyPictureBox)pictureBoxes[i]).Index)
                 {
                     if (pictureBoxes[i].Enabled)
                     {
                         Bitmap btm = (Bitmap)pictureBoxes[i].Image;
-                   //     pictureBoxes[i].Image = ChangeBrightness(btm, 0.7f);
+
                     }
                     pictureBoxes[i].Enabled = false;
-                  //  pictureBoxes[i].Click -= null;
+ 
 
                 }
             }
-            for(int i = 0; i < level; i++)
+            //Проверка на совпадение индекса picturebox и индекса картинки
+            for(int i = 0; i < countofFragments; i++)
             {
                 if (((MyPictureBox)pictureBoxes[i]).ImageIndex != ((MyPictureBox)pictureBoxes[i]).Index)
                     return false;
             }
             return true;
         }
+        //Отрисовка фрагмента
         private void CreateBitmapImage(Image image,Image[] images, int index, int numRows, int numCols, int unitX,int unitY)
         {
             images[index] = new Bitmap(unitX, unitY);
@@ -368,7 +382,7 @@ namespace Puzzle
                 GraphicsUnit.Pixel);
             og.Flush();
         }
-
+        //Перемешивание фрагментов
         private void shuffle(ref int[] array)
         {
             Random rnd = new Random();
@@ -383,45 +397,7 @@ namespace Puzzle
 
             }
         }
-        //добавление игры
-        //private  void addPuzzleToDB()
-        //{
-
-        //    sqlConnection = new SqlConnection(connectionString);
-        //    sqlConnection.Open();
-
-        //    SqlCommand command = new SqlCommand("INSERT INTO [Game] (id_puzzle,login,time,points) VALUES(@id_puzzle,@user,@time, @points)", sqlConnection);
-        //    command.Parameters.AddWithValue("@id_puzzle", puzzle.ID);
-        //    command.Parameters.AddWithValue("@user", user.Login);
-        //    command.Parameters.AddWithValue("@points", 0);
-        //    command.Parameters.AddWithValue("@time", DateTime.Now - DateTime.Now);
-        //    command.ExecuteNonQuery();
-
-        //    command = new SqlCommand("SELECT TOP 1* FROM [Game] ORDER BY id_game DESC ", sqlConnection);
-
-        //    SqlDataReader reader = null;
-        //    reader = command.ExecuteReader();
-
-
-        //    while (reader.Read())
-        //    {
-
-        //        id_game = Int32.Parse(Convert.ToString(reader["id_game"]));
-               
-        //    }
-          
-        //}
-        //удаление игры
-        //private async void deleteGame()
-        //{
-        //    sqlConnection = new SqlConnection(connectionString);
-        //    await sqlConnection.OpenAsync();
-
-        //    SqlCommand command = new SqlCommand("DELETE FROM  [Game]  where id_game=@id_game", sqlConnection);
-        //    command.Parameters.AddWithValue("@id_game", id_game);
-           
-        //    await command.ExecuteNonQueryAsync();
-        //}
+       
         //сохранение очков при завершении
         private async void setPointsToDB()
         {
@@ -481,6 +457,7 @@ namespace Puzzle
                 }
             }
         }
+       //Провека на существование игры 
         private bool IsGameExists()
         {
             if (id_game == -1)
@@ -498,9 +475,7 @@ namespace Puzzle
             getLevelSettings();
 
             getPuzzle();
-          //  addPuzzleToDB();
-
-            //сохранение данных
+  
             if (puzzle.Location && numberLevel.Type)
             {
                 createFragmentsOnField();
@@ -513,35 +488,37 @@ namespace Puzzle
             else if (puzzle.Location && !numberLevel.Type)
             {
                 numberLevel.NumCols = numberLevel.NumCols / 2;
-                level = numberLevel.NumRows * numberLevel.NumCols;
+                countofFragments = numberLevel.NumRows * numberLevel.NumCols;
                 createTriangleFragmentsOnField();
                 createFragTaleTriangle();
             }
             else if (!puzzle.Location && !numberLevel.Type)
             {
                 numberLevel.NumCols = numberLevel.NumCols / 2;
-                level = numberLevel.NumRows * numberLevel.NumCols;
+                countofFragments = numberLevel.NumRows * numberLevel.NumCols;
                 createFragTriangle();
                 flowLayoutPanel1.Visible = false;
             }
-
+            //Таймер
             date = DateTime.Now;
             Timer timer = new Timer();
             timer1.Interval = 10;
             timer1.Tick += new EventHandler(timer1_Tick);
 
-            ////Делаем таймер доступным
-            //timer1.Enabled = true;
+           
             //Запускаем таймер
             timer1.Start();
 
+            //Присваивание количество подсказок
             help_counter = 3;
             help_lab.Text = "Количество подсказок: " + help_counter.ToString();
 
+            //Очки
             count_points = 20 * numberLevel.Number;
-            //points.Text = "Количество очков: " + count_points.ToString();
+         
 
         }
+        //загрузка картинки из БД
         private void ShowImage()
         {
             image = CreateBitmapImage();
@@ -555,7 +532,7 @@ namespace Puzzle
             }
             pic.Image = image;
         }
-
+        //Обработчик события таймер
         private void timer1_Tick(object sender, EventArgs e)
         {
             long tick = DateTime.Now.Ticks - date.Ticks;
@@ -570,28 +547,28 @@ namespace Puzzle
         private void view_pic_Click(object sender, EventArgs e)
         {
            
-            //указать путь к выбранной пользователем картинке
+            //Открытие выбранной пользователем картинки
             Picture picture = new Picture(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"..\..\gallery\"+ puzzle.Image));
             picture.ShowDialog();
           
         }
-
+        //Создание картинки
         private Bitmap CreateBitmapImage()
         {
 
             Image img = Image.FromFile(@"..\..\gallery\"+ puzzle.Image);
 
             Bitmap objBmImage = new Bitmap(groupBox1.Width, groupBox1.Height);
-            //Bitmap objBmImage = new Bitmap(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+         
             Graphics objGraphics = Graphics.FromImage(objBmImage);
             objGraphics.Clear(Color.White);
             objGraphics.DrawImage(img, new Rectangle(0, 0, groupBox1.Width, groupBox1.Height));
-            //objGraphics.DrawImage(img, new Rectangle(0, 0, flowLayoutPanel1.Width, flowLayoutPanel1.Height));
+       
             objGraphics.Flush();
 
             return objBmImage;           
         }
-
+        //Запрос в БД для получения информации об Уровне сложности
         private void getLevelSettings()
         {
             try
@@ -613,14 +590,14 @@ namespace Puzzle
                     numberLevel.NumRows = Int32.Parse(Convert.ToString(reader["count_of_piece_vertically"]));
                     numberLevel.Type = Boolean.Parse(Convert.ToString(reader["type_of_piece"]));
                 }
-                level = numberLevel.NumRows * numberLevel.NumCols;
+                countofFragments = numberLevel.NumRows * numberLevel.NumCols;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка подключения к базе данных.");
             }
         }
-
+        //Запрос в БД для получения информации о пазле
         private void getPuzzle()
         {
             try
@@ -649,6 +626,8 @@ namespace Puzzle
             }
 
         }
+
+        //Сохранение незаконченного пазла для возможности продложения
         private async void SavePuzzzle()
         {
             try
@@ -659,8 +638,8 @@ namespace Puzzle
                 {
                     if (numberLevel.Type)
                     {
-                        int[] matr = new int[level];
-                        for (int i = 0; i < level; i++)
+                        int[] matr = new int[countofFragments];
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
                         }
@@ -686,8 +665,8 @@ namespace Puzzle
                     //треугольный на ленте
                     else
                     {
-                        int[] matr = new int[level * 2];
-                        for (int i = 0; i < level * 2; i += 2)
+                        int[] matr = new int[countofFragments * 2];
+                        for (int i = 0; i < countofFragments * 2; i += 2)
                         {
                             matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
                             matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
@@ -715,8 +694,8 @@ namespace Puzzle
                 {
                     if (numberLevel.Type)
                     {
-                        int[] matr = new int[level];
-                        for (int i = 0; i < level; i++)
+                        int[] matr = new int[countofFragments];
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             matr[i] = ((MyPictureBox)pictureBoxes[i]).ImageIndex;
                         }
@@ -744,8 +723,8 @@ namespace Puzzle
                     //треугольный на ленте
                     else
                     {
-                        int[] matr = new int[level * 2];
-                        for (int i = 0; i < level * 2; i += 2)
+                        int[] matr = new int[countofFragments * 2];
+                        for (int i = 0; i < countofFragments * 2; i += 2)
                         {
                             matr[i] = ((MyPictureBox)pictureBoxesTriangle[i / 2][0]).ImageIndex;
                             matr[i + 1] = ((MyPictureBox)pictureBoxesTriangle[i / 2][1]).ImageIndex;
@@ -765,7 +744,7 @@ namespace Puzzle
 
                         command.Parameters.AddWithValue("@time", DateTime.Now - date);
                         command.Parameters.AddWithValue("@help", help_counter);
-                        //      SqlCommand command = new SqlCommand("Insert into [Table1] (unfinished) VALUES(@matrix)", sqlConnection);
+                      
                         command.Parameters.Add("@matrix", System.Data.SqlDbType.VarBinary);
                         command.Parameters["@matrix"].Value = stream.ToArray();
 
@@ -788,7 +767,7 @@ namespace Puzzle
         {
 
         }
-        
+        //Создание треугольных фрагментов
         private void createFragTriangle()
         {
 
@@ -801,14 +780,14 @@ namespace Puzzle
             }
             if (pictureBoxesTriangle == null)
             {
-                pictureBoxesTriangle = new PictureBox[level][];
-                imagesTriangle = new Image[level][];
+                pictureBoxesTriangle = new PictureBox[countofFragments][];
+                imagesTriangle = new Image[countofFragments][];
             }
            
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
-            int[] indice = new int[level];
-            for (int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for (int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxesTriangle[i] == null)
@@ -845,8 +824,9 @@ namespace Puzzle
                 if (!groupBox1.Controls.Contains(pictureBoxesTriangle[i][1]))
                     groupBox1.Controls.Add(pictureBoxesTriangle[i][1]);
             }
+            //Перемешивание индексов
             shuffle(ref indice);
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
 
                 pictureBoxesTriangle[i][0].Image = imagesTriangle[indice[i]][0];
@@ -854,7 +834,7 @@ namespace Puzzle
 
             }
             shuffle(ref indice);
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
 
                 pictureBoxesTriangle[i][1].Image = imagesTriangle[indice[i]][1];
@@ -862,6 +842,7 @@ namespace Puzzle
             }
 
         }
+        //Обработчик события при нажатии на фрагмент на поле
         private void OnPuzzleClickTriangle(object sender, EventArgs e)
         {
             if (firstBox == null)
@@ -882,8 +863,9 @@ namespace Puzzle
                 secondBox = null;
             }
 
-            // ((MyPictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
+          
         }
+        //Своп фрагментов на поле
         private void SwitchImageTriangle(MyPictureBox box1, MyPictureBox box2, int i)
         {
             if (box1.ImageIndex != -150 && box2.ImageIndex != -150)
@@ -896,15 +878,16 @@ namespace Puzzle
 
                 if (Math.Abs(box1.ImageIndex) != Math.Abs(box1.Index) && Math.Abs(box2.ImageIndex) != Math.Abs(box2.Index))
                 {
+                    //уменьшение количества очков при неправильной перестановки фрагмента
                     count_points -= 1;
                 }
-                //count_points = count_points - 1;
+            
 
                 if (count_points < 0)
                 {
                     count_points = 0;
                 }
-                //points.Text = "Количество очков: " + count_points.ToString();
+            
                 if (isFinishedTriangle())
                 {
                     timer1.Stop();
@@ -921,32 +904,26 @@ namespace Puzzle
                 }
             }
         }
+        //Проверка на завершение игры
         private bool isFinishedTriangle()
         {
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
                 if (Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex) == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
                 {
-                    //if (pictureBoxesTriangle[i][0].Enabled)
-                    //{
-                    //    Bitmap btm = (Bitmap)pictureBoxesTriangle[i][0].Image;
-                  
-                    //}
+                 
                     pictureBoxesTriangle[i][0].Enabled = false;
                   
                 }
                 if (Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).ImageIndex) == Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][1]).Index))
                 {
-                    //if (pictureBoxesTriangle[i][1].Enabled)
-                    //{
-                    //    Bitmap btm = (Bitmap)pictureBoxesTriangle[i][1].Image;
-               
-                    //}
+                    
                     pictureBoxesTriangle[i][1].Enabled = false;
                   
                 }
             }
-            for (int i = 0; i < level; i++)
+            //Сравнение индексов фрагментов и индексов картинок
+            for (int i = 0; i < countofFragments; i++)
             {
                 if (Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex) != Math.Abs(((MyPictureBox)pictureBoxesTriangle[i][0]).Index))
                     return false;
@@ -956,6 +933,7 @@ namespace Puzzle
             }
             return true;
         }
+        //создание картинок фрагментов для треугольных пазлов
         private void CreateBitmapImageTriangle(Image image, Image[][] images, int index, int j, int numRows, int numCols, int unitX, int unitY)
         {
             images[index][j] = new Bitmap(unitX, unitY);
@@ -981,7 +959,7 @@ namespace Puzzle
             g.DrawImage(pictureBoxesTriangle[index][j].Image, new Point(0, 0));
             g.Flush();
         }
-
+        //создание картинок фрагментов для треугольных пазлов
         private void CreateBitmapImageTriangleOnTale(Image image, Image[][] images, int index, int j, int numRows, int numCols, int unitX, int unitY)
         {
             images[index][j] = new Bitmap(unitX, unitY);
@@ -1007,7 +985,7 @@ namespace Puzzle
             g.DrawImage(pictureBoxesTriangleOnTale[index][j].Image, new Point(0, 0));
             g.Flush();
         }
-
+        //создание треугольных фрагментов на поле
         private void createTriangleFragmentsOnField()
         {
 
@@ -1020,13 +998,13 @@ namespace Puzzle
             }
             if (pictureBoxesTriangle == null)
             {
-                pictureBoxesTriangle = new PictureBox[level][];
+                pictureBoxesTriangle = new PictureBox[countofFragments][];
                 //        imagesTriangle = new Image[level][];
             }
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
-            int[] indice = new int[level];
-            for (int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for (int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxesTriangle[i] == null)
@@ -1060,7 +1038,7 @@ namespace Puzzle
                     groupBox1.Controls.Add(pictureBoxesTriangle[i][1]);
             }
 
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
 
                 ((MyPictureBox)pictureBoxesTriangle[i][0]).ImageIndex = -150;
@@ -1068,6 +1046,7 @@ namespace Puzzle
             }
 
         }
+        //Создание треугольных фрагментов на ленте
         private void createFragTaleTriangle()//лента 
         {
             if (pic != null)
@@ -1079,16 +1058,16 @@ namespace Puzzle
             }
             if (pictureBoxesTriangleOnTale == null)
             {
-                pictureBoxesTriangleOnTale = new PictureBox[level][];
+                pictureBoxesTriangleOnTale = new PictureBox[countofFragments][];
 
-                imagesTriangle = new Image[level][];
+                imagesTriangle = new Image[countofFragments][];
             }
 
             int unitX = groupBox1.Width / numberLevel.NumCols;
             int unitY = groupBox1.Height / numberLevel.NumRows;
             flowLayoutPanel1.Height = unitY + 50;
-            int[] indice = new int[level];
-            for (int i = 0; i < level; i++)
+            int[] indice = new int[countofFragments];
+            for (int i = 0; i < countofFragments; i++)
             {
                 indice[i] = i;
                 if (pictureBoxesTriangleOnTale[i] == null)
@@ -1124,20 +1103,22 @@ namespace Puzzle
                 if (!flowLayoutPanel1.Controls.Contains(pictureBoxesTriangleOnTale[i][1]))
                     flowLayoutPanel1.Controls.Add(pictureBoxesTriangleOnTale[i][1]);
             }
+            //перемешивание фрагментов
             shuffle(ref indice);
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
                 pictureBoxesTriangleOnTale[i][0].Image = imagesTriangle[indice[i]][0];
                 ((MyPictureBox)pictureBoxesTriangleOnTale[i][0]).ImageIndex = indice[i];
             }
             shuffle(ref indice);
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < countofFragments; i++)
             {
                 pictureBoxesTriangleOnTale[i][1].Image = imagesTriangle[indice[i]][1];
                 ((MyPictureBox)pictureBoxesTriangleOnTale[i][1]).ImageIndex = indice[i];
             }
 
         }
+        //Перемещение треугольного фрагмента с ленты на поле
         private void SwitchFieldAndTaleTriangle(MyPictureBox tale, MyPictureBox box)
         {
             if (box.ImageIndex == -150)
@@ -1172,6 +1153,7 @@ namespace Puzzle
                 }
             }
         }
+        //Обработчик события при выборе фрагмента на поле
         private void OnClickTriangle(object sender, EventArgs e)
         {
 
@@ -1189,6 +1171,7 @@ namespace Puzzle
         }
         //подсказка
         int help_counter = 3;
+        //обработчик события при нажатии на кнопку ВЗЯТЬ ПОДСКАЗКУ
         private void help_Click(object sender, EventArgs e)
         {
             if (help_counter > 0)
@@ -1198,7 +1181,7 @@ namespace Puzzle
                 {
                     if (taleBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             if (taleBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
                             {
@@ -1222,7 +1205,7 @@ namespace Puzzle
                     }
                     else if (firstBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
                             {
@@ -1243,7 +1226,7 @@ namespace Puzzle
                 {
                     if (firstBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             if (firstBox.ImageIndex == ((MyPictureBox)pictureBoxes[i]).Index)
                             {
@@ -1265,7 +1248,7 @@ namespace Puzzle
                 {
                     if (taleBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
 
                             if (((TriangularPictureBox)taleBox).LeftGrag)
@@ -1313,7 +1296,7 @@ namespace Puzzle
                     }
                     else if (firstBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             if (((TriangularPictureBox)firstBox).LeftGrag)
                             {
@@ -1348,7 +1331,7 @@ namespace Puzzle
                 {
                     if (firstBox != null)
                     {
-                        for (int i = 0; i < level; i++)
+                        for (int i = 0; i < countofFragments; i++)
                         {
                             if (((TriangularPictureBox)firstBox).LeftGrag)
                             {
@@ -1381,7 +1364,7 @@ namespace Puzzle
             }
             else MessageBox.Show("У вас закончились подсказки!");
         }
-
+        //обработчик события при нажатии на кнопку ВЫЙТИ
         private void exit_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show(" Хотите сохранить текущий результат?", "Пазл не сохранен!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -1390,10 +1373,8 @@ namespace Puzzle
                 SavePuzzzle();
                
             }
-            //else
-            //{
-            //    deleteGame();
-            //}
+            //возвращение к меню
+           
             UserMenu userMenu = new UserMenu(user.Login);
             userMenu.Show();
             this.Hide();
@@ -1403,12 +1384,13 @@ namespace Puzzle
         {
 
         }
-
+        //отображение справочной информации
         private void info_Click(object sender, EventArgs e)
         {
             Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
 
+        //Отображение формы рейтинга 
         private void rating_Click(object sender, EventArgs e)
         {
             Rating rating = new Rating();

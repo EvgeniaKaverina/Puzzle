@@ -29,163 +29,30 @@ namespace Puzzle
 
         private void select_pict_Click(object sender, EventArgs e)
         {
+            //открытие формы Галерея для выбора картинки для создания пазла
             gal = new GalleryForCreate(this);
             gal.Show();
 
         }
+        /* Отображения названия картинки на форме
+         */
         public void setTextToButton()
         {
+
             select_pict.Text = gal.getpicture_name();
         }
         private void back_Click(object sender, EventArgs e)
         {
+            //возвращение к меню администратора
             AdminMenu s = new AdminMenu();
             s.Show();
             this.Hide();
         }
 
-        // private async void create_rect(string pict, int num_rows, int num_cols, int id)
-        // {
-        //     Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
-
-        //     int wid = (int)600 / num_cols;
-        //     int hgt = (int)420 / num_rows;
-
-
-        //     // Начнем расщепление растрового изображения.
-
-        //     Bitmap piece = new Bitmap(wid, hgt);
-        //     Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
-        //     using (Graphics gr = Graphics.FromImage(piece))
-        //     {
-        //         sqlConnection = new SqlConnection(connectionString);
-        //         await sqlConnection.OpenAsync();
-        //         Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
-        //         for (int row = 0; row < num_rows; row++)
-        //         {
-        //             source_rect.X = 0;
-        //             for (int col = 0; col < num_cols; col++)
-        //             {
-        //                 // Скопируем фрагмент изображения.
-        //                 gr.DrawImage(bm, dest_rect, source_rect,
-        //                     GraphicsUnit.Pixel);
-
-        //                 // Сохраним кусок.
-
-        //                 string filename = pict +id+
-        //                     row.ToString("00") +
-        //                     col.ToString("00") + ".jpg";
-        //                 //      matrix[row, col] = filename;
-
-        //                 //запись в бд
-
-        //                 SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)",sqlConnection);
-        //                 command.Parameters.AddWithValue("frag", filename);
-        //                 command.Parameters.AddWithValue("id", id);
-
-        //                 await command.ExecuteNonQueryAsync();
-
-
-        //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
-
-
-        //                 // Переместимся к следующему столбцу.
-        //                 source_rect.X += wid;
-        //             }
-        //             source_rect.Y += hgt;
-        //         }
-
-        //         sqlConnection.Close();
-        //     }
-        ////     return matrix; // вернуть матрицу
-
-        // }
-        // private async void create_trian(string pict, int num_rows, int num_cols, int id)
-        // {
-        //     Bitmap bm = new Bitmap(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", pict));
-
-        //     int wid = (int)600 / num_cols;
-        //     int hgt = (int)420 / num_rows;
-
-
-        //     // Начнем расщепление растрового изображения.
-
-        //     Bitmap piece = new Bitmap(wid, hgt);
-        //     Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
-        //     using (Graphics gr = Graphics.FromImage(piece))
-        //     {
-        //         sqlConnection = new SqlConnection(connectionString);
-        //         await sqlConnection.OpenAsync();
-
-        //         Rectangle source_rect = new Rectangle(0, 0, wid, hgt);
-        //         for (int row = 0; row < num_rows; row++)
-        //         {
-        //             source_rect.X = 0;
-        //             for (int col = 0; col < num_cols; col++)
-        //             {
-        //                 // Скопируем фрагмент изображения.
-        //                 gr.DrawImage(bm, dest_rect, source_rect,
-        //                     GraphicsUnit.Pixel);
-
-        //                 for(int j = 0; j < hgt; j++)
-        //                 {
-        //                     for(int i = 0; i < wid/hgt*j; i++)
-        //                     {
-        //                         piece.SetPixel(i, j, Color.Transparent);
-        //                     }
-        //                 }
-
-
-        //                 // Сохраним кусок.
-
-
-        //                 string filename = pict + id +row.ToString("00") + col.ToString("00")+"01" + ".jpg";
-
-        //                 SqlCommand command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
-        //                 command.Parameters.AddWithValue("frag", filename);
-        //                 command.Parameters.AddWithValue("id", id);
-
-        //                 await command.ExecuteNonQueryAsync();
-
-
-        //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename), ImageFormat.Jpeg);
-
-        //                 for (int j = 0; j < hgt; j++)
-        //                 {
-        //                     for (int i = wid / hgt * j; i < wid ; i++)
-        //                     {
-        //                         piece.SetPixel(i, j, Color.Transparent);
-        //                     }
-        //                 }
-
-
-        //                 // Сохраним кусок.
-
-
-        //                 string filename2 = pict + id + row.ToString("00") + col.ToString("00") + "02" + ".jpg";
-
-        //                command = new SqlCommand("INSERT INTO [Fragment] (name_fragment, id_puzzle) VALUES(@frag,@id)", sqlConnection);
-        //                 command.Parameters.AddWithValue("frag", filename2);
-        //                 command.Parameters.AddWithValue("id", id);
-
-        //                 await command.ExecuteNonQueryAsync();
-
-
-        //                 piece.Save(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\fragm\", filename2), ImageFormat.Jpeg);
-
-
-        //                 // Переместимся к следующему столбцу.
-        //                 source_rect.X += wid;
-        //             }
-        //             source_rect.Y += hgt;
-        //         }
-
-        //         sqlConnection.Close();
-        //     }
-
-        // }
+       
         private async void create_puzzle_Click(object sender, EventArgs e)
         {
+            //Проверка на заполнение всех полей
             if (comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Выберите номер уровня");
@@ -202,11 +69,8 @@ namespace Puzzle
             {
                 string pict = gal.getpicture_name();
 
-
-                //запрос к бд все сохранить
-
                 int number = Int32.Parse(comboBox1.SelectedItem.ToString());
-                //  string loc=comboBox2.SelectedItem.ToString();
+              
                 int loc = 0;
                 if (comboBox2.SelectedItem.ToString() == "Лента")
                 {
@@ -218,9 +82,11 @@ namespace Puzzle
                 }
                 try
                 {
+                    //открытие соединения к БД
                     sqlConnection = new SqlConnection(connectionString);
                     await sqlConnection.OpenAsync();
 
+                    //Добавление нового пазлав БД
                     SqlCommand command = new SqlCommand("INSERT INTO [Puzzles] (image, number_level, location) VALUES(@image, @number_level, @location)", sqlConnection);
                     command.Parameters.AddWithValue("image", pict);
                     command.Parameters.AddWithValue("number_level", number);
@@ -233,7 +99,7 @@ namespace Puzzle
                     }
                     else if (command.ExecuteNonQuery() == 1)
                     {
-                        //await command.ExecuteNonQueryAsync();
+                        //возвращение к меню администратора
                         AdminMenu menu = new AdminMenu();
                         menu.Show();
                         this.Hide();
@@ -245,6 +111,8 @@ namespace Puzzle
                 }
             }
         }
+        /* Проверка на существовании пазла в БД
+         */
         public Boolean isPuzzleExists()
         {
             string pict = gal.getpicture_name();
@@ -281,7 +149,8 @@ namespace Puzzle
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
 
-
+        /* событие для закрытия формы
+    */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
     }

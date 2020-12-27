@@ -8,7 +8,7 @@ namespace Puzzle
 {
     class User
     {
-        private string login;
+        private string login;//логин пользователя
         public User()
         {
 

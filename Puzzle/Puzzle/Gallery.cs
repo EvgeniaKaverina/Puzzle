@@ -26,8 +26,11 @@ namespace Puzzle
             picSelected = null;
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
+        /* событие для закрытия формы
+     */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
+
         private async void Gallery_Load(object sender, EventArgs e)
         {
              //запрос в БД SELECT
@@ -37,13 +40,13 @@ namespace Puzzle
             SqlDataReader reader = null;
             reader= await command.ExecuteReaderAsync();
             while(await reader.ReadAsync())
-            //for(int i = 0; i < 16; i++)
+          
             {
                 string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
                 Bitmap bmp = new Bitmap(filename);
                 PictureBox tempPictureBox = new PictureBox();
 
-                //generates a thumbnail image of specified size
+                //генерирование уменьшенного изображения указанного размера 200х140
                 tempPictureBox.Image = bmp.GetThumbnailImage(200, 140,  new Image.GetThumbnailImageAbort(ThumbnailCallback),   IntPtr.Zero);
         
                 tempPictureBox.Size = new System.Drawing.Size(200, 140);
@@ -65,10 +68,10 @@ namespace Puzzle
                 picSelected.BorderStyle = BorderStyle.None;
 
             }
-           //   picSelected = (PictureBox)sender;
+   
            ((PictureBox)sender).BorderStyle = BorderStyle.FixedSingle;
             picSelected = (PictureBox)sender;
-            //   picSelected.Focus();
+ 
 
         }
         public bool ThumbnailCallback()
@@ -85,6 +88,7 @@ namespace Puzzle
                 return;
             string filename = dialog.FileName;
             string[] p = filename.Split('\\');
+            //проверка на существование картинки
             if (File.Exists(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", p[p.Length-1])))
             {
                 MessageBox.Show("Изображение с таким названием существует");
@@ -96,7 +100,7 @@ namespace Puzzle
 
                 PictureBox tempPictureBox = new PictureBox();
 
-                //generates a thumbnail image of specified size
+                //генерирование уменьшенного изображения указанного размера 200х140
 
                 tempPictureBox.Image = image.GetThumbnailImage(200, 140,
                                        new Image.GetThumbnailImageAbort(ThumbnailCallback),
@@ -165,6 +169,7 @@ namespace Puzzle
                 MessageBox.Show("С данным изображением существует пазл. Невозможно удалить картинку");
             }
         }
+        /*проверка на существование пазла*/
         private bool isPuzzleExist()
         {
             try
@@ -189,24 +194,15 @@ namespace Puzzle
                 return true;
             }
         }
+        //Удаление картинки из галереи
         private void deleteFromGallery()
         {
             while (true)
             {
                 string s = Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", picSelected.Name);
-                try
-                {
-                    //   if (File.Exists(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\gallery\", picSelected.Name)))
-                    /// {
-                  
-                        File.Delete(@s);
-                        return;
-                        //}
-                }
-                catch (IOException)
-                {
-                    //     MessageBox.Show("Error");
-                }
+                File.Delete(@s);
+                return;
+               
             }
         }
         private void deleteFromBD()
@@ -230,7 +226,7 @@ namespace Puzzle
 
         }
 
-        //увеличение картинки
+        //увеличение картинки при двойном клике
         private void pictureBox_DoubleClick(object sender, EventArgs e) {
 
             picSelected = (PictureBox)sender;
@@ -253,6 +249,7 @@ namespace Puzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //возвращение к меню администратора
             AdminMenu menu = new AdminMenu();
             menu.Show();
             this.Hide();

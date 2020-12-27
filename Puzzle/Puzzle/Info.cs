@@ -16,7 +16,7 @@ namespace Puzzle
         {
             InitializeComponent();
         }
-
+        /*Вывод информации о разработчиках*/
         private void Info_Load(object sender, EventArgs e)
         {
             label1.Text= "Самарский Университет";

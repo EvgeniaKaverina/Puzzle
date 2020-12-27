@@ -8,11 +8,11 @@ namespace Puzzle
 {
     class Level
     {
-        private int number;
-        private int numRows;
-        private int numCols;
-        private bool type;
- 
+        private int number;//номер уровня сложности
+        private int numRows;//количество фрагментов по вертикали
+        private int numCols;//количество фрагментов по горизонтали
+        private bool type;//тип фрагментов
+
         public Level()
         {
 

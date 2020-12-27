@@ -16,17 +16,19 @@ namespace Puzzle
         {
             InitializeComponent();
         }
-
+        /* Вывод изображение в полный размер 600х420
+         */
         public Picture(string filename)
         {
             InitializeComponent();
-            // Image image = Image.FromFile(filename);
+            
             Bitmap bitmap = new Bitmap(filename);
             pictureBox1.Image= bitmap.GetThumbnailImage(600, 420,
                                    new Image.GetThumbnailImageAbort(ThumbnailCallback),
                                    IntPtr.Zero);
-         // pictureBox1.Size = new System.Drawing.Size(800, 560);
+      
         }
+   
         public bool ThumbnailCallback()
         {
             return true;

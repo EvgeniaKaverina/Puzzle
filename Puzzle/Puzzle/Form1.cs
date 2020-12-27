@@ -20,18 +20,22 @@ namespace Puzzle
             InitializeComponent();
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
+        /* событие для закрытия формы
+         */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
-        private  void enter_Click(object sender, EventArgs e)
+        /* обработчик события нажатия на кнопку ВХОД
+                */
+        private void enter_Click(object sender, EventArgs e)
         {
             string log = login_enter.Text;
             string pas = password_enter.Text;
 
             string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
               sqlConnection = new SqlConnection(connectionString);
-            //sqlConnection = null;
             try
             {
+                //откывается соединение к БД
                 sqlConnection.Open();
                 if (isUserExistsEnter())
                 {
@@ -47,12 +51,14 @@ namespace Puzzle
             }
            
         }
-
+        /* Проверка на существование пользователя
+         */ 
         public Boolean isUserExistsEnter()
         {
             SqlCommand command = null;
             try
             {
+                //запрос в БД
                 command = new SqlCommand("SELECT * FROM [User] WHERE login=@login AND password=@password", sqlConnection);
                 command.Parameters.AddWithValue("login", login_enter.Text);
                 command.Parameters.AddWithValue("password", password_enter.Text);
@@ -78,24 +84,26 @@ namespace Puzzle
                 }
            
         }
-
+        /*Обработчик события нажатия на кнопку РЕГИСТРАЦИЯ 
+         
+         */
         private async void registration_Click(object sender, EventArgs e)
         {
             string log=login_reg.Text;
             string pas=password_reg.Text;
      
-
+            //проверка длины логина
             if (log.Length < 4 || log.Length > 12)
             {
                 MessageBox.Show("Логин должен содержать от 4 до 12 символов.","Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-
+            //проверка длины пароля
             else if (pas.Length < 5 || pas.Length > 10)
             {
                 MessageBox.Show("Пароль должен содержать от 5 до 10 символов.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
+            //проверка логина
             else if (!char.IsLetter(log[0]))
             {
                 MessageBox.Show("Логин не должен начинаться с цифры", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -106,11 +114,12 @@ namespace Puzzle
                 SqlCommand sqlCommand=null;
                 try
                 {
+                    //открытие соединения к БД
                     string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
                     sqlConnection = new SqlConnection(connectionString);
                     await sqlConnection.OpenAsync();
 
-
+                    //запрос в БД на запись пользователя
                     sqlCommand = new SqlCommand("INSERT INTO [User] (login, password) VALUES(@login, @password)", sqlConnection);
                     sqlCommand.Parameters.AddWithValue("login", log);
                     sqlCommand.Parameters.AddWithValue("password", pas);
@@ -126,12 +135,17 @@ namespace Puzzle
 
                else  if (sqlCommand.ExecuteNonQuery() == 1)
                 {
+                    //переход к меню пользователя
                     UserMenu s = new UserMenu(log);
                     s.Show();
                     this.Hide();
                 }
             }
         }
+        /*Проверка на существование пользователя в БД
+         * true- такой пользователь существует
+         * false- такого пользователя нет в БД
+         */
         public Boolean isUserExists()
         {
             SqlCommand command = null;
@@ -158,11 +172,12 @@ namespace Puzzle
             else
                 return false;
         }
-
+        /*Обработчик события нажатия на кнопку ВОЙТИ КАК АДМИНИСТРАТОР 
+         */
         private void button_admin_Click(object sender, EventArgs e)
         {
             string pas = "admin";
-
+            //проверка пароля
             if (password_admin.Text == pas)
             {
                 AdminMenu s = new AdminMenu();

@@ -30,16 +30,20 @@ namespace Puzzle
             this.login = login;
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
+        /* событие для закрытия формы
+     */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
 
         private void buttonNewGame_Click(object sender, EventArgs e)
         {
+            //открытие игровой формы
             UserChoosingPuzzle ch = new UserChoosingPuzzle(login);
             ch.Show();
             this.Hide();
         }
-
+        /*обработчик события продолжения игры
+         */
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             MemoryStream stream = new MemoryStream();
@@ -47,20 +51,24 @@ namespace Puzzle
             sqlConnection = new SqlConnection(connectionString);
             //   await sqlConnection.OpenAsync();
 
+            //проверка на существовании незаконченного пазла
             SqlCommand command = new SqlCommand("SELECT TOP 1 unfinished FROM [Game] where login=@login and unfinished is not null Order by id_game DESC", sqlConnection);
             command.Parameters.AddWithValue("login", login);
             sqlConnection.Open();
             //  await command.ExecuteNonQueryAsync();
 
             byte[] array = (byte[])command.ExecuteScalar();
+
             if (array != null)
             {
+                //открытие игровой формы
                 ContinueGame continueGame = new ContinueGame(login);
                 continueGame.Show();
                 this.Hide();
             }
             else
             {
+                //предупреждение об отсутствии незаконченых сохраненных игр
                 DialogResult dialogResult = MessageBox.Show("Нет сохраненных игр. Хотите начать новую игру?", "Все игры оконченны", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 if (dialogResult == DialogResult.OK)
                 {
@@ -75,6 +83,7 @@ namespace Puzzle
 
         private void buttonRating_Click(object sender, EventArgs e)
         {
+            //открытие формы просмотра рейтинга игроков
             Rating rating = new Rating();
             rating.Show();
             //this.Close();
@@ -82,17 +91,20 @@ namespace Puzzle
 
         private void buttonAboutCreators_Click(object sender, EventArgs e)
         {
+            //открытие формы информации о разработчиках
             Info info = new Info();
             info.Show();
         }
 
         private void buttonAboutGame_Click(object sender, EventArgs e)
         {
+            //открытие справочной информации
             Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
 
         private void back_user_Click(object sender, EventArgs e)
         {
+            //возвращение к форме входа в систему
             Form1 f = new Form1();
             f.Show();
             this.Hide();

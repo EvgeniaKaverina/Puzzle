@@ -9,8 +9,8 @@ namespace Puzzle
 {
     class MyPictureBox:PictureBox
     {
-        int index = 0;
-        int imageIndex = 0;
+        int index = 0;//Индекс фрагмента
+        int imageIndex = 0;//Индекс картинки на данном фрагменте
         public int Index
         {
             get { return index; }
@@ -21,6 +21,7 @@ namespace Puzzle
             get { return imageIndex; }
             set { imageIndex = value; }
         }
+        //Проверка на совпадение индекса фрагмента и индекса картинки
         public bool isMatch()
         {
             return (index == imageIndex);

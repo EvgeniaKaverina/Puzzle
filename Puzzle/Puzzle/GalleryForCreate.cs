@@ -42,7 +42,8 @@ namespace Puzzle
             admin = false;
             
         }
-        
+        /* Отображение картинок на форме для пользователя по выбранном уровню сложности
+       */
         private async void userChoose(int number)
         {
             try
@@ -76,6 +77,8 @@ namespace Puzzle
                 MessageBox.Show("Ошибка подключения к базе данных.");
             }
         }
+        /* Отображение всех картинок из БД для администратора для создания пазла
+         */
         private async void createPuzzleChoose()
         {
             try
@@ -88,13 +91,12 @@ namespace Puzzle
                 SqlDataReader reader = null;
                 reader = await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
-                //for(int i = 0; i < 16; i++)
+
                 {
                     string filename = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\gallery\", reader["name_picture"].ToString());
                     Bitmap bmp = new Bitmap(filename);
                     PictureBox tempPictureBox = new PictureBox();
-
-                    //generates a thumbnail image of specified size
+                    //генерирование уменьшенного изображения указанного размера 200х140
                     tempPictureBox.Image = bmp.GetThumbnailImage(200, 140, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
 
                     tempPictureBox.Size = new System.Drawing.Size(200, 140);
@@ -125,7 +127,7 @@ namespace Puzzle
             picSelected = (PictureBox)sender;
             picSelected.BorderStyle = BorderStyle.Fixed3D;
             picture_name = picSelected.Name;
-            //   picSelected.Focus();
+
 
         }
         public string getpicture_name()
@@ -144,7 +146,7 @@ namespace Puzzle
             picture.ShowDialog();
 
         }
-
+        //Выбор картинки 
         private void button1_Click(object sender, EventArgs e)
         {
             

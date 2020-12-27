@@ -8,10 +8,10 @@ namespace Puzzle
 {
     class Puzzle
     {
-        private long id;
-        private int level;
-        private string image;
-        private bool location;
+        private long id;//Идентификатор пазла
+        private int level;//Номер уровня сложности пазла
+        private string image;//название изображения
+        private bool location;//место расположения фрагментов: 1-на ленте; 0 - на поле
         public Puzzle() { }
         public Puzzle(int id,int level,string image,bool location)
         {

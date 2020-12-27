@@ -16,8 +16,7 @@ namespace Puzzle
     public partial class UserChoosingPuzzle : Form
     {
         private GalleryForCreate gal;
-        //string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
-        //private SqlConnection sqlConnection;
+  
 
         public UserChoosingPuzzle()
         {
@@ -34,12 +33,17 @@ namespace Puzzle
         string picture;
         private void back_Click(object sender, EventArgs e)
         {
+            //возвращение к меню пользователя
             UserMenu u = new UserMenu();
             u.Show();
             this.Hide();
         }
+        /* Событие для закрытия приложения
+         */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
+
+        /*Обработчик события для выбора картинки из списка доступных*/
         private void select_img_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
@@ -48,18 +52,21 @@ namespace Puzzle
             }
             else {
                 number = Int32.Parse(comboBox1.SelectedItem.ToString());
+                //открытие формы Галерея
                 gal = new GalleryForCreate(this,number);
                 gal.Show();
             }
         }
+        //отображение имени картинки 
         public void setTextToButton()
         {
             picture= gal.getpicture_name();
             select_img.Text = picture;
         }
-
+        /* Переход к началу игры*/
         private void play_Click(object sender, EventArgs e)
         {
+            //проверка на заполнение всех полей
             if (comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Выберите номер уровня");
@@ -84,6 +91,7 @@ namespace Puzzle
 
         private void info_Click(object sender, EventArgs e)
         {
+            //отображение справочной информации
             Process.Start(Path.Combine(Path.GetDirectoryName(Directory.GetCurrentDirectory()), @"..\html\index.html"));
         }
 

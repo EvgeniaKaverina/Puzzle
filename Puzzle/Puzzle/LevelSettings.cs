@@ -20,13 +20,15 @@ namespace Puzzle
             InitializeComponent();
             this.FormClosed += new FormClosedEventHandler(Form_Closed);
         }
+        /* событие для закрытия формы
+   */
         protected void Form_Closed(object sender, EventArgs e)
         { Application.Exit(); }
         private void LevelSettings_Load(object sender, EventArgs e)
         {
             
         }
-
+        /*Установка номера уровня сложности*/
         private void button1_Click(object sender, EventArgs e)
         {
             level = 1;
@@ -54,9 +56,11 @@ namespace Puzzle
         }
 
        
-
+        /* Обработчик события при нажатие на кнопку Готово
+         */
         private async void button6_Click(object sender, EventArgs e)
         {
+            //Проверка заполненности полей
             if (level== 0)
             {
                 MessageBox.Show("Выберите номер уровня");
@@ -82,8 +86,10 @@ namespace Puzzle
 
                 try
                 {
+                    //открытие соединения с БД
                     await sqlConnection.OpenAsync();
 
+                    //запрос в БД на проверку существования выбранного уровня
                     SqlCommand sqlCommand = new SqlCommand("SELECT number FROM Level WHERE number=@num", sqlConnection);
                     sqlCommand.Parameters.AddWithValue("num", level);
 
@@ -100,19 +106,12 @@ namespace Puzzle
                         DialogResult dialogResult = MessageBox.Show("Этот уровень существует", "Уровень существует!", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                         if (dialogResult == DialogResult.OK)
                         {
-                            AdminMenu adminMenu = new AdminMenu();
+                            //возвращение к меню админинстратора
+                             AdminMenu adminMenu = new AdminMenu();
                             adminMenu.Show();
                             this.Close();
                         }
-                        //if (dialogResult== DialogResult.Yes)
-                        //{
-                        //    SqlCommand command = new SqlCommand("UPDATE [Level] set count_of_piece_horizontally=@count_horizon, count_of_piece_vertically=@count_vertical, type_of_piece=@type where number=@number", sqlConnection);
-                        //    command.Parameters.AddWithValue("number", level);
-                        //    command.Parameters.AddWithValue("count_horizon", numericUpDown2.Value);
-                        //    command.Parameters.AddWithValue("count_vertical", numericUpDown1.Value);
-                        //    command.Parameters.AddWithValue("type", type);
-                        //    await command.ExecuteNonQueryAsync();
-                        //}
+                       
                     }
                     else
                     {
@@ -140,6 +139,9 @@ namespace Puzzle
 
         private void back_level_Click(object sender, EventArgs e)
         {
+            /*
+             * возвращение к меню админинстратора
+             */
             AdminMenu a = new AdminMenu();
             a.Show();
             this.Hide();
@@ -149,7 +151,7 @@ namespace Puzzle
         {
             
         }
-
+        /* Установка количества фрагментов у треугольных пазлов*/
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem.ToString() == "Треугольные")

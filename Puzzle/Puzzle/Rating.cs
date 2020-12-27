@@ -20,7 +20,8 @@ namespace Puzzle
             LoadDataTime();
         
         }
-
+        /*Вывод ТОП 10 пользователей из БД по количеству очков
+         */
         private void LoadData()
         {
             string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
@@ -54,7 +55,8 @@ namespace Puzzle
                 MessageBox.Show("Ошибка подключения к базе данных.");
             }
         }
-
+        /* Вывод ТОП 3 пользователей на каждом уровне по времени сборки пазла
+         */
         private void LoadDataTime()
         {
             string connectionString = "Data Source=localhost;Initial Catalog=Puzzle;Integrated Security=True";
@@ -70,7 +72,7 @@ namespace Puzzle
                         " INNER JOIN [Puzzles] ON [Game].id_puzzle = [Puzzles].id_puzzle WHERE unfinished IS NULL and number_level=@i ORDER BY time", sqlConnection);
                     command.Parameters.AddWithValue("i", i);
 
-                    // time.Text = String.Format("{0:mm:ss}", stopWatch);
+                  
                     SqlDataReader reader = command.ExecuteReader();
 
                     List<string[]> data = new List<string[]>();

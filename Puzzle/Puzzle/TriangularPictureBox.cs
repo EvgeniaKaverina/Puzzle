@@ -11,7 +11,7 @@ namespace Puzzle
 {
     class TriangularPictureBox : MyPictureBox
     {
-        private bool left;
+        private bool left;//левые фрагмент
         public bool LeftGrag
         {
             set { left = value; }
@@ -21,6 +21,7 @@ namespace Puzzle
         {
             using (var p = new GraphicsPath())
             {
+                //Отрисовка треугольного фрагмента
                 if (left)
                 {
                     p.AddPolygon(new Point[] {

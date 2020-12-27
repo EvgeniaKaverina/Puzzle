@@ -8,13 +8,13 @@ namespace Puzzle
 {
     class Game
     {
-        private long id;
-        private long puzzle;
-        private string user;
-        private DateTime time;
-        private int points;
-        private int[] unfinished;
-        private int prompting;
+        private long id;//идентификатор игры
+        private long puzzle;//пазл для сборки
+        private string user;//игрок
+        private DateTime time;//время, потраченное на игру
+        private int points;//количество очков
+        private int[] unfinished;//массив индексов незаконченного пазла
+        private int prompting;//оставшееся количество подсказок
         public Game() { }
         public Game(long id, long puzzle,string user)
         {
